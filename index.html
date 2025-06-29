@@ -8,6 +8,12 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="shortcut icon" href="./img/favicon.ico">
         <style>
+            .k_slide{
+                width: 500px;
+            }
+            .k_dropdown22{
+                color: #007bff;
+            }
             .k_tbdr{
                 border: 1px solid black;
             }
@@ -36,6 +42,9 @@
             }
             .dial{
                 color: #ff6600;
+            }
+            .highlight-blue {
+                color: #007bff; /* Bootstrap primary blue */
             }
         </style>
     </head>
@@ -85,7 +94,58 @@
                     </div>
                 </div>
             </header>
-            <main class="bg-white p-5 text-center"></main>
+            <main class="bg-white p-5 ">
+                <h2>
+                    Search across <span class="fw-bold">'5.9 Crore+'</span> <span class="highlight-blue">Products &amp; Services</span>
+                </h2>
+                <div class="dropdown k_dropdown22">
+                    <!-- Input outside the dropdown toggle -->
+                    <button class="btn btn-drop dropdown-toggle w-20 n_dropdown2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-solid fa-location-dot n_dropdown2"> </i>
+                     <input type="textarea" placeholder="Enter Location">
+                    </button>
+                    <!-- Dropdown menu -->
+                    <ul class="dropdown-menu n_dropdown2" id="locationDropdown">
+                        <li><a class="dropdown-item" href="#">Neemuch</a></li>
+                        <li><a class="dropdown-item" href="#">Mandsaur</a></li>
+                        <li><a class="dropdown-item" href="#">Ratlam</a></li>
+                        <li><a class="dropdown-item" href="#">Ujjain</a></li>
+                        <li><a class="dropdown-item" href="#">Indore</a></li>
+                    </ul>
+                    <button class="btn n_dropdown2" type="button"  aria-expanded="false">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                     <input type="textarea" placeholder="Search in Neemuch">
+                        <i class="fa-solid fa-microphone"></i>
+                    </button>
+                </div>
+                <div class="container mt-3">
+                <div class="row">
+                    <div class="col-md-6">  
+                        <div id="carouselExampleAutoplaying" class="carousel slide k_slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img src="./img/29-11-2021-12-13Brightsun’s-Best-Travel-Offers-Amazing-Hotel-Packages.jpg" class="d-block w-100" alt="img">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="./img/luxury-hotels-leh-ladakh-3.webp" class="d-block w-100" alt="img">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="./img/offerte_mobile_1610976727_miglior_tariffa_garantita_hotel_riccione_tiffanys_4_stelle.jpg" class="d-block w-100" alt="img">
+                                </div>
+                            </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>     
+                </div>     
+            </main>
             <footer class="bg-dark text-white text-center p-4"></footer>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
