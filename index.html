@@ -13,89 +13,110 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link rel="shortcut icon" href="./img/favicon.ico">
     <style>
+        .scroll-buttons::-webkit-scrollbar {
+            display: none;
+            /* Hide scrollbar for Chrome, Safari */
+        }
+
+        .scroll-buttons {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Footer service grid styles */
+        .service-box {
+            border-radius: 12px;
+            padding: 10px;
+            height: 10%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+        }
+
         /* Card Styles */
-.custom-jd-card {
-  width: 260px;
-  height: 320px;
-  background-color: #fff;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  display: flex;
-  flex-direction: column;
-  margin-right: 16px; /* spacing between cards */
-  transition: transform 0.3s ease;
-}
+        .custom-jd-card {
+            width: 260px;
+            height: 320px;
+            background-color: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            margin-right: 16px;
+            /* spacing between cards */
+            transition: transform 0.3s ease;
+        }
 
-.custom-jd-card:hover {
-  transform: translateY(-3px);
-}
+        .custom-jd-card:hover {
+            transform: translateY(-3px);
+        }
 
-/* Image box */
-.jd-img-box {
-  height: 65%;
-  overflow: hidden;
-}
+        /* Image box */
+        .jd-img-box {
+            height: 65%;
+            overflow: hidden;
+        }
 
-.jd-img-inner {
-  width: 100%;
-  height: 100%;
-}
+        .jd-img-inner {
+            width: 100%;
+            height: 100%;
+        }
 
-.jd-img-inner img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.4s ease;
-}
+        .jd-img-inner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
 
-.custom-jd-card:hover .jd-img-inner img {
-  transform: scale(1.05);
-}
+        .custom-jd-card:hover .jd-img-inner img {
+            transform: scale(1.05);
+        }
 
-/* Text Box */
-.jd-text-box {
-  height: 35%;
-  background-color: #007bff;
-  color: white;
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 0 0 16px 16px;
-}
+        /* Text Box */
+        .jd-text-box {
+            height: 35%;
+            background-color: #007bff;
+            color: white;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0 0 16px 16px;
+        }
 
-.jd-title {
-  font-size: 15px;
-  font-weight: 600;
-  margin-bottom: 8px;
-  line-height: 1.3;
-}
+        .jd-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
 
-/* Button */
-.jd-btn {
-  align-self: flex-start;
-  background-color: #fff;
-  color: #007bff;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
+        /* Button */
+        .jd-btn {
+            align-self: flex-start;
+            background-color: #fff;
+            color: #007bff;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
 
-.jd-btn:hover {
-  background-color: #e6e6e6;
-  color: #0056b3;
-}
+        .jd-btn:hover {
+            background-color: #e6e6e6;
+            color: #0056b3;
+        }
 
-/* Swiper Buttons if needed to customize */
-.swiper-button-next, .swiper-button-prev {
-  color: #000;
-}
+        /* Swiper Buttons if needed to customize */
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: #000;
+        }
+
         .tourist-box {
             border: 1px solid #ddd;
             border-radius: 16px;
@@ -396,6 +417,12 @@
             padding: 10px;
         }
     </style>
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    </script>
 </head>
 
 <body>
@@ -461,32 +488,42 @@
                 <span class="highlight-blue">Products &amp; Services</span>
             </h2>
             <!-- Location & Search Section -->
-            <section class="dropdown k_dropdown22">
-                <!-- Input outside the dropdown toggle -->
-                <button class="btn btn-drop dropdown-toggle w-20 k_dropdown22" type="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    <i class="fa-solid fa-location-dot k_dropdown22"> </i>
-                    <input type="textarea" placeholder="Enter Location">
-                </button>
-                <!-- Dropdown menu -->
-                <ul class="dropdown-menu k_dropdown22" id="locationDropdown">
-                    <li><a class="dropdown-item" href="#">Neemuch</a></li>
-                    <li><a class="dropdown-item" href="#">Mandsaur</a></li>
-                    <li><a class="dropdown-item" href="#">Ratlam</a></li>
-                    <li><a class="dropdown-item" href="#">Ujjain</a></li>
-                    <li><a class="dropdown-item" href="#">Indore</a></li>
-                </ul>
-                <button class="btn k_dropdown22 btn-warning" type="button" aria-expanded="false">
-                    <i class="bi bi-search"></i>
-                    <input type="textarea" placeholder="Search in Neemuch">
+            <section class="dropdown k_dropdown22 d-flex align-items-center gap-2">
+                <!-- Dropdown Button -->
+                <div class="dropdown">
+                    <button class="btn btn-drop dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="fa-solid fa-location-dot me-2"></i>
+                        <input type="text" class="form-control d-inline w-auto" placeholder="Enter Location" />
+                    </button>
+                    <ul class="dropdown-menu" id="locationDropdown">
+                        <li><a class="dropdown-item" href="#">Neemuch</a></li>
+                        <li><a class="dropdown-item" href="#">Mandsaur</a></li>
+                        <li><a class="dropdown-item" href="#">Ratlam</a></li>
+                        <li><a class="dropdown-item" href="#">Ujjain</a></li>
+                        <li><a class="dropdown-item" href="#">Indore</a></li>
+                    </ul>
+                </div>
+
+                <!-- Search Input -->
+                <div class="d-flex align-items-center">
+                    <input type="text" class="form-control me-2" placeholder="Search in Neemuch" />
+                    <i class="fa-solid fa-magnifying-glass me-2"></i>
                     <i class="fa-solid fa-microphone"></i>
+                </div>
+
+                <!-- Fixed Download App Button (Top Right Corner) -->
+                <button class="btn btn-outline-dark d-flex align-items-center ms-auto px-3 py-2 shadow-sm">
+                    <span class="me-2">Download App</span>
+                    <!-- Replace this image path with your icon -->
+                    <img src="./img/favicon.ico" alt="JD" width="20" height="20">
                 </button>
-                <button class="btn btn-outline-success ms-3">Download App</button>
             </section>
+
             <section class="k_m1"></section>
             <!-- Carousel Section -->
             <div class="row p-0 ">
-                <section class="col-6">
+                <section class="col-5">
                     <div id="carouselExampleAutoplaying" class="carousel slide k_slide" data-bs-ride="carousel">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
@@ -525,7 +562,7 @@
                         <span class="visually-hidden">Next</span>
                     </button>
                 </section>
-                <section class="col-6 k_m5">
+                <section class="col-7 k_m5">
                     <div class="services-wrapper container-fluid k_m5">
                         <h4>Popular Services</h4>
                         <div class="scroll-container">
@@ -566,15 +603,15 @@
             <section class="k_m1"></section>
             <section class=" m-10">
                 <div class="category-grid">
-                    <div class="category-item k_m2">
+                    <div class="category-item k_m2 h-100">
                         <img src="./img/restaurant-2022.svg" alt="Restaurants" />
                         <p>Restaurants</p>
                     </div>
-                    <div class="category-item k_m2">
+                    <div class="category-item k_m2 h-100">
                         <img src="./img/hotel-2022.svg" alt="Hotels" />
                         <p>Hotels</p>
                     </div>
-                    <div class="category-item k_m2">
+                    <div class="category-item k_m2 h-100">
                         <img src="./img/beauty.svg" alt="Beauty Spa" />
                         <p>Beauty Spa</p>
                     </div>
@@ -586,39 +623,39 @@
                         <img src="./img/hotkey_wedding_icon.webp" alt="Wedding planning" />
                         <p>Wedding planning</p>
                     </div>
-                    <div class="category-item k_m2">
+                    <div class="category-item k_m2 h-100">
                         <img src="./img/education.svg" alt="Education" />
                         <p>Education</p>
                     </div>
-                    <div class="category-item k_m2">
+                    <div class="category-item k_m2 h-100">
                         <img src="./img/renthire.svg" alt="Rent & Hire" />
                         <p>Rent & Hire</p>
                     </div>
-                    <div class="category-item k_m2">
+                    <div class="category-item k_m2 h-100">
                         <img src="./img/hospital_2023.svg" alt="Hospital" />
                         <p>Hospitals</p>
                     </div>
-                    <div class="category-item k_m2">
+                    <div class="category-item k_m2 h-100">
                         <img src="./img/contractor-2022.svg" alt="Constructor" />
                         <p>Contractors</p>
                     </div>
-                    <div class="category-item k_m2">
+                    <div class="category-item k_m2 h-100">
                         <img src="./img/pet_shops_2023.svg" alt="Pet Shops" />
                         <p>Pet Shops</p>
                     </div>
-                    <div class="category-item k_m2">
+                    <div class="category-item k_m2 h-100">
                         <img src="./img/pg-hostels-rooms.svg" alt="PG/Hostals" />
                         <p>PG/Hostals</p>
                     </div>
-                    <div class="category-item k_m2">
+                    <div class="category-item k_m2 h-100">
                         <img src="./img/dentist_2023.svg" alt="Dentists" />
                         <p>Dentists</p>
                     </div>
-                    <div class="category-item k_m2">
+                    <div class="category-item k_m2 h-100">
                         <img src="./img/gym_2023.svg" alt="GYM" />
                         <p>GYM</p>
                     </div>
-                    <div class="category-item k_m2">
+                    <div class="category-item k_m2 h-100">
                         <img src="./img/loans.svg" alt="Loans" />
                         <p>Loans</p>
                     </div>
@@ -644,33 +681,31 @@
                 <div class="container my-4">
                     <div class="row g-4">
                         <div class="col-6">
-                            <div class="card custom-card">
-                                <div class="card-body p-2">
-                                    <h3>Wedding Requisites</h3>
-                                    <div class="row text-center">
-                                        <div class="col-4">
-                                            <div class="card custom-card ">
-                                                <img src="./img/88888888.avif" class="card-img-top" alt="Banquet Halls">
-                                                <div class="card-body p-2">
-                                                    <p class="card-text small m-0">Banquet Halls</p>
-                                                </div>
+                            <div class="card-body p-2">
+                                <h3>Wedding Requisites</h3>
+                                <div class="row text-center">
+                                    <div class="col-4">
+                                        <div class="card custom-card ">
+                                            <img src="./img/88888888.avif" class="card-img-top" alt="Banquet Halls">
+                                            <div class="card-body p-2">
+                                                <p class="card-text small m-0">Banquet Halls</p>
                                             </div>
                                         </div>
-                                        <div class="col-4">
-                                            <div class="card custom-card">
-                                                <img src="./img/bridalrequisite_2024.webp" class="card-img-top"
-                                                    alt="Bridal">
-                                                <div class="card-body p-2">
-                                                    <p class="card-text small">Bridal Requisite</p>
-                                                </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="card custom-card">
+                                            <img src="./img/bridalrequisite_2024.webp" class="card-img-top"
+                                                alt="Bridal">
+                                            <div class="card-body p-2">
+                                                <p class="card-text small">Bridal Requisite</p>
                                             </div>
                                         </div>
-                                        <div class="col-4">
-                                            <div class="card custom-card">
-                                                <img src="./img/caterers_2024.webp" class="card-img-top" alt="Caterers">
-                                                <div class="card-body p-2">
-                                                    <p class="card-text small">Caterers</p>
-                                                </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="card custom-card">
+                                            <img src="./img/caterers_2024.webp" class="card-img-top" alt="Caterers">
+                                            <div class="card-body p-2">
+                                                <p class="card-text small">Caterers</p>
                                             </div>
                                         </div>
                                     </div>
@@ -832,8 +867,7 @@
                                     <div class="row g-0">
                                         <div class="col-4">
                                             <div class="img-wrapper">
-                                                <img src="img/gyanodaya.avif" class="img-fluid img-zoom"
-                                                    alt="Pune">
+                                                <img src="img/gyanodaya.avif" class="img-fluid img-zoom" alt="Pune">
                                             </div>
                                         </div>
                                         <div class="col-8">
@@ -850,8 +884,7 @@
                                     <div class="row g-0">
                                         <div class="col-4">
                                             <div class="img-wrapper">
-                                                <img src="img/Zudio.jpg" class="img-fluid img-zoom"
-                                                    alt="Pune">
+                                                <img src="img/Zudio.jpg" class="img-fluid img-zoom" alt="Pune">
                                             </div>
                                         </div>
                                         <div class="col-8">
@@ -983,36 +1016,36 @@
                             <div class="col-2">
                                 <h2>Bills & Recharge</h2>
                                 <p>Pay your bills & recharge instantly with Justdial</p>
-                                <button class="btn btn-outline-success">Explore more</button>
+                                <button class="btn btn-outline-success">Explore more></button>
 
                             </div>
                             <div class="col-2 ">
                                 <div class="category-item k_m2">
-                                    <img src="./img/bt_mobile.svg" alt="Mobile" />
+                                    <img src="./img/mobilee icon-10-256.webp" alt="Mobile" />
                                     <p>Mobile</p>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="category-item k_m2">
-                                    <img src="./img/bt_electricity.svg" alt="Electricity" />
+                                    <img src="./img/electronics-electricity-light_bulb-64.webp" alt="Electricity" />
                                     <p>Electricity</p>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="category-item k_m2">
-                                    <img src="./img/bt_dth.svg" alt="DTH" />
+                                    <img src="./img/DTH IMG1.png" alt="DTH" />
                                     <p>DTH</p>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="category-item k_m2">
-                                    <img src="./img/bt_gas.svg" alt="Gas" />
+                                    <img src="./img/gass4.png" alt="Gas" />
                                     <p>Gas</p>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="category-item k_m2">
-                                    <img src="./img/bt_insurance.svg" alt="Insuarance" />
+                                    <img src="./img/41-Insurance-64.webp" alt="Insuarance" />
                                     <p>Insuarance</p>
                                 </div>
                             </div>
@@ -1027,12 +1060,12 @@
                             <div class="col-2">
                                 <h2>Travel Bookings</h2>
                                 <p>Instant ticket bookings for your best travel experience</p>
-                                <button class="btn btn-outline-success">Explore more</button>
+                                <button class="btn btn-outline-success">Explore more></button>
 
                             </div>
                             <div class="col-2 ">
                                 <div class="category-item k_m2">
-                                    <img src="./img/bt_flight.svg" alt="Flight" />
+                                    <img src="./img/travel-transmit-route-tourism-flight-64.webp" alt="Flight" />
                                     <p>Flight</p>
                                 </div>
                                 <p class="text-center text-success">powered by</p>
@@ -1040,27 +1073,27 @@
                             </div>
                             <div class="col-2">
                                 <div class="category-item k_m2">
-                                    <img src="./img/bt_bus.svg" alt="Bus" />
+                                    <img src="./img/buss icon.webp" alt="Bus" />
                                     <p>Bus</p>
                                 </div>
                                 <p class="text-center text-success">Affordable Rides</p>
                             </div>
                             <div class="col-2">
                                 <div class="category-item k_m2">
-                                    <img src="./img/bt_train.svg" alt="Train" />
+                                    <img src="./img/train-64.webp" alt="Train" />
                                     <p>Train</p>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="category-item k_m2">
-                                    <img src="./img/bt_hotel1212s.svg" alt="Hotel" />
+                                    <img src="./img/3337762.png" alt="Hotel" />
                                     <p>Hotel</p>
                                 </div>
                                 <p class="text-center text-success">Budget Friendly Stay</p>
                             </div>
                             <div class="col-2">
                                 <div class="category-item k_m2">
-                                    <img src="./img/1212121212bt_carhire.svg" alt="Car Rental" />
+                                    <img src="./img/car rentall.png" alt="Car Rental" />
                                     <p>Car Rental</p>
                                 </div>
                                 <p class="text-center text-success">Drive Easy Anywhere</p>
@@ -1071,7 +1104,7 @@
             </div>
 
 
-            <!-- pradeep -->
+
             <section class="container-fluid my-4 px-0">
                 <!-- WHOLE BOX START -->
                 <div class="tourist-box mx-3 mx-md-4 p-4 rounded-4 bg-white shadow-sm">
@@ -1105,8 +1138,8 @@
                                     <div class="row g-0">
                                         <div class="col-4">
                                             <div class="img-wrapper">
-                                                <img src="https://akam.cdn.jdmagicbox.com/images/icontent/newwap/Explorecities_Nashik.png?t=1?w=128&q=75 1x, https://akam.cdn.jdmagicbox.com/images/icontent/newwap/Explorecities_Nashik.png" class="img-fluid img-zoom"
-                                                    alt="Pune">
+                                                <img src="https://akam.cdn.jdmagicbox.com/images/icontent/newwap/Explorecities_Nashik.png?t=1?w=128&q=75 1x, https://akam.cdn.jdmagicbox.com/images/icontent/newwap/Explorecities_Nashik.png"
+                                                    class="img-fluid img-zoom" alt="Pune">
                                             </div>
                                         </div>
                                         <div class="col-8">
@@ -1123,8 +1156,8 @@
                                     <div class="row g-0">
                                         <div class="col-4">
                                             <div class="img-wrapper">
-                                                <img src="https://akam.cdn.jdmagicbox.com/images/icontent/newwap/Explorecities_Ahmedabad.png" class="img-fluid img-zoom"
-                                                    alt="Ahmedabad">
+                                                <img src="https://akam.cdn.jdmagicbox.com/images/icontent/newwap/Explorecities_Ahmedabad.png"
+                                                    class="img-fluid img-zoom" alt="Ahmedabad">
                                             </div>
                                         </div>
                                         <div class="col-8">
@@ -1141,8 +1174,8 @@
                                     <div class="row g-0">
                                         <div class="col-4">
                                             <div class="img-wrapper">
-                                                <img src="https://akam.cdn.jdmagicbox.com/images/icontent/newwap/Explorecities_Goa.png" class="img-fluid img-zoom"
-                                                    alt="Goa">
+                                                <img src="https://akam.cdn.jdmagicbox.com/images/icontent/newwap/Explorecities_Goa.png"
+                                                    class="img-fluid img-zoom" alt="Goa">
                                             </div>
                                         </div>
                                         <div class="col-8">
@@ -1159,8 +1192,8 @@
                                     <div class="row g-0">
                                         <div class="col-4">
                                             <div class="img-wrapper">
-                                                <img src="https://akam.cdn.jdmagicbox.com/images/icontent/newwap/Explorecities_Gokarna.png" class="img-fluid img-zoom"
-                                                    alt="Gokarna">
+                                                <img src="https://akam.cdn.jdmagicbox.com/images/icontent/newwap/Explorecities_Gokarna.png"
+                                                    class="img-fluid img-zoom" alt="Gokarna">
                                             </div>
                                         </div>
                                         <div class="col-8">
@@ -1177,8 +1210,8 @@
                                     <div class="row g-0">
                                         <div class="col-4">
                                             <div class="img-wrapper">
-                                                <img src="https://akam.cdn.jdmagicbox.com/images/icontent/newwap/Explorecities_Hampi.png?t=1?w=128&q=75 1x, https://akam.cdn.jdmagicbox.com/images/icontent/newwap/Explorecities_Hampi.png" class="img-fluid img-zoom"
-                                                    alt="Hampi">
+                                                <img src="https://akam.cdn.jdmagicbox.com/images/icontent/newwap/Explorecities_Hampi.png?t=1?w=128&q=75 1x, https://akam.cdn.jdmagicbox.com/images/icontent/newwap/Explorecities_Hampi.png"
+                                                    class="img-fluid img-zoom" alt="Hampi">
                                             </div>
                                         </div>
                                         <div class="col-8">
@@ -1195,8 +1228,8 @@
                                     <div class="row g-0">
                                         <div class="col-4">
                                             <div class="img-wrapper">
-                                                <img src="https://akam.cdn.jdmagicbox.com/images/icontent/newwap/Explorecities_Udaipur.png" class="img-fluid img-zoom"
-                                                    alt="Udaipur">
+                                                <img src="https://akam.cdn.jdmagicbox.com/images/icontent/newwap/Explorecities_Udaipur.png"
+                                                    class="img-fluid img-zoom" alt="Udaipur">
                                             </div>
                                         </div>
                                         <div class="col-8">
@@ -1251,8 +1284,7 @@
                                     <div class="jd-img-box">
                                         <div class="jd-img-inner">
                                             <img src="https://content.jdmagicbox.com/comp/def_content/ncat_id/10272436.jpg"
-                                                alt="Interior Designers"
-                                                title="Get Quote for Interior Designers">
+                                                alt="Interior Designers" title="Get Quote for Interior Designers">
                                         </div>
                                     </div>
 
@@ -1270,8 +1302,7 @@
                                     <div class="jd-img-box">
                                         <div class="jd-img-inner">
                                             <img src="https://content.jdmagicbox.com/comp/def_content/ncat_id/10035861.jpg"
-                                                alt="Real Estate Agents"
-                                                title="Get Quote for Real Estate Agents">
+                                                alt="Real Estate Agents" title="Get Quote for Real Estate Agents">
                                         </div>
                                     </div>
 
@@ -1288,8 +1319,7 @@
                                     <div class="jd-img-box">
                                         <div class="jd-img-inner">
                                             <img src="https://content.jdmagicbox.com/comp/def_content/ncat_id/10356131.jpg"
-                                                alt="Banquet Halls"
-                                                title="Get Quote for Banquet Halls">
+                                                alt="Banquet Halls" title="Get Quote for Banquet Halls">
                                         </div>
                                     </div>
 
@@ -1306,8 +1336,7 @@
                                     <div class="jd-img-box">
                                         <div class="jd-img-inner">
                                             <img src="https://content.jdmagicbox.com/comp/def_content/ncat_id/10156331.jpg"
-                                                alt="Pathology Labs"
-                                                title="Get Quote for Pathology Labs">
+                                                alt="Pathology Labs" title="Get Quote for Pathology Labs">
                                         </div>
                                     </div>
 
@@ -1318,56 +1347,599 @@
                                     </div>
                                 </div>
                             </div>
-
-
                         </div>
-
                         <!-- Navigation -->
                         <div class="swiper-button-prev"></div>
                         <div class="swiper-button-next"></div>
                     </div>
                 </div>
             </section>
+            <section class="container-fluid my-4 px-0">
+                <!-- WHOLE BOX START -->
+                <div class="tourist-box mx-3 mx-md-4 p-4 rounded-4 bg-white shadow-sm">
+                    <!-- Heading and Badge -->
+                    <div class="d-flex align-items-center mb-3">
+                        <h4 class="fw-bold me-2">Rainy Day Essentials</h4>
+                        <span class="badge bg-danger ">Seasonal</span>
+                    </div>
+                    <div class="swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="card">
+                                    <div class="row g-0">
+                                        <div class="col-4">
+                                            <div class="img-wrapper">
+                                                <img src="img/plumberrrrrad.jpg" class="img-fluid img-zoom"
+                                                    alt="plumber">
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="card-body d-flex flex-column justify-content-center p-2">
+                                                <h5 class="card-title fw-bold mb-1 fs-5">Plumber</h5>
+                                                <a href="#" class="text-primary fw-bold small fs-6">Explore &gt;</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="card">
+                                    <div class="row g-0">
+                                        <div class="col-4">
+                                            <div class="img-wrapper">
+                                                <img src="./img/TeaShop0501.webp" class="img-fluid img-zoom"
+                                                    alt="Tea Stalls">
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="card-body d-flex flex-column justify-content-center p-2">
+                                                <h5 class="card-title fw-bold mb-1 fs-5">Tea Stalls</h5>
+                                                <a href="#" class="text-primary fw-bold small fs-6">Explore &gt;</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="card">
+                                    <div class="row g-0">
+                                        <div class="col-4">
+                                            <div class="img-wrapper">
+                                                <img src="./img/rain coat.jpg" class="img-fluid img-zoom"
+                                                    alt="Raincoat Dealers">
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="card-body d-flex flex-column justify-content-center p-2">
+                                                <h5 class="card-title fw-bold mb-1 fs-5">Raincoat Dealers</h5>
+                                                <a href="#" class="text-primary fw-bold small fs-6">Explore &gt;</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="card">
+                                    <div class="row g-0">
+                                        <div class="col-4">
+                                            <div class="img-wrapper">
+                                                <img src="./img/inverter.jpg" class="img-fluid img-zoom"
+                                                    alt="Inverter Dealer">
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="card-body d-flex flex-column justify-content-center p-2">
+                                                <h5 class="card-title fw-bold mb-1 fs-5">Inverter Dealer</h5>
+                                                <a href="#" class="text-primary fw-bold small fs-6">Explore &gt;</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="card">
+                                    <div class="row g-0">
+                                        <div class="col-4">
+                                            <div class="img-wrapper">
+                                                <img src="./img/Cloth Drying Stand Dealers.jpg"
+                                                    class="img-fluid img-zoom" alt="Cloth Drying Stand Dealers">
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="card-body d-flex flex-column justify-content-center p-2">
+                                                <h5 class="card-title fw-bold mb-1 fs-5">Cloth Drying Stand Dealers</h5>
+                                                <a href="#" class="text-primary fw-bold small fs-6">Explore &gt;</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="container my-4">
+                <h4 class="fw-bold mb-3">Recent Activity</h4>
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                    <!-- Card 1 -->
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>Samarth Enterprises</strong>
+                                    <div class="small text-muted">Ghantali-Thane West – Mumbai</div>
+                                </div>
+                                <img src="./img/whatsapp11.png" alt="JD" width="30" height="30">
+                                <span class="btn btn-outline-success btn-sm">WhatsApp</span>
+                            </div>
+                            <img src="./img/samarth-dealers-2a4qiirs69.avif" class="card-img-top" alt="...">
+                            <div class="card-body d-flex">
+                                <img src="./img/W1.jpg" alt="User" class="rounded-circle me-2" width="40" height="40">
+                                <div>
+                                    <div class="fw-semibold">Jayashree</div>
+                                    <div class="text-muted small">Wrote a review</div>
+                                    <div class="text-warning small mb-1">★★★★★</div>
+                                    <p class="mb-0 small">
+                                        Very nice pully system. Effortlessly anyone can put clothes for drying...
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>Sadguru Enterprises</strong>
+                                    <div class="small text-muted">Ghantali-Thane West – Mumbai</div>
+                                </div>
+                                <img src="./img/whatsapp11.png" alt="JD" width="30" height="30">
+                                <span class="btn btn-outline-success btn-sm">WhatsApp</span>
+                            </div>
+                            <img src="./img/IMGgg111.avif" class="card-img-top" alt="...">
+                            <div class="card-body d-flex">
+                                <img src="./img/W3.jpg" alt="User" class="rounded-circle me-2" width="40"
+                                    height="40">
+                                <div>
+                                    <div class="fw-semibold">riya</div>
+                                    <div class="text-muted small">Wrote a review</div>
+                                    <div class="text-warning small mb-1">★★★★★</div>
+                                    <p class="mb-0 small">
+                                        Dry system is excellent, easy operated, I am satisfied, Thank you. </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>Indu's Cloths Drying</strong>
+                                    <div class="small text-muted">Ghantali-Thane West – Mumbai</div>
+                                </div>
+                                <img src="./img/whatsapp11.png" alt="JD" width="30" height="30">
+                                <span class="btn btn-outline-success btn-sm">WhatsApp</span>
+                            </div>
+                            <img src="./img/IMG222.avif" class="card-img-top" alt="...">
+                            <div class="card-body d-flex">
+                                <img src="./img/W2d.jpg" alt="User" class="rounded-circle me-2" width="40"
+                                    height="40">
+                                <div>
+                                    <div class="fw-semibold">diya</div>
+                                    <div class="text-muted small">Wrote a review</div>
+                                    <div class="text-warning small mb-1">★★★★★</div>
+                                    <p class="mb-0 small">
+                                        Very nice pully system. Effortlessly anyone can put clothes for drying...
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>Trend Interior</strong>
+                                    <div class="small text-muted">Ghantali-Thane West – Mumbai</div>
+                                </div>
+                                <img src="./img/whatsapp11.png" alt="JD" width="30" height="30">
+                                <span class="btn btn-outline-success btn-sm">WhatsApp</span>
+                            </div>
+                            <img src="./img/IMG333.avif" class="card-img-top" alt="...">
+                            <div class="card-body d-flex">
+                                <img src="./img/W3.jpg" alt="User" class="rounded-circle me-2" width="40"
+                                    height="40">
+                                <div>
+                                    <div class="fw-semibold">Jaya</div>
+                                    <div class="text-muted small">Wrote a review</div>
+                                    <div class="text-warning small mb-1">★★★★★</div>
+                                    <p class="mb-0 small">
+                                        Very nice pully system. Effortlessly anyone can put clothes for drying...
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>All Season dry cloths</strong>
+                                    <div class="small text-muted">Ghantali-Thane West – Mumbai</div>
+                                </div>
+                                <img src="./img/whatsapp11.png" alt="JD" width="30" height="30">
+                                <span class="btn btn-outline-success btn-sm">WhatsApp</span>
+                            </div>
+                            <img src="./img/IMGG4.avif" class="card-img-top" alt="...">
+                            <div class="card-body d-flex">
+                                <img src="./img/W2d.jpg" alt="User" class="rounded-circle me-2" width="40"
+                                    height="40">
+                                <div>
+                                    <div class="fw-semibold">kavish</div>
+                                    <div class="text-muted small">Wrote a review</div>
+                                    <div class="text-warning small mb-1">★★★★★</div>
+                                    <p class="mb-0 small">
+                                        Very nice pully system. Effortlessly anyone can put clothes for drying...
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>Gauri Enterprises</strong>
+                                    <div class="small text-muted">Ghantali-Thane West – Mumbai</div>
+                                </div>
+                                <img src="./img/whatsapp11.png" alt="JD" width="30" height="30">
+                                <span class="btn btn-outline-success btn-sm">WhatsApp</span>
+                            </div>
+                            <img src="./img/IMGG555.avif" class="card-img-top" alt="...">
+                            <div class="card-body d-flex">
+                                <img src="./img/W1.jpg" alt="User" class="rounded-circle me-2" width="40"
+                                    height="40">
+                                <div>
+                                    <div class="fw-semibold">Jayashree</div>
+                                    <div class="text-muted small">Wrote a review</div>
+                                    <div class="text-warning small mb-1">★★★★★</div>
+                                    <p class="mb-0 small">
+                                        Very nice pully system. Effortlessly anyone can put clothes for drying...
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center my-4">
+                <button class="btn btn-outline-primary d-inline-flex align-items-center px-3 py-2 shadow-sm">
+                    <span class="me-2">Load More</span>
+                </button>
+            </div>
 
         </main>
         <footer class="bg-dark text-white text-center p-4">
-            <h2>Follow us on</h2>
-            <li class="nav-item">
-                <a class="nav-link disabled" aria-disabled="true" style="color: rgb(240, 235, 235);">
-                    <i class="fa-brands fa-instagram "></i></i> Instagram</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" aria-disabled="true" style="color: rgb(240, 235, 235);">
-                    <i class="fa-brands fa-facebook "></i></i>Facebook</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" aria-disabled="true" style="color: rgb(240, 235, 235);">
-                    <i class="fa-brands fa-youtube "></i></i>YouTube</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" aria-disabled="true" style="color: rgb(240, 235, 235);">
-                    <i class="fa-brands fa-twitter "></i></i>Twitter</a>
-            </li>
-            <p>
-            <p>Get it on Google Play</p>
-            <p> Download on the App Store
-                One-Stop for All Local Businesses, Services, & Stores Nearby Across India</p>
-            <p>Welcome to Justdial, your 'one stop shop' where you are assisted with day-to-day and exclusive planning
-                and purchasing activities. We take pride in our iconic customer support number, 1234567890 and the fact
-                that we own a strong</p> hold on local business information pan India.
+            <!-- SOCIAL MEDIA LINKS -->
+            <div class="mt-2 d-flex align-items-center">
+                <span class="me-2">Follow us on</span>
+                <img src="./img/11facebook-circle-256.webp" alt="Facebook" width="25" height="25" class="me-2">
+                <img src="./img/instagram_icon-instagram_buttoninstegram-512.webp" alt="Instagram" width="25"
+                    height="25" class="me-2">
+                <img src="./img/youtube-256.webp" alt="YouTube" width="25" height="25" class="me-2">
+                <img src="./img/twitter_circle-256.webp" alt="Twitter" width="25" height="25" class="me-2">
+                <img src="./img/circle-linkedin-256.webp" alt="LinkedIn" width="25" height="25">
+            </div>
 
-            <p>Our service extends from providing address and contact details of business establishments around the
+            <!-- WELCOME MESSAGE -->
+            <h5 class="mt-4 mb-4 text-start">One-Stop for All Local Businesses, Services, & Stores Nearby Across India
+            </h5>
+
+            <p class="text-start">
+                Welcome to Justdial, your 'one stop shop' where you are assisted with day-to-day and exclusive planning
+                and purchasing activities. We take pride in our iconic customer support number, 8888888888 and the fact
+                that we own a strong hold on local business information pan India.
+
+                Our service extends from providing address and contact details of business establishments around the
                 country, to making orders and reservations for leisure, medical, financial, travel and domestic
                 purposes. We enlist business information across varied sectors like Hotels, Restaurants, Auto Care, Home
                 Decor, Personal and Pet Care, Fitness, Insurance, Real Estate, Sports, Schools, etc. from all over the
                 country. Holding information right from major cities like Mumbai, Delhi, Bangalore, Hyderabad, Chennai,
-                Ahmedabad and Pune our reach stretches out to other smaller cities across the country too.</p>
+                Ahmedabad and Pune our reach stretches out to other smaller cities across the country too.
 
-            <p>Our 'Free Listing' feature gives a platform to showcase varied specialities. We then furnish you with the
-                information via phone, SMS, web, App and WAP as well as, create a space for you to share your
+                Our 'Free Listing' feature gives a platform to showcase varied specialities. We then furnish you with
+                the information via phone, SMS, web, App and WAP as well as, create a space for you to share your
                 experiences through our 'Rate & Review' feature. Through the 'Best Deals', 'Last Minute Deals' and 'Live
-                Quotes', we make sure that you are offered the best bargains in the market.</p>
+                Quotes', we make sure that you are offered the best bargains in the market.
             </p>
+
+            <!-- SERVICES HEADING -->
+            <h4 class="mt-5 mb-4 text-start">Some of our services that will prove useful to you on a day-to-day basis
+                are:</h4>
+            <!-- Services Grid -->
+            <div class="container text-start">
+                <div class="row g-4"> <!-- g-4 ensures equal gaps -->
+                    <div class="col-md-3">
+                        <div class="service-box ">
+                            <i class="fas fa-briefcase text-secondary service-icon"></i>
+                            <strong>B2B</strong>
+                            <p>Explore diverse B2B categories, top vendors, and a wholesale experience. Instant
+                                assistance via chat available.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="service-box ">
+                            <i class="fas fa-globe-asia text-success service-icon"></i>
+                            <strong>All India</strong>
+                            <p>Justdial connects businesses across India—from suppliers to wholesalers—offering full
+                                digital B2B convenience.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="service-box">
+                            <i class="fas fa-truck-moving text-warning service-icon"></i>
+                            <strong>Packers and Movers</strong>
+                            <p>Get the best packers and movers with ratings, quotes, and a smooth relocation experience.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="service-box">
+                            <i class="fas fa-utensils text-danger service-icon"></i>
+                            <strong>Order Food Online</strong>
+                            <p>Browse restaurants, apply discounts, and order your favorite meals in just a few clicks.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="service-box">
+                            <i class="fas fa-user-tie text-primary service-icon"></i>
+                            <strong>Jobs</strong>
+                            <p>Find relevant jobs or hire candidates across industries and locations with ease.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="service-box">
+                            <i class="fas fa-film text-dark service-icon"></i>
+                            <strong>Movies</strong>
+                            <p>Book tickets, view trailers and cast, and stay updated with the latest releases.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="service-box">
+                            <i class="fas fa-spa text-pink service-icon"></i>
+                            <strong>Spa & Salon</strong>
+                            <p>Book appointments online for salons or spas near you for a hassle-free experience.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="service-box">
+                            <i class="fas fa-tools text-secondary service-icon"></i>
+                            <strong>Repair & Services</strong>
+                            <p>Get your AC, car, purifier, or appliances serviced quickly with verified professionals.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="service-box">
+                            <i class="fas fa-user-md text-info service-icon"></i>
+                            <strong>Doctor Appointment</strong>
+                            <p>Book doctor appointments online by specialty, city, and clinic. Avoid waiting and delays.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="service-box">
+                            <i class="fas fa-building text-success service-icon"></i>
+                            <strong>Real Estate Agents</strong>
+                            <p>Connect with property agents for buying, selling, or renting homes with verified
+                                listings.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="service-box">
+                            <i class="fas fa-bolt text-warning service-icon"></i>
+                            <strong>Recharge/Bill Payment</strong>
+                            <p>Pay bills and recharge mobiles, DTH, and utilities online instantly with Justdial.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="service-box">
+                            <i class="fas fa-wallet text-danger service-icon"></i>
+                            <strong>Digital Wallets</strong>
+                            <p>Manage your online payments and transactions through trusted digital wallets.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="text-start small mt-5 ">Some of the other services that can be of assistance to you for leisure,
+                health and home convenience are - Pest Control, Skin Care Clinics, Painters, Laundry Services, Interior
+                Designers, Mobile Phone Repair, Vaccination Centres, Internet Service Providers, etc. With an endless
+                number of things under the sun, you can be sure this will be your 'One Stop Shop' to find everything and
+                more.</p>
+            <div class="container-fluid mt-4 text-start px-0">
+                <h5 class="fw-semibold mb-3">Popular Categories</h5>
+                <div class="scroll-buttons overflow-auto">
+                    <div class="d-flex flex-nowrap gap-2 mb-3" style="min-width: max-content;">
+                        <button class="btn btn-outline-light border px-3 py-1">Accommodation</button>
+                        <button class="btn btn-outline-light border px-3 py-1">Astrology</button>
+                        <button class="btn btn-outline-light border px-3 py-1">Automobiles & Two Wheelers</button>
+                        <button class="btn btn-outline-light border px-3 py-1">Beauty, Fitness & Sports</button>
+                        <button class="btn btn-outline-light border px-3 py-1">Business & Legal</button>
+                        <button class="btn btn-outline-light border px-3 py-1">Education</button>
+                        <button class="btn btn-outline-light border px-3 py-1">Events & Weddings</button>
+                        <button class="btn btn-outline-light border px-3 py-1">Food & Restaurants</button>
+                        <button class="btn btn-outline-light border px-3 py-1">Health & Medical</button>
+                        <button class="btn btn-outline-light border px-3 py-1">Home Services</button>
+                        <button class="btn btn-outline-light border px-3 py-1">Others</button>
+                        <button class="btn btn-outline-light border px-3 py-1">Trasportation & Shipping</button>
+                        <button class="btn btn-outline-light border px-3 py-1">Travel</button>
+                    </div>
+                    <h5 class="fw-semibold mt-3 mb-3">Trending Searches</h5>
+                    <div class="category-list" style="line-height: 1.8; font-size: 0.93rem;">
+                        Real Estate Agents | Book Shops | Aadhaar Card Agents | Yoga Classes | Estate Agents For Land |
+                        Pmjay Scheme Hospitals | Tutorials For IIT JEE | Mobile Phone Repair & Services-MI | Wrist Watch
+                        Dealers | Education Consultants | Battery Operated Scooter Dealers-OLA | Entertainment Centres |
+                        DTH
+                        TV Broadcast Service Providers-Sun Direct | AC Repair & Services-Blue Star | Tnpsc Tutorials |
+                        Mobile Phone Simcard Dealers-Jio | MPSC Tutorials | Shoe Dealers-Nike | Tirupati Darshanam
+                        Ticketing
+                        Services | Bitcoin Services | Mobile Phone Repair & Services-Nothing | Cat Tutorials | Lawyers
+                        For
+                        District Court | Ayushman Bharat Yojana Consultants | Lawyers For Supreme Court | Sports Shoe
+                        Dealers | Courier Services For Ahmedabad | Internet Payment Gateway Solution Providers | Taxi
+                        Services For Inter City | BPSC Tutorials | Courier Services For Canada | Demat Account Services
+                        |
+                        Automobile Part Dealers-Ashok Leyland | Prp Hair Transplantation Treatment Doctors | Mutual Fund
+                        Agents-SBI | Courier Services For Dubai | BEST Enquiry | Pickleball Courts | Khatu Shyam Bhajan
+                        Singers | Dairy Product Retailers-Amul | Tutorials For Mppsc | Uber Autorickshaw Attachment
+                        Services
+                        | Football Dealers | Courier Services For Surat | Battery Operated Auto Rickshaw Dealers-Mini
+                        Metro
+                        | Electricity Suppliers-Kseb | Courier Services For Tirupati | Packers And Movers For Hyderabad
+                        |
+                        Newspaper Advertising Agencies-Dainik Bhaskar | Tutorials For MHT CET
+                    </div>
+                </div>
+                <h5 class="fw-semibold mt-4 mb-3">Trending Searches</h5>
+                <div class="category-list" style="line-height: 1.8; font-size: 0.93rem;">
+                    Deals and Offers | Kotak Mahindra Banks | INOX Cinemas | Canara Banks | Ratnakar Banks | PVR Cinemas
+                    | ICICI Banks | HDFC Banks | AU Small Finance Bank | Bank Of Maharashtra | Bank Of India | Axis
+                    Banks | IDFC First Banks | Maharashtra Gramin Banks | Catholic Syrian Banks | Saraswat Co Operative
+                    Banks | Punjab & Sind Banks | State Bank Of India | Union Bank Of India | Punjab National Banks |
+                    Bank Of Baroda | Lifestyle Stores | Behrouz Biryani | Fastrack | The Good Bowl | Sony | Yes Banks |
+                    Croma | Dell Exclusive Stores | Beverly Hills Polo Club | Joyalukkas Jewellery | Kalyan Jewellers |
+                    Flying Machine | Lenovo Exclusive Store | Reliance Digital | Vijay Sales | Duroflex | Anytime
+                    Fitness | Kromakay Salons | Toni&Guy Salons | Bakingo | Barbeque Nation Restaurants | McDonalds |
+                    Sweet Truth Cake Shops | ALDO Stores | Helios | Inglot Stores | LEE Stores | Max Stores | US Polo
+                    Assn | Wrangler | Levi's | Apple Store | IFB Point | LG | Oppo Exclusive Showroom | Federal Banks |
+                    IDBI Banks | Bandhan Banks | DBS Banks | Karur Vysya Banks | Indusind Banks | Central Bank Of India
+                    | Explore JD Collections | Travel & Tourism | Beauty & Fashion | Health & Fitness | Food & Beverage
+                    | Finance | On demand Services | Home & Living | Education & Career | Recreation | Jd Business Guide
+                    | Popular Cities | Bangalore | Mumbai | Chennai | Delhi | Hyderabad | Pune | Ahmedabad | Lucknow |
+                    Patna | Jaipur | Indore | Kochi | Kolkata | Coimbatore | Nagpur | Ludhiana | Agra | Bhubaneshwar |
+                    Bhopal | Guwahati | Surat | Madurai | Visakhapatnam | Sonepat | Vadodara | Meerut |
+                    Thiruvananthapuram | Gurgaon | Kozhikode | Varanasi | Siliguri | Allahabad | Rajkot | Ghaziabad |
+                    Mysore | Noida | Chandigarh | Navi-Mumbai | Vijayawada | Durgapur | Srinagar | Nashik | Panipat |
+                    Jammu | Jodhpur | Udaipur-Rajasthan | Thane | Raipur-Chhattisgarh | Amritsar | Jabalpur
+                </div>
+                <h5 class="fw-semibold mt-4 mb-2">Explore JD Collections</h5>
+                <div class="category-list" style="line-height: 1.8; font-size: 0.93rem;">
+                    Travel & Tourism | Beauty & Fashion | Health & Fitness | Food & Beverage | Finance | On demand
+                    Services |
+                    Home & Living | Education & Career | Recreation | JD Business Guide
+                </div>
+
+                <h5 class="fw-semibold mt-4 mb-2">Popular Cities</h5>
+                <div class="category-list" style="line-height: 1.8; font-size: 0.93rem;">
+                    Bangalore | Mumbai | Chennai | Delhi | Hyderabad | Pune | Ahmedabad | Lucknow | Patna | Jaipur |
+                    Indore |
+                    Kochi | Kolkata | Coimbatore | Nagpur | Ludhiana | Agra | Bhubaneshwar | Bhopal | Guwahati | Surat |
+                    Madurai | Visakhapatnam | Sonepat | Vadodara | Meerut | Thiruvananthapuram | Gurgaon | Kozhikode |
+                    Varanasi | Siliguri | Allahabad | Rajkot | Ghaziabad | Mysore | Noida | Chandigarh | Navi-Mumbai |
+                    Vijayawada | Durgapur | Srinagar | Nashik | Panipat | Jammu | Jodhpur | Udaipur-Rajasthan | Thane |
+                    Raipur-Chhattisgarh | Amritsar | Jabalpur
+                </div>
+                <div class="row mt-4">
+                    <div class="col-md-3">
+                        <h6 class="fw-bold mb-3">Quick Links</h6>
+                        <ul class="list-unstyled text-start">
+                            <li>About us</li>
+                            <li>Investor Relations</li>
+                            <li>We're hiring</li>
+                            <li>Customer Care</li>
+                            <li>Free Listing</li>
+                            <li>What's New</li>
+                            <li>Report a Bug</li>
+                            <li>B2B Sitemap</li>
+                            <li>Sitemap</li>
+                            <li>Advertise</li>
+                            <li>Media</li>
+                            <li>Testimonials</li>
+                            <li>Feedback</li>
+                            <li>Business Badge</li>
+                            <li>Jd Collection</li>
+                            <li>Client Success Videos</li>
+                            <li>B2B India Sitemap</li>
+                            <li>Return & Exchange Policy</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-9">
+                        <h6 class="fw-bold mb-3">JD Verticals</h6>
+                        <div class="row text-start">
+                            <div class="col-md-3">
+                                <ul class="list-unstyled">
+                                    <li>B2B</li>
+                                    <li>Accommodation</li>
+                                    <li>Automobiles & Two Wheelers</li>
+                                    <li>Education</li>
+                                    <li>Entertainment</li>
+                                    <li>Home & Garden</li>
+                                    <li>Lights & Lighting</li>
+                                    <li>Placements</li>
+                                    <li>Sports & Entertainment</li>
+                                    <li>Watches & Eyewear</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-3">
+                                <ul class="list-unstyled">
+                                    <li>All India</li>
+                                    <li>Advertising & PR</li>
+                                    <li>Beauty & Personal Care</li>
+                                    <li>Electronic Component</li>
+                                    <li>Events & Wedding</li>
+                                    <li>Housekeeping & Facility Management</li>
+                                    <li>Luggage Bags & Cases</li>
+                                    <li>Public</li>
+                                    <li>Textile & Leather</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-3">
+                                <ul class="list-unstyled">
+                                    <li>Doctors</li>
+                                    <li>Agriculture</li>
+                                    <li>Business & Legal</li>
+                                    <li>Electronics</li>
+                                    <li>Food & Beverage</li>
+                                    <li>Industrial Plants & Machinery</li>
+                                    <li>Office & School Supplies</li>
+                                    <li>Restaurant</li>
+                                    <li>Toys & Games</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-3">
+                                <ul class="list-unstyled">
+                                    <li>Bills & Recharge</li>
+                                    <li>Apparel</li>
+                                    <li>Chemicals</li>
+                                    <li>Energy</li>
+                                    <li>Furniture</li>
+                                    <li>IT Components</li>
+                                    <li>Packaging & Printing</li>
+                                    <li>Pet & Pet Supplies</li>
+                                    <li>Security & Protection</li>
+                                    <li>Travel</li>
+                                    <li>Cricket</li>
+                                    <li>Astrology</li>
+                                    <li>Construction & Real Estate</li>
+                                    <li>Engineering</li>
+                                    <li>Health & Medical</li>
+                                    <li>Jewellery</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         </footer>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
