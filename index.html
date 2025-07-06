@@ -74,6 +74,23 @@
             color: #333;
         }
 
+        .btn-truncate {
+            max-width: 160px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            display: inline-block;
+        }
+
+        .btn-truncate:hover {
+            overflow: visible;
+            white-space: normal;
+            background-color: #fff !important;
+            /* optional highlight */
+            z-index: 10;
+            position: relative;
+        }
+
         /* Remove input border and padding */
         .searchbar-shared input[type="text"] {
             border: none;
@@ -513,7 +530,7 @@
             margin: 5px 10px 15px;
         }
 
-        /* Optional Scrollbar Styling */
+        
         .scroll-container::-webkit-scrollbar {
             height: 6px;
         }
@@ -535,12 +552,6 @@
             box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
             transform: translateY(-5px);
         }
-
-        /* .card-img-top {
-            object-fit: contain;
-            height: 100px;
-            padding: 10px;
-        } */
 
         .card-img-top {
             height: 120px;
@@ -658,7 +669,7 @@
 
         .k_rotate-90 {
             transform: rotate(-90deg);
-            transform-origin:left top;
+            transform-origin: left top;
             white-space: nowrap;
         }
 
@@ -672,7 +683,8 @@
 
     <ul class="nav k_adv_free flex-column position-fixed top-50 end-0 ">
         <li class="nav-item k_rotate-90 mb-5">
-            <a class="rounded-top  nav-link active bg-primary text-white fw-bold" aria-current="page" href="#">Advertise</a>
+            <a class="rounded-top  nav-link active bg-primary text-white fw-bold" aria-current="page"
+                href="#">Advertise</a>
         </li>
         <li class="nav-item k_rotate-90 mt-5">
             <a class="rounded-top nav-link bg-danger text-white fw-bold" href="#">Free Listing</a>
@@ -883,14 +895,14 @@
             <section class="m-10 mt-5">
                 <div class="category-grid">
                     <a href="restaurants.html">
-                    <div class="category-item k_m2 h-100">
-                        <div class="category-content text-center">
-                            <img src="./img/restaurant-2022.svg" alt="Restaurants" />
-                            <p>Restaurants</p>
+                        <div class="category-item k_m2 h-100">
+                            <div class="category-content text-center">
+                                <img src="./img/restaurant-2022.svg" alt="Restaurants" />
+                                <p>Restaurants</p>
+                            </div>
                         </div>
-                    </div>
                     </a>
-                    
+
                     <div class="category-item k_m2 h-100">
                         <div class="category-content text-center">
                             <img src="./img/hotel-2022.svg" alt="Hotels" />
@@ -1829,7 +1841,7 @@
                             <div class="card-body d-flex">
                                 <img src="./img/W3.jpg" alt="User" class="rounded-circle me-2" width="40" height="40">
                                 <div>
-                                    <div class="fw-semibold">riya</div>
+                                    <div class="fw-semibold">diya</div>
                                     <div class="text-muted small">Wrote a review</div>
                                     <div class="text-warning small mb-1">★★★★★</div>
                                     <p class="mb-0 small">
@@ -1852,7 +1864,7 @@
                             <div class="card-body d-flex">
                                 <img src="./img/W2d.jpg" alt="User" class="rounded-circle me-2" width="40" height="40">
                                 <div>
-                                    <div class="fw-semibold">diya</div>
+                                    <div class="fw-semibold">riya</div>
                                     <div class="text-muted small">Wrote a review</div>
                                     <div class="text-warning small mb-1">★★★★★</div>
                                     <p class="mb-0 small">
@@ -2088,19 +2100,20 @@
                 <h5 class="fw-semibold mb-3">Popular Categories</h5>
                 <div class="scroll-buttons overflow-auto">
                     <div class="d-flex flex-nowrap gap-2 mb-3" style="min-width: max-content;">
-                        <button class="btn btn-outline-light border px-3 py-1">Accommodation</button>
-                        <button class="btn btn-outline-light border px-3 py-1">Astrology</button>
-                        <button class="btn btn-outline-light border px-3 py-1">Automobiles & Two Wheelers</button>
-                        <button class="btn btn-outline-light border px-3 py-1">Beauty, Fitness & Sports</button>
-                        <button class="btn btn-outline-light border px-3 py-1">Business & Legal</button>
-                        <button class="btn btn-outline-light border px-3 py-1">Education</button>
-                        <button class="btn btn-outline-light border px-3 py-1">Events & Weddings</button>
-                        <button class="btn btn-outline-light border px-3 py-1">Food & Restaurants</button>
-                        <button class="btn btn-outline-light border px-3 py-1">Health & Medical</button>
-                        <button class="btn btn-outline-light border px-3 py-1">Home Services</button>
-                        <button class="btn btn-outline-light border px-3 py-1">Others</button>
-                        <button class="btn btn-outline-light border px-3 py-1">Trasportation & Shipping</button>
-                        <button class="btn btn-outline-light border px-3 py-1">Travel</button>
+                        <button class="btn btn-light border px-3 py-1  btn-truncate">Accommodation</button>
+                        <button class="btn btn-light border px-3 py-1">Astrology</button>
+                        <button class="btn btn-light border px-3 py-1">Automobiles & Two Wheelers</button>
+                        <button class="btn btn-light border px-3 py-1">Beauty, Fitness & Sports</button>
+                        <button class="btn btn-light border px-3 py-1">Business & Legal</button>
+                        <button class="btn btn-light border px-3 py-1">Education</button>
+                        <button class="btn btn-light border px-3 py-1">Events & Weddings</button>
+                        <button class="btn btn-light border px-3 py-1">Food & Restaurants</button>
+                        <button class="btn btn-light border px-3 py-1">Health & Medical</button>
+                        <button class="btn btn-light border px-3 py-1">Home Services</button>
+                        <button class="btn btn-light border px-3 py-1">Others</button>
+                        <button class="btn btn-light border px-3 py-1">Trasportation & Shipping</button>
+                        <button class="btn btn-light border px-3 py-1">Travel</button>
+                    </div>
                     </div>
                     <h5 class="fw-semibold mt-3 mb-3">Trending Searches</h5>
                     <div class="category-list" style="line-height: 1.8; font-size: 0.93rem;">
@@ -2127,7 +2140,7 @@
                         |
                         Newspaper Advertising Agencies-Dainik Bhaskar | Tutorials For MHT CET
                     </div>
-                </div>
+                
                 <h5 class="fw-semibold mt-4 mb-3">Trending Searches</h5>
                 <div class="category-list" style="line-height: 1.8; font-size: 0.93rem;">
                     Deals and Offers | Kotak Mahindra Banks | INOX Cinemas | Canara Banks | Ratnakar Banks | PVR Cinemas

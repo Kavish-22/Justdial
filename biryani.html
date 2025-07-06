@@ -24,13 +24,18 @@
         }
 
         .scroll-buttons {
+            overflow-y: auto;
             -ms-overflow-style: none;
+            /* IE and Edge */
             scrollbar-width: none;
         }
 
-
-
-
+        .scroll-buttons {
+            overflow-x: 150px;
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+        }
 
         .k_tbdr {
             /* border: 1px solid black; */
@@ -47,15 +52,13 @@
         }
 
         main {
-            min-height: 700px;
+            min-height: 750px;
             margin-top: 40px;
         }
 
         footer {
             height: 537;
         }
-
-
 
         #backToTopBtn {
             border-radius: 50%;
@@ -64,14 +67,6 @@
             font-size: 18px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
-
-
-        .card {
-            overflow: hidden;
-            /* Prevent image from going outside */
-            border-radius: 10px;
-        }
-
 
         .k_rotate-90 {
             transform: rotate(-90deg);
@@ -84,9 +79,13 @@
             z-index: 99999;
         }
 
-        img {
-            object-fit: cover;
+        .banner-img {
+            height: 250px;
+            /* increase or change as needed */
+            object-fit: contain !important;
+            /* show full image */
         }
+
 
         .category-hover {
             transition: transform 0.3s ease;
@@ -97,7 +96,11 @@
             transform: scale(1.05);
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
         }
+        
+
+        
     </style>
+
 </head>
 
 <body>
@@ -112,7 +115,7 @@
         </li>
     </ul>
 
-    <div class="container-fluid p-0 pt-0 pb-0">
+    <div class="container-fluid p-0 pt-0 pb-0 bg-white">
         <header class="k_tbdr position-fixed w-100 bg-light z-3">
             <div class="row m-0 h-100 align-items-center">
                 <!-- Left: Logo -->
@@ -171,120 +174,378 @@
             </div>
         </header>
 
-        <main class="bg-white p-0 ">
-
-            <section class="position-relative text-white text-center ">
-                <img src="./img/noodles.jpg" class="w-100" alt="Food Banner"
-                    style="max-height: 250px; object-fit: cover;">
+        <main class="bg-white p-0 mt-0">
+            <section class="position-relative text-white text-center">
+                <div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="./img/banner222.jpg" class="d-block w-100 banner-img" alt="Banner 1">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./img/banner33.webp" class="d-block w-100 banner-img" alt="Banner 2">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./img/banner44.jpg" class="d-block w-100 banner-img" alt="Banner 3">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./img/banner4444.jpg" class="d-block w-100 banner-img" alt="Banner 4">
+                        </div>
+                    </div>
+                </div>
             </section>
+            <section>
 
-            <h4 class="mt-2 ms-4 fw-bold">Indian Flavours</h4>
+            <h3 class=" ms-4 fw-bold ">Best Biryani Restaurants in Mumbai - Order Food Online</h3>
 
+            <div class="scroll-buttons overflow">
+                <div class="d-flex flex-nowrap gap-2 mb-3" style="min-width: max-content;">
+                    <div class="dropdown ms-4">
+                        <button class="btn btn-light border px-3 py-1 dropdown-toggle" type="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Sort By
+                        </button>
+                        
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Relevance</a></li>
+                            <li><a class="dropdown-item" href="#">Rating</a></li>
+                            <li><a class="dropdown-item" href="#">Popular</a></li>
+                            <li><a class="dropdown-item" href="#">Distance</a></li>
+                            <button class="w-75 mt-3 btn btn-outline-primary mx-auto d-block text-center">close</button>
+                        </ul>
+                    </div>
 
-            <div class="container my-5">
+                    <div class="dropdown ms-1">
+                        <button class="btn btn-light border px-3 py-1 dropdown-toggle" type="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            price
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Relevance</a></li>
+                            <li><a class="dropdown-item" href="#">Rating</a></li>
+                            <li><a class="dropdown-item" href="#">Popular</a></li>
+                            <li><a class="dropdown-item" href="#">Distance</a></li>
+                            <button class="w-75 mt-3 btn btn-outline-primary mx-auto d-block text-center">close</button>
+                        </ul>
+                    </div>
 
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+                    <div class="dropdown ms-1">
+                        <button class="btn btn-light border px-3 py-1 dropdown-toggle" type="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Biryani
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Relevance</a></li>
+                            <li><a class="dropdown-item" href="#">Rating</a></li>
+                            <li><a class="dropdown-item" href="#">Popular</a></li>
+                            <li><a class="dropdown-item" href="#">Distance</a></li>
+                            <button class="w-75 mt-3 btn btn-outline-primary mx-auto d-block text-center">close</button>
+                        </ul>
+                    </div>
 
-                    <!-- Category Item -->
-                    <a href="biryani.html">
-                        <div class="col category-hover">
-                            <div class="d-flex align-items-center bg-light p-2 rounded">
-                                <img src="./img/biryani.avif" alt="Biryani" width="50" height="50" class="rounded me-3">
+                    <div class="dropdown ms-1">
+                        <button class="btn btn-light border px-3 py-1 dropdown-toggle" type="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Amenities
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Relevance</a></li>
+                            <li><a class="dropdown-item" href="#">Rating</a></li>
+                            <li><a class="dropdown-item" href="#">Popular</a></li>
+                            <li><a class="dropdown-item" href="#">Distance</a></li>
+                            <button class="w-75 mt-3 btn btn-outline-primary mx-auto d-block text-center">close</button>
+                        </ul>
+                    </div>
 
-                                <div>
-                                    <h6 class="mb-0 fw-semibold">Biryani</h6>
+                    <div class="dropdown ms-1">
+                        <button class=" btn btn-light border px-3 py-1 dropdown-toggle" type="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Rating
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Relevance</a></li>
+                            <li><a class="dropdown-item" href="#">Rating</a></li>
+                            <li><a class="dropdown-item" href="#">Popular</a></li>
+                            <li><a class="dropdown-item" href="#">Distance</a></li>
+                            <button class="w-75 mt-3 btn btn-outline-primary mx-auto d-block text-center">close</button>
+                        </ul>
+                    </div>
+
+                    <button class="btn btn-light border px-3 py-1">Business & Legal</button>
+                    <button class="btn btn-light border px-3 py-1">Education</button>
+                    <button class="btn btn-light border px-3 py-1">Events & Weddings</button>
+                    <button class="btn btn-light border px-3 py-1">Food & Restaurants</button>
+                    <button class="btn btn-light border px-3 py-1">Health & Medical</button>
+                    <button class="btn btn-light border px-3 py-1">Home Services</button>
+                    <button class="btn btn-light border px-3 py-1">Others</button>
+                    <button class="btn btn-light border px-3 py-1">Trasportation & Shipping</button>
+                    <button class="btn btn-light border px-3 py-1">Travel</button>
+                </div>
+            </div>
+            </section>
+            <div class="container my-3 ms-2">
+                <div class="card mb-4 shadow-sm">
+                    <div class="row g-0">
+                        <!-- Image -->
+                        <div class="col-md-2">
+                            <img src="./img/shop1.webp" class="img-fluid rounded-start h-100" alt="Restaurant Image">
+                        </div>
+
+                        <!-- Details -->
+                        <div class="col-md-9">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <h4 class="card-title mb-0 me-2 fw-bold">Hotel Kombadi Vade</h4>
+
                                 </div>
+                                <span class="badge bg-success me-2 mb-4">3.9 ★</span>
+                                <small class="text-muted">103 Ratings</small>
+                                <span class="badge bg-light text-dark border ms-2">⚡ Responsive</span>
 
-                            </div>
-                        </div>
-                    </a>
+                                <p class="mb-1 text-muted mt-2"> <i class="fa-solid fa-location-dot"></i> Vartak
+                                    Nagar Thane West, Thane</p>
+                                <p class="mb-1 text-muted">
+                                    <strong>Open until:</strong> 11:00 PM &nbsp; | &nbsp; ₹450 for two &nbsp; |
+                                    &nbsp;
+                                    <i class="bi bi-car-front"></i> Parking Available
+                                </p>
 
-                    <div class="col category-hover">
-                        <div class="d-flex align-items-center bg-light p-2 rounded">
-                            <img src="./img/dhaba.avif" alt="Dhaba" width="50" height="50" class="rounded me-3">
-                            <div>
-                                <h6 class="mb-0 fw-semibold">Dhaba</h6>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col category-hover">
-                        <div class="d-flex align-items-center bg-light p-2 rounded">
-                            <img src="./img/gujarati.avif" alt="Gujarati" width="50" height="50" class="rounded me-3">
-                            <div>
-                                <h6 class="mb-0 fw-semibold">Gujarati</h6>
-                                <small class="text-muted">Yummy Che!</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col category-hover">
-                        <div class="d-flex align-items-center bg-light p-2 rounded">
-                            <img src="./img/malwani.avif" alt="Malwani" width="50" height="50" class="rounded me-3">
-                            <div>
-                                <h6 class="mb-0 fw-semibold">Malwani</h6>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col category-hover">
-                        <div class="d-flex align-items-center bg-light p-2 rounded">
-                            <img src="./img/mughlai.avif" alt="Mughlai" width="50" height="50" class="rounded me-3">
-                            <div>
-                                <h6 class="mb-0 fw-semibold">Mughlai</h6>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col category-hover">
-                        <div class="d-flex align-items-center bg-light p-2 rounded">
-                            <img src="./img/north_indian.avif" alt="North Indian" width="50" height="50"
-                                class="rounded me-3">
-                            <div>
-                                <h6 class="mb-0 fw-semibold">North Indian</h6>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col category-hover">
-                        <div class="d-flex align-items-center bg-light p-2 rounded">
-                            <img src="./img/pure_veg.avif" alt="Pure Veg" width="50" height="50" class="rounded me-3">
-                            <div>
-                                <h6 class="mb-0 fw-semibold">Pure Veg</h6>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col category-hover">
-                        <div class="d-flex align-items-center bg-light p-2 rounded">
-                            <img src="./img/sea_food.avif" alt="Sea Food" width="50" height="50" class="rounded me-3">
-                            <div>
-                                <h6 class="mb-0 fw-semibold">Sea Food</h6>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col category-hover">
-                        <div class="d-flex align-items-center bg-light p-2 rounded">
-                            <img src="./img/south_indian.avif" alt="South India" width="50" height="50"
-                                class="rounded me-3">
-                            <div>
-                                <h6 class="mb-0 fw-semibold">South India</h6>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col category-hover">
-                        <div class="d-flex align-items-center bg-light p-2 rounded">
-                            <img src="./img/tandoori.avif" alt="Tandoori" width="50" height="50" class="rounded me-3">
-                            <div>
-                                <h6 class="mb-0 fw-semibold">Tandoori</h6>
-
+                                <div class="d-flex flex-wrap gap-2 mt-2">
+                                    <a href="tel:09972269380" class="btn btn-outline-success px-3">📞 09972269380</a>
+                                    <a href="#" class="btn btn-primary px-4">Order Online</a>
+                                    <a href="#" class="btn btn-outline-secondary px-4">Menu</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <div class="container my-3 ms-2">
+                <div class="card mb-4 shadow-sm">
+                    <div class="row g-0">
+                        <!-- Image -->
+                        <div class="col-md-2">
+                            <img src="./img/momos.webp" class="img-fluid rounded-start h-100" alt="Restaurant Image">
+                        </div>
+
+                        <!-- Details -->
+                        <div class="col-md-9">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <h4 class="card-title mb-0 me-2 fw-bold">Farmhouse Brass Anchor</h4>
+
+                                </div>
+                                <span class="badge bg-success me-2 mb-4">3.9 ★</span>
+                                <small class="text-muted">103 Ratings</small>
+                                <span class="badge bg-light text-dark border ms-2">⚡ Responsive</span>
+
+                                <p class="mb-1 text-muted mt-2"> <i class="fa-solid fa-location-dot"></i> Vartak
+                                    Nagar Thane West, Thane</p>
+                                <p class="mb-1 text-muted">
+                                    <strong>Open until:</strong> 11:00 PM &nbsp; | &nbsp; ₹350 for two &nbsp; |
+                                    &nbsp;
+                                    <i class="bi bi-car-front"></i> Parking Available
+                                </p>
+
+                                <div class="d-flex flex-wrap gap-2 mt-2">
+                                    <a href="tel:09972269380" class="btn btn-outline-success px-3">📞 01235269380</a>
+                                    <a href="#" class="btn btn-primary px-4">Order Online</a>
+                                    <a href="#" class="btn btn-outline-secondary px-4">Menu</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container my-3 ms-2">
+                <div class="card mb-4 shadow-sm">
+                    <div class="row g-0">
+                        <!-- Image -->
+                        <div class="col-md-2">
+                            <img src="./img/hotelpraveen.webp" class="img-fluid rounded-start h-100"
+                                alt="Restaurant Image">
+                        </div>
+
+                        <!-- Details -->
+                        <div class="col-md-9">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <h4 class="card-title mb-0 me-2 fw-bold">Hotel Praveen</h4>
+
+                                </div>
+                                <span class="badge bg-success me-2 mb-4">3.9 ★</span>
+                                <small class="text-muted">103 Ratings</small>
+                                <span class="badge bg-light text-dark border ms-2">⚡ Responsive</span>
+
+                                <p class="mb-1 text-muted mt-2"> <i class="fa-solid fa-location-dot"></i> Vartak
+                                    Nagar Thane West, Thane</p>
+                                <p class="mb-1 text-muted">
+                                    <strong>Open until:</strong> 11:00 PM &nbsp; | &nbsp; ₹250 for two &nbsp; |
+                                    &nbsp;
+                                    <i class="bi bi-car-front"></i> Parking Available
+                                </p>
+
+                                <div class="d-flex flex-wrap gap-2 mt-2">
+                                    <a href="tel:09972269380" class="btn btn-outline-success px-3">📞 09456269380</a>
+                                    <a href="#" class="btn btn-primary px-4">Order Online</a>
+                                    <a href="#" class="btn btn-outline-secondary px-4">Menu</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container my-3 ms-2">
+                <div class="card mb-4 shadow-sm">
+                    <div class="row g-0">
+                        <!-- Image -->
+                        <div class="col-md-2">
+                            <img src="./img/maaz.webp" class="img-fluid rounded-start h-100" alt="Restaurant Image">
+                        </div>
+
+                        <!-- Details -->
+                        <div class="col-md-9">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <h4 class="card-title mb-0 me-2 fw-bold">Maaz Inn Restaurant</h4>
+
+                                </div>
+                                <span class="badge bg-success me-2 mb-4">3.9 ★</span>
+                                <small class="text-muted">103 Ratings</small>
+                                <span class="badge bg-light text-dark border ms-2">⚡ Responsive</span>
+
+                                <p class="mb-1 text-muted mt-2"> <i class="fa-solid fa-location-dot"></i> Vartak
+                                    Nagar Thane West, Thane</p>
+                                <p class="mb-1 text-muted">
+                                    <strong>Open until:</strong> 11:00 PM &nbsp; | &nbsp; ₹400 for two &nbsp; |
+                                    &nbsp;
+                                    <i class="bi bi-car-front"></i> Parking Available
+                                </p>
+
+                                <div class="d-flex flex-wrap gap-2 mt-2">
+                                    <a href="tel:09972269380" class="btn btn-outline-success px-3">📞 09842269380</a>
+                                    <a href="#" class="btn btn-primary px-4">Order Online</a>
+                                    <a href="#" class="btn btn-outline-secondary px-4">Menu</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container my-3 ms-2">
+                <div class="card mb-4 shadow-sm">
+                    <div class="row g-0">
+                        <!-- Image -->
+                        <div class="col-md-2">
+                            <img src="./img/khao-piyo-.avif" class="img-fluid rounded-start h-100"
+                                alt="Restaurant Image">
+                        </div>
+
+                        <!-- Details -->
+                        <div class="col-md-9">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <h4 class="card-title mb-0 me-2 fw-bold">Khao Piyo</h4>
+
+                                </div>
+                                <span class="badge bg-success me-2 mb-4">4.9 ★</span>
+                                <small class="text-muted">100 Ratings</small>
+                                <span class="badge bg-light text-dark border ms-2">⚡ Responsive</span>
+
+                                <p class="mb-1 text-muted mt-2"> <i class="fa-solid fa-location-dot"></i> Vartak
+                                    Nagar Thane West, Thane</p>
+                                <p class="mb-1 text-muted">
+                                    <strong>Open until:</strong> 11:00 PM &nbsp; | &nbsp; ₹550 for two &nbsp; |
+                                    &nbsp;
+                                    <i class="bi bi-car-front"></i> Parking Available
+                                </p>
+
+                                <div class="d-flex flex-wrap gap-2 mt-2">
+                                    <a href="tel:09972269380" class="btn btn-outline-success px-3">📞 0997154980</a>
+                                    <a href="#" class="btn btn-primary px-4">Order Online</a>
+                                    <a href="#" class="btn btn-outline-secondary px-4">Menu</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center my-5">
+                <button class="btn btn-primary d-inline-flex align-items-center px-5 py-2 ">
+                    <span class="me-2 ">Load More</span>
+                </button>
+            </div>
+
+            <div class="container my-5">
+                <h4 class="fw-bold mb-4">Latest Customer Reviews</h4>
+
+                <!-- Review Card 1 -->
+                <div class="mb-4 border-bottom pb-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <img src="./img/W1.jpg" class="rounded-circle" width="40" height="40" alt="User">
+                        <strong>Hotel Nityanand</strong>
+                    </div>
+
+                    <div class="d-flex align-items-center gap-2 mt-2">
+                        <span class="badge bg-success fs-6">5.0 ★</span>
+                    </div>
+
+                    <p class="mt-2 mb-1" style="line-height: 1.6;">
+                        “I recently had the pleasure of staying at Hotel Nityanand and I must say, it exceeded all my
+                        expectations.
+                        The food was incredibly tasty and fresh, offering a wide variety to suit every palate...”
+                    </p>
+                    <div class="d-flex justify-content-between">
+                        <small class="text-muted"><strong>ronak</strong></small>
+                        <small class="text-muted">28 Jan 2025</small>
+                    </div>
+                </div>
+
+                <!-- Review Card 2 -->
+                <div class="mb-4 border-bottom pb-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <img src="./img/W2d.jpg" class="rounded-circle" width="40" height="40" alt="User">
+                        <strong>Tandoor Corner</strong>
+                    </div>
+
+                    <div class="d-flex align-items-center gap-2 mt-2">
+                        <span class="badge bg-success fs-6">4.0 ★</span>
+                    </div>
+
+                    <p class="mt-2 mb-1" style="line-height: 1.6;">
+                        “An old and well known restaurant in Bandra, which is known for its Mughlai style dishes and
+                        biryanis.
+                        The ambience is well maintained and takes you back in the retro mood with wooden touches.”
+                    </p>
+                    <div class="d-flex justify-content-between">
+                        <small class="text-muted"><strong>abhishek</strong></small>
+                        <small class="text-muted">28 Feb 2023</small>
+                    </div>
+                </div>
+                <div class="mb-4 border-bottom pb-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <img src="./img/W3.jpg" class="rounded-circle" width="40" height="40" alt="User">
+                        <strong>hotel moon</strong>
+                    </div>
+
+                    <div class="d-flex align-items-center gap-2 mt-2">
+                        <span class="badge bg-success fs-6">4.0 ★</span>
+                    </div>
+
+                    <p class="mt-2 mb-1" style="line-height: 1.6;">
+                        “An old and well known restaurant in Bandra, which is known for its Mughlai style dishes and
+                        biryanis.
+                        The ambience is well maintained and takes you back in the retro mood with wooden touches.”
+                    </p>
+                    <div class="d-flex justify-content-between">
+                        <small class="text-muted"><strong>Kavish</strong></small>
+                        <small class="text-muted">28 Feb 2023</small>
+                    </div>
+                </div>
+            </div>
         </main>
 
         <footer class="bg-light text-dark text-center p-4">
@@ -446,32 +707,32 @@
                         <button class="btn btn-light border px-3 py-1">Travel</button>
                     </div>
                 </div>
-                    <h5 class="fw-semibold mt-3 mb-3">Trending Searches</h5>
-                    <div class="category-list" style="line-height: 1.8; font-size: 0.93rem;">
-                        Real Estate Agents | Book Shops | Aadhaar Card Agents | Yoga Classes | Estate Agents For Land |
-                        Pmjay Scheme Hospitals | Tutorials For IIT JEE | Mobile Phone Repair & Services-MI | Wrist Watch
-                        Dealers | Education Consultants | Battery Operated Scooter Dealers-OLA | Entertainment Centres |
-                        DTH
-                        TV Broadcast Service Providers-Sun Direct | AC Repair & Services-Blue Star | Tnpsc Tutorials |
-                        Mobile Phone Simcard Dealers-Jio | MPSC Tutorials | Shoe Dealers-Nike | Tirupati Darshanam
-                        Ticketing
-                        Services | Bitcoin Services | Mobile Phone Repair & Services-Nothing | Cat Tutorials | Lawyers
-                        For
-                        District Court | Ayushman Bharat Yojana Consultants | Lawyers For Supreme Court | Sports Shoe
-                        Dealers | Courier Services For Ahmedabad | Internet Payment Gateway Solution Providers | Taxi
-                        Services For Inter City | BPSC Tutorials | Courier Services For Canada | Demat Account Services
-                        |
-                        Automobile Part Dealers-Ashok Leyland | Prp Hair Transplantation Treatment Doctors | Mutual Fund
-                        Agents-SBI | Courier Services For Dubai | BEST Enquiry | Pickleball Courts | Khatu Shyam Bhajan
-                        Singers | Dairy Product Retailers-Amul | Tutorials For Mppsc | Uber Autorickshaw Attachment
-                        Services
-                        | Football Dealers | Courier Services For Surat | Battery Operated Auto Rickshaw Dealers-Mini
-                        Metro
-                        | Electricity Suppliers-Kseb | Courier Services For Tirupati | Packers And Movers For Hyderabad
-                        |
-                        Newspaper Advertising Agencies-Dainik Bhaskar | Tutorials For MHT CET
-                    </div>
-                
+                <h5 class="fw-semibold mt-3 mb-3">Trending Searches</h5>
+                <div class="category-list" style="line-height: 1.8; font-size: 0.93rem;">
+                    Real Estate Agents | Book Shops | Aadhaar Card Agents | Yoga Classes | Estate Agents For Land |
+                    Pmjay Scheme Hospitals | Tutorials For IIT JEE | Mobile Phone Repair & Services-MI | Wrist Watch
+                    Dealers | Education Consultants | Battery Operated Scooter Dealers-OLA | Entertainment Centres |
+                    DTH
+                    TV Broadcast Service Providers-Sun Direct | AC Repair & Services-Blue Star | Tnpsc Tutorials |
+                    Mobile Phone Simcard Dealers-Jio | MPSC Tutorials | Shoe Dealers-Nike | Tirupati Darshanam
+                    Ticketing
+                    Services | Bitcoin Services | Mobile Phone Repair & Services-Nothing | Cat Tutorials | Lawyers
+                    For
+                    District Court | Ayushman Bharat Yojana Consultants | Lawyers For Supreme Court | Sports Shoe
+                    Dealers | Courier Services For Ahmedabad | Internet Payment Gateway Solution Providers | Taxi
+                    Services For Inter City | BPSC Tutorials | Courier Services For Canada | Demat Account Services
+                    |
+                    Automobile Part Dealers-Ashok Leyland | Prp Hair Transplantation Treatment Doctors | Mutual Fund
+                    Agents-SBI | Courier Services For Dubai | BEST Enquiry | Pickleball Courts | Khatu Shyam Bhajan
+                    Singers | Dairy Product Retailers-Amul | Tutorials For Mppsc | Uber Autorickshaw Attachment
+                    Services
+                    | Football Dealers | Courier Services For Surat | Battery Operated Auto Rickshaw Dealers-Mini
+                    Metro
+                    | Electricity Suppliers-Kseb | Courier Services For Tirupati | Packers And Movers For Hyderabad
+                    |
+                    Newspaper Advertising Agencies-Dainik Bhaskar | Tutorials For MHT CET
+                </div>
+
                 <h5 class="fw-semibold mt-4 mb-3">Trending Searches</h5>
                 <div class="category-list" style="line-height: 1.8; font-size: 0.93rem;">
                     Deals and Offers | Kotak Mahindra Banks | INOX Cinemas | Canara Banks | Ratnakar Banks | PVR Cinemas
