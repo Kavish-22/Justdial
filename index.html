@@ -655,10 +655,34 @@
             display: flex;
             gap: 0.5rem;
         }
+
+        .k_rotate-90 {
+            transform: rotate(-90deg);
+            transform-origin:left top;
+            white-space: nowrap;
+        }
+
+        .k_adv_free {
+            right: -75px !important;
+        }
     </style>
 </head>
 
 <body>
+
+    <ul class="nav k_adv_free flex-column position-fixed top-50 end-0 ">
+        <li class="nav-item k_rotate-90 mb-5">
+            <a class="rounded-top  nav-link active bg-primary text-white fw-bold" aria-current="page" href="#">Advertise</a>
+        </li>
+        <li class="nav-item k_rotate-90 mt-5">
+            <a class="rounded-top nav-link bg-danger text-white fw-bold" href="#">Free Listing</a>
+        </li>
+    </ul>
+
+
+
+
+
     <div class="container-fluid p-4 pt-0 pb-0">
         <header class="k_tbdr position-fixed w-100 bg-light z-3">
             <div class="row m-0 h-100 align-items-center">
@@ -717,12 +741,7 @@
                             </div>
                         </div>
                     </div>
-
-
-                    <!-- Floating Search Bar -->
                 </div>
-
-
                 <!-- Right: Advertise, Free Listing, Bell, Login -->
                 <div class="col-4 d-flex align-items-center justify-content-start gap-3 ps-3">
                     <a class="text-dark d-flex align-items-center gap-2"><i class="fa-solid fa-bullhorn"></i>
@@ -735,7 +754,7 @@
             </div>
         </header>
 
-        <main class="bg-white p-5">
+        <main class="bg-white p-5 ">
             <h2 class="animated-heading d-flex align-items-center flex-wrap">
                 <span class="me-2 fw-semibold">Search across</span>
                 <div class="rotating-text position-relative overflow-hidden">
@@ -863,13 +882,15 @@
             </div>
             <section class="m-10 mt-5">
                 <div class="category-grid">
+                    <a href="restaurants.html">
                     <div class="category-item k_m2 h-100">
                         <div class="category-content text-center">
                             <img src="./img/restaurant-2022.svg" alt="Restaurants" />
                             <p>Restaurants</p>
                         </div>
                     </div>
-
+                    </a>
+                    
                     <div class="category-item k_m2 h-100">
                         <div class="category-content text-center">
                             <img src="./img/hotel-2022.svg" alt="Hotels" />
@@ -1276,7 +1297,7 @@
 
                         <div class="col-8 col-4 col-md-2 text-center">
                             <img src="./img/imgg333.avif" class="img-fluid rounded mb-2" alt="F1">
-                            <p class="mb-1 fw-bold category-item">F1</p>
+                            <p class="mb-1 fw-bold category-item">F1 </p>
                             <p class="text-muted">English &bull; 3D</p>
                             <span class="bg-light text-dark"><i
                                     class="bi bi-hand-thumbs-up-fill text-danger"></i></span>
@@ -1312,7 +1333,7 @@
                         </div>
             </section>
             <section class="k_m3"></section>
-           
+
             <div class="mt-5">
                 <section class="k_tbdr k_m3">
                     <div class="container my-4">
@@ -1923,7 +1944,7 @@
             </div>
 
         </main>
-        <footer class="bg-dark text-white text-center p-4">
+        <footer class="bg-light text-dark text-center p-4">
             <!-- SOCIAL MEDIA LINKS -->
             <div class="mt-2 d-flex align-items-center">
                 <span class="me-2">Follow us on</span>
