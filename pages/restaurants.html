@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Businesses Near You on Local Search Engine - Justdial</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <link rel="shortcut icon" href="../img/favicon.ico">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        header.k_tbdr {
+            position: fixed;
+            top: 0;
+            z-index: 1050;
+            height: 70px;
+            background: #f8f9fa;
+            width: 100%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .scroll-buttons {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .k_slide {
+            width: 450px;
+        }
+
+        .k_dropdown22 {
+            color: #007bff;
+        }
+
+        .k_tbdr {
+            /* border: 1px solid black; */
+            border-bottom: 1px solid #ddd;
+        }
+
+        body {
+            background-color: #E8E8E8;
+        }
+
+        header {
+            height: 79px;
+            z-index: 1000;
+        }
+
+        main {
+            min-height: 2400px;
+            margin-top: 40px;
+        }
+
+        footer {
+            height: 537;
+        }
+
+        .k_m1 {
+            height: 50px;
+        }
+
+        .k_m2 {
+            height: 110px;
+        }
+
+        .k_m3 {
+            height: 250px;
+        }
+
+        .k_m4 {
+            height: 488px;
+        }
+
+        .k_m5 {
+            height: 400px;
+        }
+
+        #backToTopBtn {
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            font-size: 18px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .centered-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2.5rem;
+            z-index: 1;
+        }
+
+        .card {
+            overflow: hidden;
+            /* Prevent image from going outside */
+            border-radius: 10px;
+        }
+
+        .img-zoom {
+            transition: transform 0.4s ease;
+        }
+
+        .card:hover .img-zoom {
+            transform: scale(1.1);
+        }
+
+        .card-img-top {
+            height: 120px;
+            object-fit: cover;
+        }
+
+
+
+        .k_rotate-90 {
+            transform: rotate(-90deg);
+            transform-origin: left top;
+            white-space: nowrap;
+        }
+
+        .k_adv_free {
+            right: -75px !important;
+            z-index: 99999;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="header"></div>
+    <ul class="nav k_adv_free flex-column position-fixed top-50 end-0 ">
+        <li class="nav-item k_rotate-90 mb-5">
+            <a class="rounded-top  nav-link active bg-primary text-white fw-bold" aria-current="page"
+                href="#">Advertise</a>
+        </li>
+        <li class="nav-item k_rotate-90 mt-5">
+            <a class="rounded-top nav-link bg-danger text-white fw-bold" href="#">Free Listing</a>
+        </li>
+    </ul>
+    <div class="container-fluid p-0 pt-0 pb-0">
+        <main class="bg-white p-0">
+            <!-- Banner Section -->
+            <section class="position-relative text-white text-center ">
+                <img src="../img/restaurants_banner_image.jpg" class="w-100" alt="Food Banner"
+                    style="max-height: 400px; object-fit: cover;">
+                <div class="position-absolute top-50 start-50 translate-middle text-white">
+                    <h1 class="fw-bold">IT'S ALL ABOUT FOOD</h1>
+                </div>
+
+                <!-- Overlapping Card Section -->
+                <div class="position-absolute w-100" style="bottom: -40%; left: 0;">
+                    <div class="d-flex justify-content-center gap-4 flex-wrap">
+                        <div class="px-4 py-3 bg-white rounded-3 shadow-sm text-center">
+                            <img src="../img/booktable.svg" alt="Book Table" width="40" class="mb-2">
+                            <p class="fw-bold mb-1 text-dark">Book A Table</p>
+                            <a href="#" class="text-decoration-none text-primary">Make Reservation ></a>
+                        </div>
+                        <div class="px-4 py-3 bg-white rounded-3 shadow-sm text-center">
+                            <img src="../img/trending.svg" alt="Trending" width="40" class="mb-2">
+                            <p class="fw-bold mb-1 text-dark">WHAT'S TRENDING?</p>
+                            <a href="#" class="text-decoration-none text-primary">Try it Yourself ></a>
+                        </div>
+                        <div class="px-4 py-3 bg-white rounded-3 shadow-sm text-center">
+                            <img src="../img/orderfood2.svg" alt="Order Food" width="40" class="mb-2">
+                            <p class="fw-bold mb-1 text-dark">ORDER FOOD</p>
+                            <a href="#" class="text-decoration-none text-primary">5830 Restaurants ></a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="k_m1"></section>
+
+            <!-- Categories -->
+            <section class="pt-5 mt-5 p-4">
+                <div class="row g-4">
+                    <div class="col-6 col-md-4 col-lg-2">
+                        <a href="./indian.html">
+                            <div class="card h-100 d-flex flex-column">
+                                <img src="../img/indianflavours.jpg" class="card-img-top img-zoom"
+                                    alt="Indian Flavours">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">Indian Flavours</h5>
+                                    <ul class="list-unstyled">
+                                        <li>- Tandoori</li>
+                                        <li>- South Indian</li>
+                                        <li>- Pure Veg </li>
+                                        <li>- North Indian</li>
+                                        <li class="text-primary mt-3">- More</li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-2">
+                        <div class="card h-100 d-flex flex-column">
+                            <img src="../img/globalcuisines.webp" class="card-img-top img-zoom " alt="Indian Flavours">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Global Cuisines</h5>
+                                <ul class="list-unstyled">
+                                    <li>- Pan Asian</li>
+                                    <li>- Continental</li>
+                                    <li>- Italian </li>
+                                    <li>- chinese</li>
+                                    <li class="text-primary mt-3">- More</li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-2">
+                        <div class="card h-100 d-flex flex-column">
+                            <img src="../img/i55_nightlife (1).webp" class="card-img-top img-zoom"
+                                alt="Indian Flavours">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Nightlife</h5>
+                                <ul class="list-unstyled">
+                                    <li>- Pubs</li>
+                                    <li>- Launge Bars</li>
+                                    <li>- Night Club</li>
+                                    <li>- Restaurants & Bars</li>
+                                    <li class="text-primary mt-3">- More</li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-2">
+                        <div class="card h-100 d-flex flex-column">
+                            <img src="../img/i_quickbites.webp" class="card-img-top img-zoom" alt="Indian Flavours">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Quick Bites</h5>
+                                <ul class="list-unstyled">
+                                    <li>- Bakeries</li>
+                                    <li>- Coffee Shops</li>
+                                    <li>- Fast Food</li>
+                                    <li>- Pizza Outlets</li>
+                                    <li class="text-primary mt-3">- More</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-2">
+                        <div class="card h-100 d-flex flex-column">
+                            <img src="../img/i_sweettooth.webp" class="card-img-top img-zoom" alt="Indian Flavours">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Sweet Tooth</h5>
+                                <ul class="list-unstyled">
+                                    <li>- Cake Shops</li>
+                                    <li>- Desserts</li>
+                                    <li>- Donut Outlets</li>
+                                    <li>- Sweets</li>
+                                    <li class="text-primary mt-3">- More</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-2">
+                        <div class="card h-100 d-flex flex-column">
+                            <img src="../img/i_foodie.webp" class="card-img-top img-zoom" alt="Indian Flavours">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Foodie</h5>
+                                <ul class="list-unstyled">
+                                    <li>- Chinese</li>
+                                    <li>- Dhaba Joints</li>
+                                    <li>- Fab Biryanis</li>
+                                    <li>- Thali Feasts</li>
+                                    <li class="text-primary mt-3">- More</li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center my-5">
+                    <button class="btn btn-primary d-inline-flex align-items-center px-5 py-2 ">
+                        <span class="me-2 ">View All Categories</span>
+                    </button>
+                </div>
+            </section>
+
+            <section class="k_m2 p-5">
+
+                <h5 class="fw-bold">Unveiling the Culinary Treasures: Exploring Local Restaurants & Eateries near Mumbai
+                </h5>
+                <h6>Welcome to the vibrant world of local restaurants, where every dish tells a story and every bite is
+                    an adventure! In this article, we will take a delightful journey through the bustling streets and
+                    cozy corners of your neighborhood to discover the hidden gems known as eateries, food places, and
+                    top-rated restaurants. From savory sensations to sweet delights, there's something for every palate
+                    in these food spots that define the essence of culinary excellence.</h6>
+
+                <h5 class="mt-4 fw-bold">Exploring the Local Scene</h5>
+                <h6>When it comes to experiencing the true essence of a city or town, few things rival the joy of
+                    indulging in its local cuisine. Local restaurants offer a glimpse into the heart and soul of a
+                    community, serving up not just food but also a sense of belonging and tradition. Whether you're
+                    craving comfort food or eager to explore exotic flavors, these culinary havens have something to
+                    satisfy every craving.</h6>
+
+                <h5 class="mt-4 fw-bold">Restaurant Menu: A Feast for the Senses</h5>
+                <h6>Step inside any local restaurant, and you'll be greeted by a symphony of aromas, colors, and flavors
+                    that titillate the senses. From sizzling steaks to aromatic curries, the restaurant menu is a
+                    treasure trove of culinary delights waiting to be explored. Each dish is carefully crafted to
+                    tantalize the taste buds and leave a lasting impression, ensuring that every meal is a memorable
+                    experience.</h6>
+
+                <h5 class="mt-4 fw-bold">Global Cuisines: A World of Flavors at Your Doorstep </h5>
+                <h6>One of the greatest joys of dining at local restaurants is the opportunity to embark on a culinary
+                    journey around the world without ever leaving your neighborhood. From Italian trattorias to Thai
+                    street food stalls, these establishments offer a diverse array of global cuisines that reflect the
+                    rich tapestry of cultures that call your city home. Whether you're in the mood for a taste of India
+                    or craving the bold flavors of Mexico, you'll find it all right here in your own backyard.</h6>
+
+                <h5 class="mt-4 fw-bold">Nightlife: Where Food Meets Entertainment </h5>
+                <h6>Local restaurants aren't just about great food; they're also hubs of social activity and nightlife.
+                    As the sun sets and the city comes alive, these eateries transform into vibrant gathering spots
+                    where friends come together to eat, drink, and make memories. Whether you're looking for a cozy
+                    corner to enjoy a romantic dinner or a lively atmosphere to dance the night away, the local
+                    restaurant scene has something for everyone.</h6>
+
+                <h5 class="mt-4 fw-bold">Quick Bites: On-the-Go Gastronomy </h5>
+                <h6>In today's fast-paced world, convenience is key, and local restaurants are here to deliver. Whether
+                    you're rushing to catch a train or grabbing a quick bite between meetings, these food spots offer a
+                    delicious solution to your hunger pangs. From gourmet sandwiches to freshly baked pastries, you'll
+                    find an array of quick bites that are as satisfying as they are convenient.</h6>
+
+                <h5 class="mt-4 fw-bold">Sweet Tooth: Indulge Your Dessert Desires </h5>
+                <h6>No meal is complete without something sweet to satisfy your sweet tooth, and local restaurants have
+                    you covered. From decadent cakes to artisanal chocolates, these establishments offer a tempting
+                    array of desserts that are sure to delight your taste buds. Whether you're celebrating a special
+                    occasion or simply treating yourself to a little indulgence, there's no shortage of sweet treats to
+                    choose from.</h6>
+
+                <h3 class="mt-5 ">Frequently Asked Questions</h3>
+
+                <h5 class="mt-4 fw-bold">1. What are the key factors to consider when choosing a restaurant in Mumbai?
+                </h5>
+                <h6>You should consider the type of cuisine you're in the mood for, the restaurant's location, its
+                    hygiene standards, ambiance, price range, customer reviews, and any special requirements like
+                    vegetarian options, parking, or Wi-Fi.</h6>
+
+                <h5 class="mt-4 fw-bold">2. How can I find the best local restaurants in Mumbai?</h5>
+                <h6>You can use online platforms such as Justdial, Zomato, Swiggy or Google Maps. Asking locals or
+                    friends for recommendations, checking social media pages and food blogs, and looking for popular
+                    food festivals or food trails can also help.</h6>
+
+                <h5 class="mt-4 fw-bold">3. What should I look for in online reviews of Indian restaurants?</h5>
+                <h6>Look for consistency in positive feedback regarding food quality and taste, comments on cleanliness
+                    and hygiene, feedback on service and staff behavior, information on portion sizes and value for
+                    money, and any recurring negative comments or issues mentioned by multiple reviewers</h6>
+
+                <h5 class="mt-4 fw-bold">4. Are there any safety tips to keep in mind when dining out in India?</h5>
+                <h6>Opt for bottled water to avoid waterborne diseases. Check the hygiene rating of the restaurant.
+                    Prefer busy and well-reviewed places, as high turnover often indicates freshness. Be cautious of
+                    street food; ensure it's cooked fresh and served hot. Verify the authenticity of ingredients,
+                    especially in international cuisine restaurants.</h6>
+
+                <h5 class="mt-4 fw-bold">5. What are some famous regional cuisines to try in different parts of India?
+                </h5>
+                <h6>In North India, you can try Punjabi, Kashmiri, and Mughlai cuisines. In South India, popular options
+                    include Andhra, Tamil, Kerala, Karnataka, Goan, and Chettinad cuisines. In West India, you can
+                    explore Gujarati, Maharashtrian, and Goan cuisines. East India offers Bengali, Assamese, and Oriya
+                    cuisines.</h6>
+
+
+            </section>
+
+        </main>
+        <div id="footer"></div>
+    </div>
+    <script>
+        fetch('../justdial/header.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('header').innerHTML = data);
+
+        fetch('../justdial/footer.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('footer').innerHTML = data);
+    </script>
+    <script src="../js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/js/all.min.js"
+        integrity="sha512-b+nQTCdtTBIRIbraqNEwsjB6UvL3UEMkXnhzd8awtCYh0Kcsjl9uEgwVFVbhoj3uu1DO1ZMacNvLoyJJiNfcvg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+</body>
+
+</html>

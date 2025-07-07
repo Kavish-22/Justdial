@@ -1,0 +1,67 @@
+<header class="k_tbdr position-fixed w-100 bg-light z-3">
+    <div class="row m-0 h-100 align-items-center">
+        <!-- Left: Logo -->
+        <div class="col-2 d-flex align-items-center ps-3">
+            <div class="header_left_inner">
+                <a role="link" class="animate__animated header_jdlogo" href="/">
+                    <img src="https://akam.cdn.jdmagicbox.com/images/icontent/jdrwd/jdlogosvg.svg" alt="Justdial Logo"
+                        title="Justdial" height="25" width="102">
+                </a>
+            </div>
+        </div>
+
+        <!-- Middle Column: Hiring and Floating Search -->
+        <div class="col-6 d-flex align-items-center justify-content-end position-relative" style="height: 70px;">
+            <!-- Nav section -->
+            <ul class="nav k_wearehiring d-flex align-items-center gap-3 mb-0">
+                <li class="nav-item">
+                    <button class="btn dropdown-toggle text-primary" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="fa-solid fa-language"></i> En
+                    </button>
+                </li>
+                <li class="nav-item"><a class="nav-link text-dark" href="#">We are Hiring</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="#">Investor Relations</a></li>
+            </ul>
+
+            <!-- Floating Search Bar -->
+            <div id="floatingSearch" class="position-absolute top-0 start-0 w-100 floating-hidden"
+                style="z-index: 999;">
+                <div class="searchbar-shared d-flex align-items-center gap-3 px-3 py-2 shadow-sm rounded w-100">
+                    <!-- Location Dropdown -->
+                    <div class="dropdown">
+                        <button class="btn btn-drop dropdown-toggle d-flex align-items-center" type="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-location-dot me-2"></i>
+                            <input type="text" class="form-control border-0 shadow-none" placeholder="Enter Location" />
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Neemuch</a></li>
+                            <li><a class="dropdown-item" href="#">Mandsaur</a></li>
+                            <li><a class="dropdown-item" href="#">Ratlam</a></li>
+                            <li><a class="dropdown-item" href="#">Ujjain</a></li>
+                            <li><a class="dropdown-item" href="#">Indore</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Search Input -->
+                    <div class="d-flex align-items-center gap-2 w-100">
+                        <input type="text" class="form-control jd-search-input" placeholder="Search in Neemuch" />
+                        <i class="fa-solid fa-microphone text-mic"></i>
+                        <i class="fa-solid fa-magnifying-glass me-2 text-orange"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Right: Advertise, Free Listing, Bell, Login -->
+        <div class="col-4 d-flex align-items-center justify-content-start gap-3 ps-3">
+            <a class="text-dark d-flex align-items-center gap-2"><i class="fa-solid fa-bullhorn"></i>
+                Advertise</a>
+            <a class="text-dark d-flex align-items-center gap-2"><i class="fa-solid fa-chart-line"></i> Free
+                Listing</a>
+            <i class="fa-regular fa-bell"></i>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#authModal" px-3 py-1 fw-bold
+                btn-sm>Log In / Sign Up</button>
+        </div>
+    </div>
+</header>
