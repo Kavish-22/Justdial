@@ -170,7 +170,7 @@
       </div>
       <section class="mt-5">
         <div class="category-grid">
-          <a href="../pages/restaurants.html">
+          <a href="./pages/restaurants.html">
             <div class="category-item k_m2 h-100">
               <div class="category-content text-center">
                 <img src="../img/restaurant-2022.svg" alt="Restaurants" />
@@ -1202,15 +1202,15 @@
     <div id="footer"></div>
   </div>
   <script>
-    fetch('header.html')
+    fetch('./justdial/header.html')
       .then(response => response.text())
       .then(data => document.getElementById('header').innerHTML = data);
 
-    fetch('footer.html')
+    fetch('./justdial/footer.html')
       .then(response => response.text())
       .then(data => document.getElementById('footer').innerHTML = data);
   </script>
-  <script src="../js/main.js"></script>
+  <script src="./js/main.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
     crossorigin="anonymous"></script>
