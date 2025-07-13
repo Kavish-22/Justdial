@@ -1,0 +1,2368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Businesses Near You on Local Search Engine - Justdial</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <link rel="shortcut icon" href="./img/favicon.ico">
+    <style>
+        header.k_tbdr {
+            position: fixed;
+            top: 0;
+            z-index: 1050;
+            height: 70px;
+            background: #f8f9fa;
+            width: 100%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .scroll-buttons::-webkit-scrollbar {
+            display: none;
+            /* Hide scrollbar for Chrome, Safari */
+        }
+
+        #mainSearchSection {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        #mainSearchSection.hide {
+            opacity: 0;
+            transform: translateY(-20px);
+            pointer-events: none;
+            height: 0;
+            overflow: hidden;
+        }
+
+        .logo_wrapper span.just {
+            font-weight: bold;
+            font-size: 20px;
+            color: #000;
+        }
+
+        .logo_wrapper span.dial {
+            font-weight: bold;
+            font-size: 20px;
+            color: orange;
+        }
+
+        .searchbar-shared {
+            border: 2px solid var(--jd-orange-light);
+            border-radius: 12px;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+            background-color: #fff;
+        }
+
+        .searchbar-shared:hover {
+            box-shadow: 0 2px 12px rgba(243, 111, 33, 0.25);
+            transform: translateY(-2px);
+        }
+
+        /* Location Dropdown Input */
+        .searchbar-shared .btn-drop {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 6px 10px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        /* Remove input border and padding */
+        .searchbar-shared input[type="text"] {
+            border: none;
+            box-shadow: none;
+            font-size: 14px;
+        }
+
+        /* Search Input Box */
+        .jd-search-input {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 6px 12px;
+            font-size: 14px;
+            width: 100%;
+        }
+
+        .searchbar-container {
+            transition: all 0.4s ease-in-out;
+            transform-origin: top left;
+            z-index: 999;
+        }
+
+        .searchbar-main {
+            width: 90%;
+            max-width: 1000px;
+            margin: 2rem auto;
+            transform: scale(1);
+        }
+
+        .searchbar-header {
+            position: fixed;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%) scale(0.7);
+        }
+
+
+        /* Download App Button */
+        .searchbar-shared .btn-outline-dark {
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        /* Icons */
+        .searchbar-shared i {
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        /* Specific icon colors */
+        .text-mic {
+            color: #3399ff;
+            /* Mic - Light blue */
+        }
+
+        .text-orange {
+            color: var(--jd-orange);
+            /* Search icon - Justdial orange */
+        }
+
+        /* Scroll Animations */
+        .floating-visible {
+            opacity: 1 !important;
+            pointer-events: auto !important;
+            transform: translateY(0);
+            transition: all 0.4s ease;
+        }
+
+        .floating-hidden {
+            opacity: 0 !important;
+            pointer-events: none !important;
+            transform: translateY(-25px);
+            transition: all 0.4s ease;
+        }
+
+        #mainSearch {
+            transition: all 0.4s ease-in-out;
+            /* transform-origin: top center; */
+        }
+
+        .floating-container {
+            left: 50%;
+            transform: translateX(-50%) scale(0.7);
+        }
+
+        /* Animation class */
+        .slide-down {
+            animation: slideDown 0.4s ease-in-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        .scroll-buttons {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Footer service grid styles */
+        .service-box {
+            border-radius: 12px;
+            padding: 10px;
+            height: 10%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Card Styles */
+        .custom-jd-card {
+            width: 260px;
+            height: 320px;
+            background-color: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            margin-right: 16px;
+            /* spacing between cards */
+            transition: transform 0.3s ease;
+        }
+
+        .custom-jd-card:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Image box */
+        .jd-img-box {
+            height: 65%;
+            overflow: hidden;
+        }
+
+        .jd-img-inner {
+            width: 100%;
+            height: 100%;
+        }
+
+        .jd-img-inner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .custom-jd-card:hover .jd-img-inner img {
+            transform: scale(1.05);
+        }
+
+        /* Text Box */
+        .jd-text-box {
+            height: 35%;
+            background-color: #007bff;
+            color: white;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0 0 16px 16px;
+        }
+
+        .jd-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        /* Button */
+        .jd-btn {
+            align-self: flex-start;
+            background-color: #fff;
+            color: #007bff;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .jd-btn:hover {
+            background-color: #e6e6e6;
+            color: #0056b3;
+        }
+
+        .text-orange {
+            color: #ff6f00;
+            /* Deep orange */
+        }
+
+
+        /* Swiper Buttons if needed to customize */
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: #000;
+        }
+
+        .tourist-box {
+            border: 1px solid #ddd;
+            border-radius: 16px;
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+        }
+
+        .swiper {
+            padding-bottom: 40px;
+        }
+
+        .swiper-slide {
+            margin-right: 15px;
+        }
+
+        .img-wrapper {
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .img-zoom {
+            transition: transform 0.4s ease;
+            transform-origin: center center;
+        }
+
+        .card:hover .img-zoom {
+            transform: scale(1.1);
+        }
+
+        .swiper-button-next,
+        .swiper-button-prev {
+            background-color: rgba(255, 255, 255, 0.85);
+            color: black;
+            width: 32px;
+            /* Smaller */
+            height: 32px;
+            /* Smaller */
+            border-radius: 6px;
+            /* Square rounded */
+            font-size: 14px;
+            /* Smaller text size */
+            font-weight: bold;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: none;
+            z-index: 10;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 1 !important;
+            /* Always visible */
+            cursor: default;
+            /* No pointer */
+        }
+
+        .swiper-button-next:hover,
+        .swiper-button-prev:hover {
+            background-color: rgba(255, 255, 255, 0.85);
+            /* No change on hover */
+        }
+
+        /* Arrow text */
+        .swiper-button-next::after,
+        .swiper-button-prev::after {
+            font-size: 16px;
+            font-weight: 800;
+            color: black;
+        }
+
+        /* Center buttons vertically */
+        .swiper-button-next,
+        .swiper-button-prev {
+            position: absolute;
+        }
+
+        /* Ensure spacing like Justdial UI */
+        .swiper-button-prev {
+            left: -10px;
+        }
+
+        .swiper-button-next {
+            right: -10px;
+        }
+
+        .k_slide {
+            width: 450px;
+        }
+
+        .k_dropdown22 {
+            color: #007bff;
+        }
+
+        .k_tbdr {
+            /* border: 1px solid black; */
+            border-bottom: 1px solid #ddd;
+        }
+
+        body {
+            background-color: #E8E8E8;
+        }
+
+        header {
+            height: 79px;
+            z-index: 1000;
+        }
+
+        main {
+            min-height: 2500px;
+            margin-top: 40px;
+        }
+
+        footer {
+            height: 537px;
+        }
+
+        .k_m1 {
+            height: 30px;
+        }
+
+        .k_m2 {
+            height: 110px;
+        }
+
+        .k_m3 {
+            height: 250px;
+        }
+
+        .k_m4 {
+            height: 488px;
+        }
+
+        .k_m5 {
+            height: 400px;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 20px;
+            padding: 0 10px;
+        }
+
+        .category-item {
+            background: #fff;
+            border-radius: 12px;
+            padding: 16px 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+            height: 140px;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            transition: transform 0.2s ease;
+        }
+
+        .category-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+            /* Darker shadow */
+            border-color: #aaa;
+            /* Slightly darker border on hover */
+        }
+
+        .category-item img {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 10px;
+            object-fit: contain;
+        }
+
+        .category-item p {
+            font-weight: 600;
+            font-size: 14px;
+            text-align: center;
+            margin: 0;
+            color: #333;
+        }
+
+        .services-wrapper {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .services-wrapper h4 {
+            margin-bottom: 15px;
+            font-size: 25px;
+            font-weight: 600;
+        }
+
+        .scroll-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding-bottom: 10px;
+        }
+
+        .category-card {
+            background: white;
+            min-width: 180px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .category-card img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+        }
+
+        .category-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin: 10px 10px 0;
+        }
+
+        .category-desc {
+            font-size: 14px;
+            color: #fff;
+            margin: 5px 10px 15px;
+        }
+
+        /* Optional Scrollbar Styling */
+        .scroll-container::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .scroll-container::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 4px;
+        }
+
+        .card.custom-card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .card.custom-card:hover {
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
+        }
+
+        /* .card-img-top {
+            object-fit: contain;
+            height: 100px;
+            padding: 10px;
+        } */
+
+        .card-img-top {
+            height: 120px;
+            object-fit: cover;
+        }
+
+        .card-title {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .card {
+            border-radius: 8px;
+            transition: 0.3s ease;
+        }
+
+        .card-body {
+            padding: 0.75rem;
+        }
+
+        .logo_wrapper {
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            font-size: 25px;
+            padding: 5px 10px;
+        }
+
+        .just {
+            color: #0076d6;
+        }
+
+        .dial {
+            color: #ff6600;
+        }
+
+        .highlight-blue {
+            color: #007bff;
+            /* Bootstrap primary blue */
+        }
+
+        .category-card:nth-child(1) {
+            background-color: #0E77CD;
+            /* light red background for B2B */
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        .category-card:nth-child(2) {
+            background-color: #2654A1;
+            /* light blue background for Repairs & Services */
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        .category-card:nth-child(3) {
+            background-color: #6769D0;
+            /* light green background for Real Estate */
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        .category-card:nth-child(4) {
+            background-color: #008561;
+            /* light green background for Real Estate */
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        .k_fixedSearch {
+            opacity: 0;
+            transform: translate(-50px, 50px);
+            /* ⬅️⬇️ Bottom-left offset */
+            transition: all 0.5s ease-in-out;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .k_fixedSearch.show {
+            opacity: 1;
+            transform: translate(0, 0);
+            /* Move to original position (center) */
+            pointer-events: auto;
+        }
+
+        #backToTopBtn {
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            font-size: 18px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .k22_tbdr {
+            border-bottom: 1px solid #ddd;
+        }
+
+        .rotating-text {
+            height: 1.8em;
+            /* adjust to text height */
+            line-height: 1.8em;
+            overflow: hidden;
+        }
+
+        .text-wrapper {
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .rotate-item {
+            height: 1.8em;
+            display: flex;
+            gap: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="k_tbdr position-fixed w-100 bg-light z-3">
+        <div class="row m-0 h-100 align-items-center">
+            <!-- Left: Logo -->
+            <div class="col-2 d-flex align-items-center ps-3">
+                <div class="header_left_inner">
+                    <a role="link" class="animate__animated header_jdlogo">
+                        <img src="https://akam.cdn.jdmagicbox.com/images/icontent/jdrwd/jdlogosvg.svg"
+                            alt="Justdial Logo" title="Justdial" height="25" width="102">
+                    </a>
+                </div>
+            </div>
+
+            <!-- Middle Column: Hiring and Floating Search -->
+            <div class="col-6 d-flex align-items-center justify-content-end position-relative" style="height: 70px;">
+                <!-- Nav section -->
+                <ul class="nav k_wearehiring d-flex align-items-center gap-3 mb-0">
+                    <li class="nav-item">
+                        <button class="btn dropdown-toggle text-primary" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <i class="fa-solid fa-language"></i> En
+                        </button>
+                    </li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="#">We are Hiring</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="#">Investor Relations</a></li>
+                </ul>
+
+                <!-- Floating Search Bar -->
+                <div id="floatingSearch" class="position-absolute top-0 start-0 w-100 floating-hidden"
+                    style="z-index: 999;">
+                    <div class="searchbar-shared d-flex align-items-center gap-3 px-3 py-2 shadow-sm rounded w-100">
+                        <!-- Location Dropdown -->
+                        <div class="dropdown">
+                            <button class="btn btn-drop dropdown-toggle d-flex align-items-center" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-location-dot me-2"></i>
+                                Enter Location
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Neemuch</a></li>
+                                <li><a class="dropdown-item" href="#">Mandsaur</a></li>
+                                <li><a class="dropdown-item" href="#">Ratlam</a></li>
+                                <li><a class="dropdown-item" href="#">Ujjain</a></li>
+                                <li><a class="dropdown-item" href="#">Indore</a></li>
+                            </ul>
+                        </div>
+                        <div class="d-flex align-items-center gap-2 w-100">
+                            <input type="text" class="form-control jd-search-input" placeholder="Search in Neemuch" />
+                            <i class="fa-solid fa-microphone text-mic"></i>
+                            <i class="fa-solid fa-magnifying-glass me-2 text-orange"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 d-flex align-items-center justify-content-start gap-3 ps-3">
+                <a class="text-dark d-flex align-items-center gap-2"><i class="fa-solid fa-bullhorn"></i>
+                    Advertise</a>
+                <a class="text-dark d-flex align-items-center gap-2"><i class="fa-solid fa-chart-line"></i> Free
+                    Listing</a>
+                <i class="fa-regular fa-bell"></i>
+                <button class="btn btn-primary px-3 py-1 fw-bold btn-sm">Log In / Sign Up</button>
+            </div>
+        </div>
+    </header>
+    <div class="container-fluid p-4 pt-0 pb-0">
+        <main class="bg-white p-5">
+            <h2 class="animated-heading d-flex align-items-center flex-wrap">
+                <span class="me-2 fw-bold">Search across</span>
+                <span class="rotating-text position-relative overflow-hidden">
+                    <span class="text-wrapper">
+                        <span class="rotate-item">
+                            <span class="fw-semibold">'4.7 Crore+'</span>
+                            <span class="highlight-blue">Business</span>
+                        </span>
+                        <span class="rotate-item">
+                            <span class="fw-semibold">'5.9 Crore+'</span>
+                            <span class="highlight-blue">Products & Services</span>
+                        </span>
+                    </span>
+                </span>
+            </h2>
+
+            <section id="mainSearch" class="mt-4 d-flex justify-content-center">
+                <div class="searchbar-shared d-flex align-items-center gap-3 px-3 py-2 bg-white shadow-sm rounded w-100"
+                    style="max-width: 900px">
+                    <div class="dropdown">
+                        <button class="btn btn-drop dropdown-toggle d-flex align-items-center" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-location-dot me-2"></i>
+                                Enter Location
+                            </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Neemuch</a></li>
+                            <li><a class="dropdown-item" href="#">Mandsaur</a></li>
+                            <li><a class="dropdown-item" href="#">Ratlam</a></li>
+                            <li><a class="dropdown-item" href="#">Ujjain</a></li>
+                            <li><a class="dropdown-item" href="#">Indore</a></li>
+                        </ul>
+                    </div>
+                    <div class="d-flex align-items-center gap-2 flex-grow-1">
+                        <input type="text" class="form-control jd-search-input" placeholder="Search in Neemuch" />
+                        <i class="fa-solid fa-microphone text-mic"></i>
+                        <i class="fa-solid fa-magnifying-glass me-2 text-orange"></i>
+                    </div>
+
+                    <button class="btn btn-outline-dark d-flex align-items-center ms-auto px-3 py-2 shadow-sm">
+                        <span class="me-2 fw-semibold">Download App</span>
+                        <img src="../img/favicon.ico" alt="JD" width="20" height="20" />
+                    </button>
+                </div>
+            </section>
+            <div class="row p-0 mt-5">
+                <section class="col-5">
+
+                    <!-- First Carousel -->
+                    <div id="carouselInterior" class="carousel slide k_slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="../img/banner_interiordesigners_2024.webp" class="d-block w-100"
+                                    alt="Interior Designers">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="../img/banner_loans_2024.webp" class="d-block w-100" alt="Loans">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="../img/banner_hotels_2024.webp" class="d-block w-100" alt="Hotels">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselInterior"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselInterior"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+
+                    <!-- Second Carousel -->
+                    <div id="carouselCCTV" class="carousel slide k_slide mt-5" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="../img/banner_cctv_2024.webp" class="d-block w-100" alt="CCTV">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="../img/banner_bills_2024.webp" class="d-block w-100" alt="Bills">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="../img/banner_packersmovers_2024.webp" class="d-block w-100"
+                                    alt="Packers and Movers">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselCCTV"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselCCTV"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+
+                </section>
+
+                <section class="col-7 k_m5">
+                    <div class="services-wrapper container-fluid k_m5">
+                        <h4>Popular Services</h4>
+                        <div class="scroll-container">
+                            <!-- Card 1 -->
+                            <div class="category-card">
+                                <div class="category-title text-white">B2B</div>
+                                <div class="category-desc">Quick Quotes</div>
+                                <img src="../img/b2b_square_hotkey.webp" alt="B2B">
+                                <div class="category-title text-white">Explore now &gt;</div>
+                            </div>
+
+                            <!-- Card 2 -->
+                            <div class="category-card">
+                                <div class="category_arn-title text-white">Rep avvairs & Services</div>
+                                <div class="category-desc">Get Nearest Vendor</div>
+                                <img src="../img/repair_square_hotkey.webp" alt="Repairs">
+                                <div class="category-title text-white">Explore now &gt;</div>
+                            </div>
+
+                            <!-- Card 3 -->
+                            <div class="category-card">
+                                <div class="category-title text-white">Real Estate</div>
+                                <div class="category-desc text-white">Finest Agents</div>
+                                <img src="../img/realestate_square_hotkey.webp" alt="Real Estate">
+                                <div class="category-title text-white">Explore now &gt;</div>
+                            </div>
+                            <!-- Card 4 -->
+                            <div class="category-card">
+                                <div class="category-title text-white">Doctors</div>
+                                <div class="category-desc">Book Now</div>
+                                <img src="../img/doctor_square_hotkey.webp" alt="Doctors">
+                                <div class="category-title text-white">Explore now &gt;</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <section class="mt-5">
+                <div class="category-grid">
+                    <a href="BusinessListing.html">
+                        <div class="category-item k_m2 h-100">
+                            <div class="category-content text-center">
+                                <img src="../img/restaurant-2022.svg" alt="Restaurants" />
+                                <p>Restaurants</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <div class="category-item k_m2 h-100">
+                        <div class="category-content text-center">
+                            <img src="../img/hotel-2022.svg" alt="Hotels" />
+                            <p>Hotels</p>
+                        </div>
+                    </div>
+
+                    <div class="category-item k_m2 h-100">
+                        <div class="category-content text-center">
+                            <img src="../img/beauty.svg" alt="Beauty Spa" />
+                            <p>Beauty Spa</p>
+                        </div>
+                    </div>
+
+                    <div class="category-item k_m2 h-100">
+                        <div class="category-content text-center">
+                            <img src="../img/homedecor.svg" alt="Home Decor" />
+                            <p>Home Decor</p>
+                        </div>
+                    </div>
+
+                    <div class="category-item k_m2 h-100">
+                        <div class="category-content text-center">
+                            <img src="../img/hotkey_wedding_icon.webp" alt="Wedding Planning" />
+                            <p>Wedding Planning</p>
+                        </div>
+                    </div>
+
+                    <div class="category-item k_m2 h-100">
+                        <div class="category-content text-center">
+                            <img src="../img/education.svg" alt="Education" />
+                            <p>Education</p>
+                        </div>
+                    </div>
+
+                    <div class="category-item k_m2 h-100">
+                        <div class="category-content text-center">
+                            <img src="../img/renthire.svg" alt="Rent & Hire" />
+                            <p>Rent & Hire</p>
+                        </div>
+                    </div>
+
+                    <div class="category-item k_m2 h-100">
+                        <div class="category-content text-center">
+                            <img src="../img/hospital_2023.svg" alt="Hospitals" />
+                            <p>Hospitals</p>
+                        </div>
+                    </div>
+
+                    <div class="category-item k_m2 h-100">
+                        <div class="category-content text-center">
+                            <img src="../img/contractor-2022.svg" alt="Contractors" />
+                            <p>Contractors</p>
+                        </div>
+                    </div>
+
+                    <div class="category-item k_m2 h-100">
+                        <div class="category-content text-center">
+                            <img src="../img/pet_shops_2023.svg" alt="Pet Shops" />
+                            <p>Pet Shops</p>
+                        </div>
+                    </div>
+
+                    <div class="category-item k_m2 h-100">
+                        <div class="category-content text-center">
+                            <img src="../img/pg-hostels-rooms.svg" alt="PG/Hostels" />
+                            <p>PG/Hostels</p>
+                        </div>
+                    </div>
+
+                    <div class="category-item k_m2 h-100">
+                        <div class="category-content text-center">
+                            <img src="../img/dentist_2023.svg" alt="Dentists" />
+                            <p>Dentists</p>
+                        </div>
+                    </div>
+
+                    <div class="category-item k_m2 h-100">
+                        <div class="category-content text-center">
+                            <img src="../img/gym_2023.svg" alt="Gym" />
+                            <p>Gym</p>
+                        </div>
+                    </div>
+
+                    <div class="category-item k_m2 h-100">
+                        <div class="category-content text-center">
+                            <img src="../img/loans.svg" alt="Loans" />
+                            <p>Loans</p>
+                        </div>
+                    </div>
+
+                    <div class="category-item k_m2 h-100">
+                        <div class="category-content text-center">
+                            <img src="../img/driving_school_2023.svg" alt="Driving Schools" />
+                            <p>Driving Schools</p>
+                        </div>
+                    </div>
+
+                    <div class="category-item k_m2 h-100">
+                        <div class="category-content text-center">
+                            <img src="../img/courier_2023.svg" alt="Courier Service" />
+                            <p>Courier Service</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="mt-5">
+                <div class="container">
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="bg-white p-3 rounded shadow-sm h-100">
+                                <h3 class="mb-3">Wedding Requisites</h3>
+                                <div class="row text-center g-3">
+                                    <div class="col-4">
+                                        <div class="card custom-card h-100">
+                                            <img src="../img/88888888.avif" class="card-img-top" alt="Banquet Halls" />
+                                            <div class="card-body p-2">
+                                                <p class="card-text fw-semibold small m-0">Banquet Halls</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="card custom-card h-100">
+                                            <img src="../img/bridalrequisite_2024.webp" class="card-img-top"
+                                                alt="Bridal Requisites" />
+                                            <div class="card-body p-2">
+                                                <p class="card-text fw-semibold small m-0">Bridal Requisites</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="card custom-card h-100">
+                                            <img src="../img/caterers_2024.webp" class="card-img-top" alt="Caterers" />
+                                            <div class="card-body p-2">
+                                                <p class="card-text fw-semibold small m-0">Caterers</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Column -->
+                        <div class="col-md-6">
+                            <div class="bg-white p-3 rounded shadow-sm h-100">
+                                <h3 class="mb-3">Beauty & Spa</h3>
+                                <div class="row text-center g-3">
+                                    <div class="col-4">
+                                        <div class="card custom-card h-100">
+                                            <img src="../img/beautyparlor2024.webp" class="card-img-top"
+                                                alt="Beauty Parlours" />
+                                            <div class="card-body p-2">
+                                                <p class="card-text fw-semibold small m-0">Beauty Parlours</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="card custom-card h-100">
+                                            <img src="../img/spamassages4.webp" class="card-img-top"
+                                                alt="Spa & Massages" />
+                                            <div class="card-body p-2">
+                                                <p class="card-text fw-semibold small m-0">Spa & Massages</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="card custom-card h-100">
+                                            <img src="../img/salons_.webp" class="card-img-top" alt="Salons" />
+                                            <div class="card-body p-2">
+                                                <p class="card-text fw-semibold small m-0">Salons</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class="container">
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="bg-white p-3 rounded shadow-sm h-100">
+                                <h3 class="mb-3">Repair & Services</h3>
+                                <div class="row text-center g-3">
+                                    <div class="col-4">
+                                        <div class="card custom-card h-100">
+                                            <img src="../img/acrepair.avif" class="card-img-top" alt="AC Service" />
+                                            <div class="card-body p-2">
+                                                <p class="card-text fw-semibold small m-0">AC Service</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="card custom-card h-100">
+                                            <img src="../img/carservice.webp" class="card-img-top" alt="Car Service" />
+                                            <div class="card-body p-2">
+                                                <p class="card-text fw-semibold small m-0">Car Service</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="card custom-card h-100">
+                                            <img src="../img/bikeservice.webp" class="card-img-top"
+                                                alt="Bike Service" />
+                                            <div class="card-body p-2">
+                                                <p class="card-text fw-semibold small m-0">Bike Service</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Column -->
+                        <div class="col-md-6">
+                            <div class="bg-white p-3 rounded shadow-sm h-100">
+                                <h3 class="mb-3">Daily Needs</h3>
+                                <div class="row text-center g-3">
+                                    <div class="col-4">
+                                        <div class="card custom-card h-100">
+                                            <img src="../img/movies.webp" class="card-img-top" alt="Movies" />
+                                            <div class="card-body p-2">
+                                                <p class="card-text fw-semibold small m-0">Movies</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="card custom-card h-100">
+                                            <img src="../img/grocery.webp" class="card-img-top" alt="Grocery" />
+                                            <div class="card-body p-2">
+                                                <p class="card-text fw-semibold small m-0">Grocery</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="card custom-card h-100">
+                                            <img src="../img/electricians.webp" class="card-img-top"
+                                                alt="Electricians" />
+                                            <div class="card-body p-2">
+                                                <p class="card-text fw-semibold small m-0">Electricians</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="mt-4">
+                <!-- WHOLE BOX START -->
+                <div class="tourist-box mx-3 mx-md-4 p-4 rounded-4 bg-white shadow-sm">
+                    <!-- Heading and Badge -->
+                    <div class="d-flex align-items-center mb-1">
+                        <h4 class="fw-bold me-2">Trending Searches Near You</h4>
+                        <span class="badge bg-danger">NEW</span>
+                    </div>
+                    <p class="text-muted small">Latest local trends around you</p>
+                    <div class="swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="card">
+                                    <div class="row g-0">
+                                        <div class="col-4">
+                                            <div class="img-wrapper">
+                                                <img src="../img/advertisedownload.jpg" class="img-fluid img-zoom"
+                                                    alt="Advertising Agencies">
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="card-body d-flex flex-column justify-content-center p-2">
+                                                <h5 class="card-title fw-bold mb-1 fs-5">Advertising Agencies</h5>
+                                                <a href="#" class="text-primary fw-bold small fs-6">Explore &gt;</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="card">
+                                    <div class="row g-0">
+                                        <div class="col-4">
+                                            <div class="img-wrapper">
+                                                <img src="../img/carrentinmmmimages.jpg" class="img-fluid img-zoom"
+                                                    alt="Car Rental">
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="card-body d-flex flex-column justify-content-center p-2">
+                                                <h5 class="card-title fw-bold mb-1 fs-5">Car Rental For Mumbai</h5>
+                                                <a href="#" class="text-primary fw-bold small fs-6">Explore &gt;</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="card">
+                                    <div class="row g-0">
+                                        <div class="col-4">
+                                            <div class="img-wrapper">
+                                                <img src="../img/gyanodaya.avif" class="img-fluid img-zoom"
+                                                    alt="Hospitals">
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="card-body d-flex flex-column justify-content-center p-2">
+                                                <h5 class="card-title fw-bold mb-1 fs-5">Hospitals</h5>
+                                                <a href="#" class="text-primary fw-bold small fs-6">Explore &gt;</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="card">
+                                    <div class="row g-0">
+                                        <div class="col-4">
+                                            <div class="img-wrapper">
+                                                <img src="../img/Zudio.jpg" class="img-fluid img-zoom"
+                                                    alt="Zudio Stores">
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="card-body d-flex flex-column justify-content-center p-2">
+                                                <h5 class="card-title fw-bold mb-1 fs-5">Zudio Stores</h5>
+                                                <a href="#" class="text-primary fw-bold small fs-6">Explore &gt;</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="card">
+                                    <div class="row g-0">
+                                        <div class="col-4">
+                                            <div class="img-wrapper">
+                                                <img src="../img/modern-chemists-478.avif" class="img-fluid img-zoom"
+                                                    alt="Chemists">
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="card-body d-flex flex-column justify-content-center p-2">
+                                                <h5 class="card-title fw-bold mb-1 fs-5">Chemists</h5>
+                                                <a href="#" class="text-primary fw-bold small fs-6">Explore &gt;</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="card">
+                                    <div class="row g-0">
+                                        <div class="col-4">
+                                            <div class="img-wrapper">
+                                                <img src="../img/Explorecities_Mumbai.avif" class="img-fluid img-zoom"
+                                                    alt="Hearing Aid Dealers">
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="card-body d-flex flex-column justify-content-center p-2">
+                                                <h5 class="card-title fw-bold mb-1 fs-5">Hearing Aid Dealers</h5>
+                                                <a href="#" class="text-primary fw-bold small fs-6">Explore &gt;</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                    </div>
+                </div>
+            </section>
+            <section class="mt-2">
+                <div class="container-fluid bg-subtle py-4">
+                    <h4 class="fw-bold text-dark mb-4">Latest Movies & Review</h4>
+                    <div class="row g-4">
+                        <div class="col-8 col-4 col-md-2 text-center">
+                            <img src="../img/imggg11.avif" class="img-fluid rounded mb-2" alt="Sitaare Zameen Par">
+                            <p class="mb-1 fw-bold category-item">Sitaare Zameen Par<br><small class="text-muted">(Hindi
+                                    Movie)</small></p>
+                            <p class="text-muted">Hindi • 2D</p>
+                            <span class="bg-light text-dark"><i class="bi bi-hand-thumbs-up-fill text-danger"></i>
+                            </span>
+                        </div>
+
+                        <div class="col-8 col-4 col-md-2 text-center">
+                            <img src="../img/imggg2222.jpg" class="img-fluid rounded mb-2" alt="Maa 2025">
+                            <p class="mb-1 fw-bold category-item">Maa (2025 Film)<br><small class="text-muted">(Hindi
+                                    Movie)</small>
+                            </p>
+                            <p class="text-muted">Hindi • 2D</p>
+                            <span class="bg-light text-dark"><i
+                                    class="bi bi-hand-thumbs-up-fill text-danger"></i></span>
+                        </div>
+
+                        <div class="col-8 col-4 col-md-2 text-center">
+                            <img src="../img/imgg333.avif" class="img-fluid rounded mb-2" alt="F1">
+                            <p class="mb-1 fw-bold category-item">F1 </p>
+                            <p class="text-muted">English • 3D</p>
+                            <span class="bg-light text-dark"><i
+                                    class="bi bi-hand-thumbs-up-fill text-danger"></i></span>
+                        </div>
+
+                        <div class="col-8 col-4 col-md-2 text-center">
+                            <img src="../img/imggg4440.webp" class="img-fluid rounded mb-2" alt="Jarann">
+                            <p class="mb-1 fw-bold category-item">Jarann<br><small class="text-muted">(Marathi
+                                    Movie)</small></p>
+                            <p class="text-muted">Marathi • 2D</p>
+                            <span class="bg-light text-dark"><i
+                                    class="bi bi-hand-thumbs-up-fill text-danger"></i></span>
+                        </div>
+
+                        <div class="col-8 col-4 col-md-2 text-center">
+                            <img src="../img/housefull5.avif" class="img-fluid rounded mb-2" alt="Housefull 5">
+                            <p class="mb-1 fw-bold category-item">Housefull 5<br><small class="text-muted">(Hindi
+                                    Movie)</small>
+                            </p>
+                            <p class="text-muted">Hindi • 2D</p>
+                            <span class="bg-light text-dark"><i
+                                    class="bi bi-hand-thumbs-up-fill text-danger"></i></span>
+                        </div>
+
+                        <div class="col-8 col-4 col-md-2 text-center">
+                            <img src="../img/finaldestination.jpg" class="img-fluid rounded mb-2"
+                                alt="Final Destination Bloodlines">
+                            <p class="mb-1 fw-bold category-item">Final Destination Bloodlines<br><small
+                                    class="text-muted">(English
+                                    Movie)</small></p>
+                            <p class="text-muted">English • 2D</p>
+                            <span class="badge bg-light text-dark"><i
+                                    class="bi bi-hand-thumbs-up-fill text-danger"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="k_tbdr">
+                <div class="container my-4">
+                    <div class="row p-0 g-4">
+                        <div class="col-2">
+                            <h2>Bills & Recharge</h2>
+                            <p>Pay your bills & recharge instantly with Justdial</p>
+                            <button class="btn btn-outline-success">Explore more &gt;</button>
+                        </div>
+                        <div class="col-2">
+                            <div class="category-item k_m2">
+                                <img src="../img/mobileeicon-10-256.webp" alt="Mobile" />
+                                <p>Mobile</p>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="category-item k_m2">
+                                <img src="../img/electronics-electricity-light_bulb-64.webp" alt="Electricity" />
+                                <p>Electricity</p>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="category-item k_m2">
+                                <img src="../img/DTHIMG1.png" alt="DTH" />
+                                <p>DTH</p>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="category-item k_m2">
+                                <img src="../img/gass4.png" alt="Gas" />
+                                <p>Gas</p>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="category-item k_m2">
+                                <img src="../img/41-Insurance-64.webp" alt="Insurance" />
+                                <p>Insurance</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="k_tbdr">
+                <div class="container my-4">
+                    <div class="row p-0 g-4">
+                        <div class="col-2">
+                            <h2>Travel Bookings</h2>
+                            <p>Instant ticket bookings for your best travel experience</p>
+                            <button class="btn btn-outline-success">Explore more &gt;</button>
+                        </div>
+                        <div class="col-2">
+                            <div class="category-item k_m2">
+                                <img src="../img/travel-transmit-route-tourism-flight-64.webp" alt="Flight" />
+                                <p>Flight</p>
+                            </div>
+                            <p class="text-center text-success">powered by</p>
+                            <p class="text-center text-success">Easemytrip.com</p>
+                        </div>
+                        <div class="col-2">
+                            <div class="category-item k_m2">
+                                <img src="../img/bussicon.webp" alt="Bus" />
+                                <p>Bus</p>
+                            </div>
+                            <p class="text-center text-success">Affordable Rides</p>
+                        </div>
+                        <div class="col-2">
+                            <div class="category-item k_m2">
+                                <img src="../img/train-64.webp" alt="Train" />
+                                <p>Train</p>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="category-item k_m2">
+                                <img src="../img/3337762.png" alt="Hotel" />
+                                <p>Hotel</p>
+                            </div>
+                            <p class="text-center text-success">Budget Friendly Stay</p>
+                        </div>
+                        <div class="col-2">
+                            <div class="category-item k_m2">
+                                <img src="../img/carrentall.png" alt="Car Rental" />
+                                <p>Car Rental</p>
+                            </div>
+                            <p class="text-center text-success">Drive Easy Anywhere</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="my-4 px-0">
+                <div class="tourist-box mx-3 mx-md-4 p-4 rounded-4 bg-white shadow-sm">
+                    <div class="d-flex align-items-center mb-3">
+                        <h4 class="fw-bold me-2">Explore Top Tourist Places</h4>
+                        <span class="badge bg-danger">NEW</span>
+                    </div>
+                    <div class="swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="card">
+                                    <div class="row g-0">
+                                        <div class="col-4">
+                                            <div class="img-wrapper">
+                                                <img src="../img/Explorecities_Mumbai.avif" class="img-fluid img-zoom"
+                                                    alt="Mumbai">
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="card-body d-flex flex-column justify-content-center p-2">
+                                                <h5 class="card-title fw-bold mb-1 fs-5">Mumbai</h5>
+                                                <a href="#" class="text-primary fw-bold small fs-6">Explore &gt;</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="card">
+                                    <div class="row g-0">
+                                        <div class="col-4">
+                                            <div class="img-wrapper">
+                                                <img src="https://akam.cdn.jdmagicbox.com/images/icontent/newwap/Explorecities_Nashik.png"
+                                                    class="img-fluid img-zoom" alt="Pune">
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="card-body d-flex flex-column justify-content-center p-2">
+                                                <h5 class="card-title fw-bold mb-1 fs-5">Pune</h5>
+                                                <a href="#" class="text-primary fw-bold small fs-6">Explore &gt;</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="card">
+                                    <div class="row g-0">
+                                        <div class="col-4">
+                                            <div class="img-wrapper">
+                                                <img src="https://akam.cdn.jdmagicbox.com/images/icontent/newwap/Explorecities_Ahmedabad.png"
+                                                    class="img-fluid img-zoom" alt="Ahmedabad">
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="card-body d-flex flex-column justify-content-center p-2">
+                                                <h5 class="card-title fw-bold mb-1 fs-5">Ahmedabad</h5>
+                                                <a href="#" class="text-primary fw-bold small fs-6">Explore &gt;</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="card">
+                                    <div class="row g-0">
+                                        <div class="col-4">
+                                            <div class="img-wrapper">
+                                                <img src="https://akam.cdn.jdmagicbox.com/images/icontent/newwap/Explorecities_Goa.png"
+                                                    class="img-fluid img-zoom" alt="Goa">
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="card-body d-flex flex-column justify-content-center p-2">
+                                                <h5 class="card-title fw-bold mb-1 fs-5">Goa</h5>
+                                                <a href="#" class="text-primary fw-bold small fs-6">Explore &gt;</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="card">
+                                    <div class="row g-0">
+                                        <div class="col-4">
+                                            <div class="img-wrapper">
+                                                <img src="https://akam.cdn.jdmagicbox.com/images/icontent/newwap/Explorecities_Gokarna.png"
+                                                    class="img-fluid img-zoom" alt="Gokarna">
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="card-body d-flex flex-column justify-content-center p-2">
+                                                <h5 class="card-title fw-bold mb-1 fs-5">Gokarna</h5>
+                                                <a href="#" class="text-primary fw-bold small fs-6">Explore &gt;</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="card">
+                                    <div class="row g-0">
+                                        <div class="col-4">
+                                            <div class="img-wrapper">
+                                                <img src="https://akam.cdn.jdmagicbox.com/images/icontent/newwap/Explorecities_Hampi.png"
+                                                    class="img-fluid img-zoom" alt="Hampi">
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="card-body d-flex flex-column justify-content-center p-2">
+                                                <h5 class="card-title fw-bold mb-1 fs-5">Hampi</h5>
+                                                <a href="#" class="text-primary fw-bold small fs-6">Explore &gt;</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="card">
+                                    <div class="row g-0">
+                                        <div class="col-4">
+                                            <div class="img-wrapper">
+                                                <img src="https://akam.cdn.jdmagicbox.com/images/icontent/newwap/Explorecities_Udaipur.png"
+                                                    class="img-fluid img-zoom" alt="Udaipur">
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="card-body d-flex flex-column justify-content-center p-2">
+                                                <h5 class="card-title fw-bold mb-1 fs-5">Udaipur</h5>
+                                                <a href="#" class="text-primary fw-bold small fs-6">Explore &gt;</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                    </div>
+                </div>
+            </section>
+            <section class="my-4 px-0">
+                <div class="mx-3 mx-md-4 p-4 rounded-4 bg-white shadow-sm">
+                    <div class="d-flex align-items-center mb-3">
+                        <h4 class="fw-bold me-2">Popular Searches</h4>
+                    </div>
+                    <div class="swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="custom-jd-card pointer">
+                                    <div class="jd-img-box">
+                                        <div class="jd-img-inner">
+                                            <img src="https://content.jdmagicbox.com/comp/def_content/ncat_id/10192844.jpg"
+                                                alt="Estate Agents For Residential Rental"
+                                                title="Get Quote for Estate Agents For Residential Rental">
+                                        </div>
+                                    </div>
+                                    <div class="jd-text-box text-white d-flex flex-column justify-content-between">
+                                        <h3 class="jd-title">Estate Agents For Residential Rental</h3>
+                                        <button class="jd-btn">Enquire Now</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="custom-jd-card pointer">
+                                    <div class="jd-img-box">
+                                        <div class="jd-img-inner">
+                                            <img src="https://content.jdmagicbox.com/comp/def_content/ncat_id/10272436.jpg"
+                                                alt="Interior Designers" title="Get Quote for Interior Designers">
+                                        </div>
+                                    </div>
+                                    <div class="jd-text-box text-white d-flex flex-column justify-content-between">
+                                        <h3 class="jd-title">Interior Designers</h3>
+                                        <button class="jd-btn">Enquire Now</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="custom-jd-card pointer">
+                                    <div class="jd-img-box">
+                                        <div class="jd-img-inner">
+                                            <img src="https://content.jdmagicbox.com/comp/def_content/ncat_id/10035861.jpg"
+                                                alt="Real Estate Agents" title="Get Quote for Real Estate Agents">
+                                        </div>
+                                    </div>
+                                    <div class="jd-text-box text-white d-flex flex-column justify-content-between">
+                                        <h3 class="jd-title">Real Estate Agents</h3>
+                                        <button class="jd-btn">Enquire Now</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="custom-jd-card pointer">
+                                    <div class="jd-img-box">
+                                        <div class="jd-img-inner">
+                                            <img src="https://content.jdmagicbox.com/comp/def_content/ncat_id/10356131.jpg"
+                                                alt="Banquet Halls" title="Get Quote for Banquet Halls">
+                                        </div>
+                                    </div>
+                                    <div class="jd-text-box text-white d-flex flex-column justify-content-between">
+                                        <h3 class="jd-title">Banquet Halls</h3>
+                                        <button class="jd-btn">Enquire Now</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="custom-jd-card pointer">
+                                    <div class="jd-img-box">
+                                        <div class="jd-img-inner">
+                                            <img src="https://content.jdmagicbox.com/comp/def_content/ncat_id/10156331.jpg"
+                                                alt="Pathology Labs" title="Get Quote for Pathology Labs">
+                                        </div>
+                                    </div>
+                                    <div class="jd-text-box text-white d-flex flex-column justify-content-between">
+                                        <h3 class="jd-title">Pathology Labs</h3>
+                                        <button class="jd-btn">Explore</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                    </div>
+                </div>
+            </section>
+            <section class="my-4 px-0">
+                <div class="tourist-box mx-3 mx-md-4 p-4 rounded-4 bg-white shadow-sm">
+                    <div class="d-flex align-items-center mb-3">
+                        <h4 class="fw-bold me-2">Rainy Day Essentials</h4>
+                        <span class="badge bg-danger">Seasonal</span>
+                    </div>
+                    <div class="swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="card">
+                                    <div class="row g-0">
+                                        <div class="col-4">
+                                            <div class="img-wrapper">
+                                                <img src="../img/plumberrrrrad.jpg" class="img-fluid img-zoom"
+                                                    alt="Plumber">
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="card-body d-flex flex-column justify-content-center p-2">
+                                                <h5 class="card-title fw-bold mb-1 fs-5">Plumber</h5>
+                                                <a href="#" class="text-primary fw-bold small fs-6">Explore &gt;</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="card">
+                                    <div class="row g-0">
+                                        <div class="col-4">
+                                            <div class="img-wrapper">
+                                                <img src="../img/TeaShop0501.webp" class="img-fluid img-zoom"
+                                                    alt="Tea Stalls">
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="card-body d-flex flex-column justify-content-center p-2">
+                                                <h5 class="card-title fw-bold mb-1 fs-5">Tea Stalls</h5>
+                                                <a href="#" class="text-primary fw-bold small fs-6">Explore &gt;</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="card">
+                                    <div class="row g-0">
+                                        <div class="col-4">
+                                            <div class="img-wrapper">
+                                                <img src="../img/raincoat.jpg" class="img-fluid img-zoom"
+                                                    alt="Raincoat Dealers">
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="card-body d-flex flex-column justify-content-center p-2">
+                                                <h5 class="card-title fw-bold mb-1 fs-5">Raincoat Dealers</h5>
+                                                <a href="#" class="text-primary fw-bold small fs-6">Explore &gt;</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="card">
+                                    <div class="row g-0">
+                                        <div class="col-4">
+                                            <div class="img-wrapper">
+                                                <img src="../img/inverter.jpg" class="img-fluid img-zoom"
+                                                    alt="Inverter Dealer">
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="card-body d-flex flex-column justify-content-center p-2">
+                                                <h5 class="card-title fw-bold mb-1 fs-5">Inverter Dealer</h5>
+                                                <a href="#" class="text-primary fw-bold small fs-6">Explore &gt;</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="card">
+                                    <div class="row g-0">
+                                        <div class="col-4">
+                                            <div class="img-wrapper">
+                                                <img src="../img/ClothDryingStandDealers.jpg" class="img-fluid img-zoom"
+                                                    alt="Cloth Drying Stand Dealers">
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="card-body d-flex flex-column justify-content-center p-2">
+                                                <h5 class="card-title fw-bold mb-1 fs-5">-cloth Drying Stand Dealers
+                                                </h5>
+                                                <a href="#" class="text-primary fw-bold small fs-6">Explore &gt;</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                    </div>
+                </div>
+            </section>
+            <div class="m-4">
+                <h4 class="fw-bold mb-3">Recent Activity</h4>
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                    <!-- Card 1 -->
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>Samarth Enterprises</strong>
+                                    <div class="small text-muted">Ghantali-Thane West – Mumbai</div>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <img src="../img/whatsapp11.png" alt="WhatsApp" width="30" height="30" class="me-2">
+                                    <span class="btn btn-outline-success btn-sm">WhatsApp</span>
+                                </div>
+                            </div>
+                            <img src="../img/samarth-dealers-2a4qiirs69.avif" class="card-img-top"
+                                alt="Samarth Enterprises">
+                            <div class="card-body d-flex">
+                                <img src="../img/W1.jpg" alt="User" class="rounded-circle me-2" width="40" height="40">
+                                <div>
+                                    <div class="fw-semibold">Jayashree</div>
+                                    <div class="text-muted small">Wrote a review</div>
+                                    <div class="text-warning small mb-1">★★★★★</div>
+                                    <p class="mb-0 small">
+                                        Very nice pully system. Effortlessly anyone can put clothes for drying...
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>Sadguru Enterprises</strong>
+                                    <div class="small text-muted">Ghantali-Thane West – Mumbai</div>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <img src="../img/whatsapp11.png" alt="WhatsApp" width="30" height="30" class="me-2">
+                                    <span class="btn btn-outline-success btn-sm">WhatsApp</span>
+                                </div>
+                            </div>
+                            <img src="../img/IMGgg111.avif" class="card-img-top" alt="Sadguru Enterprises">
+                            <div class="card-body d-flex">
+                                <img src="../img/W3.jpg" alt="User" class="rounded-circle me-2" width="40" height="40">
+                                <div>
+                                    <div class="fw-semibold">Diya</div>
+                                    <div class="text-muted small">Wrote a review</div>
+                                    <div class="text-warning small mb-1">★★★★★</div>
+                                    <p class="mb-0 small">
+                                        Dry system is excellent, easy operated, I am satisfied, Thank you.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>Indu's Cloths Drying</strong>
+                                    <div class="small text-muted">Ghantali-Thane West – Mumbai</div>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <img src="../img/whatsapp11.png" alt="WhatsApp" width="30" height="30" class="me-2">
+                                    <span class="btn btn-outline-success btn-sm">WhatsApp</span>
+                                </div>
+                            </div>
+                            <img src="../img/IMG222.avif" class="card-img-top" alt="Indu's Cloths Drying">
+                            <div class="card-body d-flex">
+                                <img src="../img/W2d.jpg" alt="User" class="rounded-circle me-2" width="40" height="40">
+                                <div>
+                                    <div class="fw-semibold">Riya</div>
+                                    <div class="text-muted small">Wrote a review</div>
+                                    <div class="text-warning small mb-1">★★★★★</div>
+                                    <p class="mb-0 small">
+                                        Very nice pully system. Effortlessly anyone can put clothes for drying...
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>Trend Interior</strong>
+                                    <div class="small text-muted">Ghantali-Thane West – Mumbai</div>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <img src="../img/whatsapp11.png" alt="WhatsApp" width="30" height="30" class="me-2">
+                                    <span class="btn btn-outline-success btn-sm">WhatsApp</span>
+                                </div>
+                            </div>
+                            <img src="../img/IMG333.avif" class="card-img-top" alt="Trend Interior">
+                            <div class="card-body d-flex">
+                                <img src="../img/W3.jpg" alt="User" class="rounded-circle me-2" width="40" height="40">
+                                <div>
+                                    <div class="fw-semibold">Jaya</div>
+                                    <div class="text-muted small">Wrote a review</div>
+                                    <div class="text-warning small mb-1">★★★★★</div>
+                                    <p class="mb-0 small">
+                                        Very nice pully system. Effortlessly anyone can put clothes for drying...
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>All Season Dry Cloths</strong>
+                                    <div class="small text-muted">Ghantali-Thane West – Mumbai</div>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <img src="../img/whatsapp11.png" alt="WhatsApp" width="30" height="30" class="me-2">
+                                    <span class="btn btn-outline-success btn-sm">WhatsApp</span>
+                                </div>
+                            </div>
+                            <img src="../img/IMGG4.avif" class="card-img-top" alt="All Season Dry Cloths">
+                            <div class="card-body d-flex">
+                                <img src="../img/W2d.jpg" alt="User" class="rounded-circle me-2" width="40" height="40">
+                                <div>
+                                    <div class="fw-semibold">Kavish</div>
+                                    <div class="text-muted small">Wrote a review</div>
+                                    <div class="text-warning small mb-1">★★★★★</div>
+                                    <p class="mb-0 small">
+                                        Very nice pully system. Effortlessly anyone can put clothes for drying...
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>Gauri Enterprises</strong>
+                                    <div class="small text-muted">Ghantali-Thane West – Mumbai</div>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <img src="../img/whatsapp11.png" alt="WhatsApp" width="30" height="30" class="me-2">
+                                    <span class="btn btn-outline-success btn-sm">WhatsApp</span>
+                                </div>
+                            </div>
+                            <img src="../img/IMGG555.avif" class="card-img-top" alt="Gauri Enterprises">
+                            <div class="card-body d-flex">
+                                <img src="../img/W1.jpg" alt="User" class="rounded-circle me-2" width="40" height="40">
+                                <div>
+                                    <div class="fw-semibold">Jayashree</div>
+                                    <div class="text-muted small">Wrote a review</div>
+                                    <div class="text-warning small mb-1">★★★★★</div>
+                                    <p class="mb-0 small">
+                                        Very nice pully system. Effortlessly anyone can put clothes for drying...
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center my-4">
+                <button class="btn btn-outline-primary custom-btn-gradient px-4 py-2">
+                    <i class="fa-solid fa-compass me-2"></i>
+                    Explore More
+                </button>
+            </div>
+            <button id="backToTopBtn" class="btn position-fixed"
+                style="bottom: 20px; right: 20px; display: none; z-index: 999; background-color: white; color: black; border: 1px solid black;">
+                ⮝
+            </button>
+        </main>
+        <footer class="bg-light text-dark text-center p-4">
+            <!-- SOCIAL MEDIA LINKS -->
+            <div class="d-flex justify-content-between align-items-center flex-wrap mt-2">
+                <div class="d-flex align-items-center flex-wrap">
+                    <span class="me-2">Follow us on</span>
+                    <img src="./img/11facebook-circle-256.webp" alt="Facebook" width="25" height="25" class="me-2">
+                    <img src="./img/instagram_icon-instagram_buttoninstegram-512.webp" alt="Instagram" width="25"
+                        height="25" class="me-2">
+                    <img src="./img/youtube-256.webp" alt="YouTube" width="25" height="25" class="me-2">
+                    <img src="./img/twitter_circle-256.webp" alt="Twitter" width="25" height="25" class="me-2">
+                    <img src="./img/circle-linkedin-256.webp" alt="LinkedIn" width="25" height="25">
+                </div>
+                <div class="d-flex gap-2 mt-2 mt-md-0">
+                    <a href="https://play.google.com/store" target="_blank">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
+                            alt="Get it on Google Play" style="height: 40px;">
+                    </a>
+                    <a href="https://www.apple.com/app-store/" target="_blank">
+                        <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                            alt="Download on the App Store" style="height: 40px;">
+                    </a>
+                </div>
+            </div>
+
+            <!-- WELCOME MESSAGE -->
+            <h5 class="mt-4 mb-4 text-start">One-Stop for All Local Businesses, Services, & Stores Nearby Across India
+            </h5>
+
+            <p class="text-start">
+                Welcome to Justdial, your 'one stop shop' where you are assisted with day-to-day and exclusive planning
+                and purchasing activities. We take pride in our iconic customer support number, 8888888888 and the fact
+                that we own a strong hold on local business information pan India.
+
+                Our service extends from providing address and contact details of business establishments around the
+                country, to making orders and reservations for leisure, medical, financial, travel and domestic
+                purposes. We enlist business information across varied sectors like Hotels, Restaurants, Auto Care, Home
+                Decor, Personal and Pet Care, Fitness, Insurance, Real Estate, Sports, Schools, etc. from all over the
+                country. Holding information right from major cities like Mumbai, Delhi, Bangalore, Hyderabad, Chennai,
+                Ahmedabad and Pune our reach stretches out to other smaller cities across the country too.
+
+                Our 'Free Listing' feature gives a platform to showcase varied specialities. We then furnish you with
+                the information via phone, SMS, web, App and WAP as well as, create a space for you to share your
+                experiences through our 'Rate & Review' feature. Through the 'Best Deals', 'Last Minute Deals' and 'Live
+                Quotes', we make sure that you are offered the best bargains in the market.
+            </p>
+
+            <!-- SERVICES HEADING -->
+            <h4 class="mt-5 mb-4 text-start">Some of our services that will prove useful to you on a day-to-day basis
+                are:</h4>
+            <!-- Services Grid -->
+            <div class="container text-start">
+                <div class="row g-4"> <!-- g-4 ensures equal gaps -->
+                    <div class="col-md-3">
+                        <div class="service-box ">
+                            <i class="fas fa-briefcase text-secondary service-icon"></i>
+                            <strong>B2B</strong>
+                            <p>Explore diverse B2B categories, top vendors, and a wholesale experience. Instant
+                                assistance via chat available.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="service-box ">
+                            <i class="fas fa-globe-asia text-success service-icon"></i>
+                            <strong>All India</strong>
+                            <p>Justdial connects businesses across India—from suppliers to wholesalers—offering full
+                                digital B2B convenience.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="service-box">
+                            <i class="fas fa-truck-moving text-warning service-icon"></i>
+                            <strong>Packers and Movers</strong>
+                            <p>Get the best packers and movers with ratings, quotes, and a smooth relocation experience.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="service-box">
+                            <i class="fas fa-utensils text-danger service-icon"></i>
+                            <strong>Order Food Online</strong>
+                            <p>Browse restaurants, apply discounts, and order your favorite meals in just a few clicks.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="service-box">
+                            <i class="fas fa-user-tie text-primary service-icon"></i>
+                            <strong>Jobs</strong>
+                            <p>Find relevant jobs or hire candidates across industries and locations with ease.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="service-box">
+                            <i class="fas fa-film text-dark service-icon"></i>
+                            <strong>Movies</strong>
+                            <p>Book tickets, view trailers and cast, and stay updated with the latest releases.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="service-box">
+                            <i class="fas fa-spa text-pink service-icon"></i>
+                            <strong>Spa & Salon</strong>
+                            <p>Book appointments online for salons or spas near you for a hassle-free experience.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="service-box">
+                            <i class="fas fa-tools text-secondary service-icon"></i>
+                            <strong>Repair & Services</strong>
+                            <p>Get your AC, car, purifier, or appliances serviced quickly with verified professionals.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="service-box">
+                            <i class="fas fa-user-md text-info service-icon"></i>
+                            <strong>Doctor Appointment</strong>
+                            <p>Book doctor appointments online by specialty, city, and clinic. Avoid waiting and delays.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="service-box">
+                            <i class="fas fa-building text-success service-icon"></i>
+                            <strong>Real Estate Agents</strong>
+                            <p>Connect with property agents for buying, selling, or renting homes with verified
+                                listings.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="service-box">
+                            <i class="fas fa-bolt text-warning service-icon"></i>
+                            <strong>Recharge/Bill Payment</strong>
+                            <p>Pay bills and recharge mobiles, DTH, and utilities online instantly with Justdial.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="service-box">
+                            <i class="fas fa-wallet text-danger service-icon"></i>
+                            <strong>Digital Wallets</strong>
+                            <p>Manage your online payments and transactions through trusted digital wallets.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="text-start small mt-5 ">Some of the other services that can be of assistance to you for leisure,
+                health and home convenience are - Pest Control, Skin Care Clinics, Painters, Laundry Services, Interior
+                Designers, Mobile Phone Repair, Vaccination Centres, Internet Service Providers, etc. With an endless
+                number of things under the sun, you can be sure this will be your 'One Stop Shop' to find everything and
+                more.</p>
+            <div class="container-fluid mt-4 text-start px-0">
+                <h5 class="fw-semibold mb-3">Popular Categories</h5>
+                <div class="scroll-buttons overflow-auto">
+                    <div class="d-flex flex-nowrap gap-2 mb-3" style="min-width: max-content;">
+                        <button class="btn btn-light border px-3 py-1  btn-truncate">Accommodation</button>
+                        <button class="btn btn-light border px-3 py-1">Astrology</button>
+                        <button class="btn btn-light border px-3 py-1">Automobiles & Two Wheelers</button>
+                        <button class="btn btn-light border px-3 py-1">Beauty, Fitness & Sports</button>
+                        <button class="btn btn-light border px-3 py-1">Business & Legal</button>
+                        <button class="btn btn-light border px-3 py-1">Education</button>
+                        <button class="btn btn-light border px-3 py-1">Events & Weddings</button>
+                        <button class="btn btn-light border px-3 py-1">Food & Restaurants</button>
+                        <button class="btn btn-light border px-3 py-1">Health & Medical</button>
+                        <button class="btn btn-light border px-3 py-1">Home Services</button>
+                        <button class="btn btn-light border px-3 py-1">Others</button>
+                        <button class="btn btn-light border px-3 py-1">Trasportation & Shipping</button>
+                        <button class="btn btn-light border px-3 py-1">Travel</button>
+                    </div>
+                </div>
+                <h5 class="fw-semibold mt-3 mb-3">Trending Searches</h5>
+                <div class="category-list" style="line-height: 1.8; font-size: 0.93rem;">
+                    Real Estate Agents | Book Shops | Aadhaar Card Agents | Yoga Classes | Estate Agents For Land |
+                    Pmjay Scheme Hospitals | Tutorials For IIT JEE | Mobile Phone Repair & Services-MI | Wrist Watch
+                    Dealers | Education Consultants | Battery Operated Scooter Dealers-OLA | Entertainment Centres |
+                    DTH
+                    TV Broadcast Service Providers-Sun Direct | AC Repair & Services-Blue Star | Tnpsc Tutorials |
+                    Mobile Phone Simcard Dealers-Jio | MPSC Tutorials | Shoe Dealers-Nike | Tirupati Darshanam
+                    Ticketing
+                    Services | Bitcoin Services | Mobile Phone Repair & Services-Nothing | Cat Tutorials | Lawyers
+                    For
+                    District Court | Ayushman Bharat Yojana Consultants | Lawyers For Supreme Court | Sports Shoe
+                    Dealers | Courier Services For Ahmedabad | Internet Payment Gateway Solution Providers | Taxi
+                    Services For Inter City | BPSC Tutorials | Courier Services For Canada | Demat Account Services
+                    |
+                    Automobile Part Dealers-Ashok Leyland | Prp Hair Transplantation Treatment Doctors | Mutual Fund
+                    Agents-SBI | Courier Services For Dubai | BEST Enquiry | Pickleball Courts | Khatu Shyam Bhajan
+                    Singers | Dairy Product Retailers-Amul | Tutorials For Mppsc | Uber Autorickshaw Attachment
+                    Services
+                    | Football Dealers | Courier Services For Surat | Battery Operated Auto Rickshaw Dealers-Mini
+                    Metro
+                    | Electricity Suppliers-Kseb | Courier Services For Tirupati | Packers And Movers For Hyderabad
+                    |
+                    Newspaper Advertising Agencies-Dainik Bhaskar | Tutorials For MHT CET
+                </div>
+
+                <h5 class="fw-semibold mt-4 mb-3">Trending Searches</h5>
+                <div class="category-list" style="line-height: 1.8; font-size: 0.93rem;">
+                    Deals and Offers | Kotak Mahindra Banks | INOX Cinemas | Canara Banks | Ratnakar Banks | PVR Cinemas
+                    | ICICI Banks | HDFC Banks | AU Small Finance Bank | Bank Of Maharashtra | Bank Of India | Axis
+                    Banks | IDFC First Banks | Maharashtra Gramin Banks | Catholic Syrian Banks | Saraswat Co Operative
+                    Banks | Punjab & Sind Banks | State Bank Of India | Union Bank Of India | Punjab National Banks |
+                    Bank Of Baroda | Lifestyle Stores | Behrouz Biryani | Fastrack | The Good Bowl | Sony | Yes Banks |
+                    Croma | Dell Exclusive Stores | Beverly Hills Polo Club | Joyalukkas Jewellery | Kalyan Jewellers |
+                    Flying Machine | Lenovo Exclusive Store | Reliance Digital | Vijay Sales | Duroflex | Anytime
+                    Fitness | Kromakay Salons | Toni&Guy Salons | Bakingo | Barbeque Nation Restaurants | McDonalds |
+                    Sweet Truth Cake Shops | ALDO Stores | Helios | Inglot Stores | LEE Stores | Max Stores | US Polo
+                    Assn | Wrangler | Levi's | Apple Store | IFB Point | LG | Oppo Exclusive Showroom | Federal Banks |
+                    IDBI Banks | Bandhan Banks | DBS Banks | Karur Vysya Banks | Indusind Banks | Central Bank Of India
+                    | Explore JD Collections | Travel & Tourism | Beauty & Fashion | Health & Fitness | Food & Beverage
+                    | Finance | On demand Services | Home & Living | Education & Career | Recreation | Jd Business Guide
+                    | Popular Cities | Bangalore | Mumbai | Chennai | Delhi | Hyderabad | Pune | Ahmedabad | Lucknow |
+                    Patna | Jaipur | Indore | Kochi | Kolkata | Coimbatore | Nagpur | Ludhiana | Agra | Bhubaneshwar |
+                    Bhopal | Guwahati | Surat | Madurai | Visakhapatnam | Sonepat | Vadodara | Meerut |
+                    Thiruvananthapuram | Gurgaon | Kozhikode | Varanasi | Siliguri | Allahabad | Rajkot | Ghaziabad |
+                    Mysore | Noida | Chandigarh | Navi-Mumbai | Vijayawada | Durgapur | Srinagar | Nashik | Panipat |
+                    Jammu | Jodhpur | Udaipur-Rajasthan | Thane | Raipur-Chhattisgarh | Amritsar | Jabalpur
+                </div>
+                <h5 class="fw-semibold mt-4 mb-2">Explore JD Collections</h5>
+                <div class="category-list" style="line-height: 1.8; font-size: 0.93rem;">
+                    Travel & Tourism | Beauty & Fashion | Health & Fitness | Food & Beverage | Finance | On demand
+                    Services |
+                    Home & Living | Education & Career | Recreation | JD Business Guide
+                </div>
+
+                <h5 class="fw-semibold mt-4 mb-2">Popular Cities</h5>
+                <div class="category-list" style="line-height: 1.8; font-size: 0.93rem;">
+                    Bangalore | Mumbai | Chennai | Delhi | Hyderabad | Pune | Ahmedabad | Lucknow | Patna | Jaipur |
+                    Indore |
+                    Kochi | Kolkata | Coimbatore | Nagpur | Ludhiana | Agra | Bhubaneshwar | Bhopal | Guwahati | Surat |
+                    Madurai | Visakhapatnam | Sonepat | Vadodara | Meerut | Thiruvananthapuram | Gurgaon | Kozhikode |
+                    Varanasi | Siliguri | Allahabad | Rajkot | Ghaziabad | Mysore | Noida | Chandigarh | Navi-Mumbai |
+                    Vijayawada | Durgapur | Srinagar | Nashik | Panipat | Jammu | Jodhpur | Udaipur-Rajasthan | Thane |
+                    Raipur-Chhattisgarh | Amritsar | Jabalpur
+                </div>
+                <div class="row mt-4">
+                    <div class="col-md-3">
+                        <h6 class="fw-bold mb-3">Quick Links</h6>
+                        <ul class="list-unstyled text-start">
+                            <li>About us</li>
+                            <li>Investor Relations</li>
+                            <li>We're hiring</li>
+                            <li>Customer Care</li>
+                            <li>Free Listing</li>
+                            <li>What's New</li>
+                            <li>Report a Bug</li>
+                            <li>B2B Sitemap</li>
+                            <li>Sitemap</li>
+                            <li>Advertise</li>
+                            <li>Media</li>
+                            <li>Testimonials</li>
+                            <li>Feedback</li>
+                            <li>Business Badge</li>
+                            <li>Jd Collection</li>
+                            <li>Client Success Videos</li>
+                            <li>B2B India Sitemap</li>
+                            <li>Return & Exchange Policy</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-9">
+                        <h6 class="fw-bold mb-3">JD Verticals</h6>
+                        <div class="row text-start">
+                            <div class="col-md-3">
+                                <ul class="list-unstyled">
+                                    <li>B2B</li>
+                                    <li>Accommodation</li>
+                                    <li>Automobiles & Two Wheelers</li>
+                                    <li>Education</li>
+                                    <li>Entertainment</li>
+                                    <li>Home & Garden</li>
+                                    <li>Lights & Lighting</li>
+                                    <li>Placements</li>
+                                    <li>Sports & Entertainment</li>
+                                    <li>Watches & Eyewear</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-3">
+                                <ul class="list-unstyled">
+                                    <li>All India</li>
+                                    <li>Advertising & PR</li>
+                                    <li>Beauty & Personal Care</li>
+                                    <li>Electronic Component</li>
+                                    <li>Events & Wedding</li>
+                                    <li>Housekeeping & Facility Management</li>
+                                    <li>Luggage Bags & Cases</li>
+                                    <li>Public</li>
+                                    <li>Textile & Leather</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-3">
+                                <ul class="list-unstyled">
+                                    <li>Doctors</li>
+                                    <li>Agriculture</li>
+                                    <li>Business & Legal</li>
+                                    <li>Electronics</li>
+                                    <li>Food & Beverage</li>
+                                    <li>Industrial Plants & Machinery</li>
+                                    <li>Office & School Supplies</li>
+                                    <li>Restaurant</li>
+                                    <li>Toys & Games</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-3">
+                                <ul class="list-unstyled">
+                                    <li>Bills & Recharge</li>
+                                    <li>Apparel</li>
+                                    <li>Chemicals</li>
+                                    <li>Energy</li>
+                                    <li>Furniture</li>
+                                    <li>IT Components</li>
+                                    <li>Packaging & Printing</li>
+                                    <li>Pet & Pet Supplies</li>
+                                    <li>Security & Protection</li>
+                                    <li>Travel</li>
+                                    <li>Cricket</li>
+                                    <li>Astrology</li>
+                                    <li>Construction & Real Estate</li>
+                                    <li>Engineering</li>
+                                    <li>Health & Medical</li>
+                                    <li>Jewellery</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button id="backToTopBtn1" class="btn position-fixed"
+                style="bottom: 20px; right: 20px; display: none; z-index: 999; background-color: white; color: black; border: 1px solid black;">
+                ⮝
+            </button>
+        </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/js/all.min.js"
+        integrity="sha512-b+nQTCdtTBIRIbraqNEwsjB6UvL3UEMkXnhzd8awtCYh0Kcsjl9uEgwVFVbhoj3uu1DO1ZMacNvLoyJJiNfcvg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- Custom Scripts -->
+    <script>
+        // Show/hide "We Are Hiring" and "Fixed Search"
+        window.addEventListener("scroll", function () {
+            const scrollTop = window.scrollY || document.documentElement.scrollTop;
+            const windowHeight = window.innerHeight;
+            const docHeight = document.documentElement.scrollHeight;
+            const scrollPercent = (scrollTop / (docHeight - windowHeight)) * 100;
+
+            const hiringElement = document.querySelector('.k_wearehiring');
+            const fixedSearch = document.querySelector('.k_fixedSearch');
+
+            if (scrollPercent >= 1.8) {
+                if (hiringElement && !hiringElement.classList.contains("d-none")) {
+                    hiringElement.classList.remove("d-flex");
+                    hiringElement.classList.add("d-none");
+                }
+                if (fixedSearch && !fixedSearch.classList.contains("show")) {
+                    fixedSearch.classList.add("show");
+                }
+            } else {
+                if (hiringElement && hiringElement.classList.contains("d-none")) {
+                    hiringElement.classList.remove("d-none");
+                    hiringElement.classList.add("d-flex");
+                }
+                if (fixedSearch && fixedSearch.classList.contains("show")) {
+                    fixedSearch.classList.remove("show");
+                }
+            }
+        });
+
+        // Swiper Slider Initialization (Single Block)
+        const swiper = new Swiper('.swiper', {
+            slidesPerView: 4,
+            spaceBetween: 16,
+            slidesPerGroup: 1,
+            loop: false,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            breakpoints: {
+                0: {
+                    slidesPerView: 1.2,
+                },
+                576: {
+                    slidesPerView: 2,
+                },
+                768: {
+                    slidesPerView: 3,
+                },
+                992: {
+                    slidesPerView: 4,
+                }
+            }
+        });
+
+        // Back to Top Button
+        const backToTopBtn = document.getElementById("backToTopBtn");
+
+        window.addEventListener("scroll", function () {
+            backToTopBtn.style.display = window.scrollY > 100 ? "block" : "none";
+        });
+
+        backToTopBtn.addEventListener("click", function () {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+    </script>
+    <script>
+        const mainSearch = document.getElementById("mainSearch");
+        const floatingSearch = document.getElementById("floatingSearch");
+        const hiringBar = document.querySelector(".k_wearehiring");
+
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 100) {
+                hiringBar && (hiringBar.style.display = "none");
+
+                floatingSearch.classList.remove("floating-hidden");
+                floatingSearch.classList.add("floating-visible");
+
+                mainSearch.style.opacity = "0";
+                mainSearch.style.pointerEvents = "none";
+                mainSearch.style.transform = "scale(0.7) translateY(-20px)";
+            } else {
+                hiringBar && (hiringBar.style.display = "flex");
+
+                floatingSearch.classList.remove("floating-visible");
+                floatingSearch.classList.add("floating-hidden");
+
+                mainSearch.style.opacity = "1";
+                mainSearch.style.pointerEvents = "auto";
+                mainSearch.style.transform = "scale(1) translateY(0)";
+            }
+        });
+    </script>
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    </script>
+    <script>
+        const wrapper = document.querySelector('.text-wrapper');
+        let index = 0;
+
+        setInterval(() => {
+            index = (index + 1) % 2;
+            wrapper.style.transform = `translateY(-${index * 1.8}em)`;
+        }, 2000); // change every 2 seconds
+    </script>
+
+</body>
+
+</html>

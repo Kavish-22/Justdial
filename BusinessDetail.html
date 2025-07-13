@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Businesses Near You on Local Search Engine - Justdial</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+
+    <style>
+        header.k_tbdr {
+            position: fixed;
+            top: 0;
+            z-index: 1050;
+            height: 70px;
+            background: #f8f9fa;
+            width: 100%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .scroll-buttons {
+            overflow-y: auto;
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+        }
+
+        .scroll-buttons {
+            overflow-x: auto;
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+        }
+
+        .k_tbdr {
+            /* border: 1px solid black; */
+            border-bottom: 1px solid #ddd;
+        }
+
+        body {
+            background-color: #E8E8E8;
+        }
+
+        header {
+            height: 79px;
+            z-index: 1000;
+        }
+
+        main {
+            min-height: 750px;
+            margin-top: 40px;
+        }
+
+        footer {
+            height: 537px;
+        }
+
+        #backToTopBtn {
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            font-size: 18px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .k_rotate-90 {
+            transform: rotate(-90deg);
+            transform-origin: left top;
+            white-space: nowrap;
+        }
+
+        .k_adv_free {
+            right: -75px !important;
+            z-index: 99999;
+        }
+
+        .banner-img {
+            height: 250px;
+            /* increase or change as needed */
+            object-fit: contain !important;
+            /* show full image */
+        }
+
+
+        .category-hover {
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .category-hover:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+
+</head>
+
+<body>
+    <header class="k_tbdr position-fixed w-100 bg-light z-3">
+        <div class="row m-0 h-100 align-items-center">
+            <!-- Left: Logo -->
+            <div class="col-2 d-flex align-items-center ps-3">
+                <div class="header_left_inner">
+                    <a role="link" class="animate__animated header_jdlogo" href="homePage.html">
+                        <img src="https://akam.cdn.jdmagicbox.com/images/icontent/jdrwd/jdlogosvg.svg"
+                            alt="Justdial Logo" title="Justdial" height="25" width="102">
+                    </a>
+                </div>
+            </div>
+
+            <!-- Middle Column: Hiring and Floating Search -->
+            <div class="col-6 d-flex align-items-center justify-content-end position-relative" style="height: 70px;">
+                <!-- Nav section -->
+                <ul class="nav k_wearehiring d-flex align-items-center gap-3 mb-0">
+                    <li class="nav-item">
+                        <button class="btn dropdown-toggle text-primary" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <i class="fa-solid fa-language"></i> En
+                        </button>
+                    </li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="#">We are Hiring</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="#">Investor Relations</a></li>
+                </ul>
+
+                <!-- Floating Search Bar -->
+                <div id="floatingSearch" class="position-absolute top-0 start-0 w-100 floating-hidden"
+                    style="z-index: 999;">
+                    <div class="searchbar-shared d-flex align-items-center gap-3 px-3 py-2 shadow-sm rounded w-100">
+                        <!-- Location Dropdown -->
+                        <div class="dropdown d-flex align-items-center">
+                            <i class="fa-solid fa-location-dot me-2"></i>
+                            <input type="text" class="form-control border-0 shadow-none" placeholder="Enter Location"
+                                data-bs-toggle="dropdown" aria-expanded="false" role="combobox" aria-haspopup="listbox"
+                                aria-controls="locationDropdown" />
+                            <ul class="dropdown-menu" id="locationDropdown" role="listbox">
+                                <li><a class="dropdown-item" href="#">Neemuch</a></li>
+                                <li><a class="dropdown-item" href="#">Mandsaur</a></li>
+                                <li><a class="dropdown-item" href="#">Ratlam</a></li>
+                                <li><a class="dropdown-item" href="#">Ujjain</a></li>
+                                <li><a class="dropdown-item" href="#">Indore</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Search Input -->
+                        <div class="d-flex align-items-center gap-2 w-100">
+                            <input type="text" class="form-control jd-search-input" placeholder="Search in Neemuch" />
+                            <i class="fa-solid fa-microphone text-mic"></i>
+                            <i class="fa-solid fa-magnifying-glass me-2 text-orange"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Right: Advertise, Free Listing, Bell, Login -->
+            <div class="col-4 d-flex align-items-center justify-content-start gap-3 ps-3">
+                <a class="text-dark d-flex align-items-center gap-2"><i class="fa-solid fa-bullhorn"></i>
+                    Advertise</a>
+                <a class="text-dark d-flex align-items-center gap-2"><i class="fa-solid fa-chart-line"></i> Free
+                    Listing</a>
+                <i class="fa-regular fa-bell"></i>
+                <button class="btn btn-primary px-3 py-1 fw-bold btn-sm" data-bs-toggle="modal"
+                    data-bs-target="#authModal">Log In / Sign Up</button>
+            </div>
+        </div>
+    </header>
+    <ul class="nav k_adv_free flex-column position-fixed top-50 end-0 ">
+        <li class="nav-item k_rotate-90 mb-5">
+            <a class="rounded-top  nav-link active bg-primary text-white fw-bold" aria-current="page"
+                href="#">Advertise</a>
+        </li>
+        <li class="nav-item k_rotate-90 mt-5">
+            <a class="rounded-top nav-link bg-danger text-white fw-bold" href="#">Free Listing</a>
+        </li>
+    </ul>
+    <div class="container-fluid p-0 pt-0 pb-0 bg-white">
+        <main class="bg-white p-0 mt-0">
+            <section class="position-relative text-white text-center">
+                <div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="../img/banner222.jpg" class="d-block w-100 banner-img" alt="Banner 1">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="../img/banner33.webp" class="d-block w-100 banner-img" alt="Banner 2">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="../img/banner44.jpg" class="d-block w-100 banner-img" alt="Banner 3">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="../img/banner4444.jpg" class="d-block w-100 banner-img" alt="Banner 4">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section>
+
+                <h3 class=" ms-4 fw-bold ">Best Biryani Restaurants in Mumbai - Order Food Online</h3>
+
+                <div class="scroll-buttons overflow">
+                    <div class="d-flex flex-nowrap gap-2 mb-3" style="min-width: max-content;">
+                        <div class="dropdown ms-4">
+                            <button class="btn btn-light border px-3 py-1 dropdown-toggle" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Sort By
+                            </button>
+
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Relevance</a></li>
+                                <li><a class="dropdown-item" href="#">Rating</a></li>
+                                <li><a class="dropdown-item" href="#">Popular</a></li>
+                                <li><a class="dropdown-item" href="#">Distance</a></li>
+                                <li>
+                                    <button class="w-75 mt-3 btn btn-outline-primary mx-auto d-block text-center">
+                                        Close
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="dropdown ms-1">
+                            <button class="btn btn-light border px-3 py-1 dropdown-toggle" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                price
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Relevance</a></li>
+                                <li><a class="dropdown-item" href="#">Rating</a></li>
+                                <li><a class="dropdown-item" href="#">Popular</a></li>
+                                <li><a class="dropdown-item" href="#">Distance</a></li>
+                                <li>
+                                    <button class="w-75 mt-3 btn btn-outline-primary mx-auto d-block text-center">
+                                        Close
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="dropdown ms-1">
+                            <button class="btn btn-light border px-3 py-1 dropdown-toggle" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Biryani
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Relevance</a></li>
+                                <li><a class="dropdown-item" href="#">Rating</a></li>
+                                <li><a class="dropdown-item" href="#">Popular</a></li>
+                                <li><a class="dropdown-item" href="#">Distance</a></li>
+                                <li>
+                                    <button class="w-75 mt-3 btn btn-outline-primary mx-auto d-block text-center">
+                                        Close
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="dropdown ms-1">
+                            <button class="btn btn-light border px-3 py-1 dropdown-toggle" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Amenities
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Relevance</a></li>
+                                <li><a class="dropdown-item" href="#">Rating</a></li>
+                                <li><a class="dropdown-item" href="#">Popular</a></li>
+                                <li><a class="dropdown-item" href="#">Distance</a></li>
+                                <li>
+                                    <button class="w-75 mt-3 btn btn-outline-primary mx-auto d-block text-center">
+                                        Close
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="dropdown ms-1">
+                            <button class=" btn btn-light border px-3 py-1 dropdown-toggle" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Rating
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Relevance</a></li>
+                                <li><a class="dropdown-item" href="#">Rating</a></li>
+                                <li><a class="dropdown-item" href="#">Popular</a></li>
+                                <li><a class="dropdown-item" href="#">Distance</a></li>
+                                <li>
+                                    <button class="w-75 mt-3 btn btn-outline-primary mx-auto d-block text-center">
+                                        Close
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <button class="btn btn-light border px-3 py-1">Business & Legal</button>
+                        <button class="btn btn-light border px-3 py-1">Education</button>
+                        <button class="btn btn-light border px-3 py-1">Events & Weddings</button>
+                        <button class="btn btn-light border px-3 py-1">Food & Restaurants</button>
+                        <button class="btn btn-light border px-3 py-1">Health & Medical</button>
+                        <button class="btn btn-light border px-3 py-1">Home Services</button>
+                        <button class="btn btn-light border px-3 py-1">Others</button>
+                        <button class="btn btn-light border px-3 py-1">Trasportation & Shipping</button>
+                        <button class="btn btn-light border px-3 py-1">Travel</button>
+                    </div>
+                </div>
+            </section>
+            <div class="container my-3 ms-2">
+                <div class="card mb-4 shadow-sm">
+                    <div class="row g-0">
+                        <div class="col-md-2">
+                            <img src="../img/shop1.webp" class="img-fluid rounded-start h-100" alt="Restaurant Image">
+                        </div>
+
+                        <div class="col-md-9">
+                            <div class="card-body">
+                                <a href="BusinessDetail2.html" class="stretched-link text-decoration-none text-dark">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <h4 class="card-title mb-0 me-2 fw-bold">Hotel Kombadi Vade</h4>
+                                    </div>
+                                </a>
+
+                                <span class="badge bg-success me-2 mb-4">3.9 ★</span>
+                                <small class="text-muted">103 Ratings</small>
+                                <span class="badge bg-light text-dark border ms-2">⚡ Responsive</span>
+
+                                <p class="mb-1 text-muted mt-2">
+                                    <i class="fa-solid fa-location-dot"></i> Vartak Nagar Thane West, Thane
+                                </p>
+                                <p class="mb-1 text-muted">
+                                    <strong>Open until:</strong> 11:00 PM &nbsp; | &nbsp; ₹450 for two &nbsp; | &nbsp;
+                                    <i class="bi bi-car-front"></i> Parking Available
+                                </p>
+
+                                <div class="d-flex flex-wrap gap-2 mt-2">
+                                    <a href="tel:09972269380" class="btn btn-outline-success px-3">📞 09972269380</a>
+                                    <a href="#" class="btn btn-primary px-4">Order Online</a>
+                                    <a href="#" class="btn btn-outline-secondary px-4">Menu</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="container my-3 ms-2">
+                <div class="card mb-4 shadow-sm">
+                    <div class="row g-0">
+                        <!-- Image -->
+                        <div class="col-md-2">
+                            <img src="../img/momos.webp" class="img-fluid rounded-start h-100" alt="Restaurant Image">
+                        </div>
+
+                        <!-- Details -->
+                        <div class="col-md-9">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <h4 class="card-title mb-0 me-2 fw-bold">Farmhouse Brass Anchor</h4>
+
+                                </div>
+                                <span class="badge bg-success me-2 mb-4">3.9 ★</span>
+                                <small class="text-muted">103 Ratings</small>
+                                <span class="badge bg-light text-dark border ms-2">⚡ Responsive</span>
+
+                                <p class="mb-1 text-muted mt-2"> <i class="fa-solid fa-location-dot"></i> Vartak
+                                    Nagar Thane West, Thane</p>
+                                <p class="mb-1 text-muted">
+                                    <strong>Open until:</strong> 11:00 PM &nbsp; | &nbsp; ₹350 for two &nbsp; |
+                                    &nbsp;
+                                    <i class="bi bi-car-front"></i> Parking Available
+                                </p>
+
+                                <div class="d-flex flex-wrap gap-2 mt-2">
+                                    <a href="tel:09972269380" class="btn btn-outline-success px-3">📞 01235269380</a>
+                                    <a href="#" class="btn btn-primary px-4">Order Online</a>
+                                    <a href="#" class="btn btn-outline-secondary px-4">Menu</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container my-3 ms-2">
+                <div class="card mb-4 shadow-sm">
+                    <div class="row g-0">
+                        <!-- Image -->
+                        <div class="col-md-2">
+                            <img src="../img/hotelpraveen.webp" class="img-fluid rounded-start h-100"
+                                alt="Restaurant Image">
+                        </div>
+
+                        <!-- Details -->
+                        <div class="col-md-9">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <h4 class="card-title mb-0 me-2 fw-bold">Hotel Praveen</h4>
+
+                                </div>
+                                <span class="badge bg-success me-2 mb-4">3.9 ★</span>
+                                <small class="text-muted">103 Ratings</small>
+                                <span class="badge bg-light text-dark border ms-2">⚡ Responsive</span>
+
+                                <p class="mb-1 text-muted mt-2"> <i class="fa-solid fa-location-dot"></i> Vartak
+                                    Nagar Thane West, Thane</p>
+                                <p class="mb-1 text-muted">
+                                    <strong>Open until:</strong> 11:00 PM &nbsp; | &nbsp; ₹250 for two &nbsp; |
+                                    &nbsp;
+                                    <i class="bi bi-car-front"></i> Parking Available
+                                </p>
+
+                                <div class="d-flex flex-wrap gap-2 mt-2">
+                                    <a href="tel:09972269380" class="btn btn-outline-success px-3">📞 09456269380</a>
+                                    <a href="#" class="btn btn-primary px-4">Order Online</a>
+                                    <a href="#" class="btn btn-outline-secondary px-4">Menu</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container my-3 ms-2">
+                <div class="card mb-4 shadow-sm">
+                    <div class="row g-0">
+                        <!-- Image -->
+                        <div class="col-md-2">
+                            <img src="../img/maaz.webp" class="img-fluid rounded-start h-100" alt="Restaurant Image">
+                        </div>
+
+                        <!-- Details -->
+                        <div class="col-md-9">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <h4 class="card-title mb-0 me-2 fw-bold">Maaz Inn Restaurant</h4>
+
+                                </div>
+                                <span class="badge bg-success me-2 mb-4">3.9 ★</span>
+                                <small class="text-muted">103 Ratings</small>
+                                <span class="badge bg-light text-dark border ms-2">⚡ Responsive</span>
+
+                                <p class="mb-1 text-muted mt-2"> <i class="fa-solid fa-location-dot"></i> Vartak
+                                    Nagar Thane West, Thane</p>
+                                <p class="mb-1 text-muted">
+                                    <strong>Open until:</strong> 11:00 PM &nbsp; | &nbsp; ₹400 for two &nbsp; |
+                                    &nbsp;
+                                    <i class="bi bi-car-front"></i> Parking Available
+                                </p>
+
+                                <div class="d-flex flex-wrap gap-2 mt-2">
+                                    <a href="tel:09972269380" class="btn btn-outline-success px-3">📞 09842269380</a>
+                                    <a href="#" class="btn btn-primary px-4">Order Online</a>
+                                    <a href="#" class="btn btn-outline-secondary px-4">Menu</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container my-3 ms-2">
+                <div class="card mb-4 shadow-sm">
+                    <div class="row g-0">
+                        <!-- Image -->
+                        <div class="col-md-2">
+                            <img src="../img/khao-piyo-.avif" class="img-fluid rounded-start h-100"
+                                alt="Restaurant Image">
+                        </div>
+
+                        <!-- Details -->
+                        <div class="col-md-9">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <h4 class="card-title mb-0 me-2 fw-bold">Khao Piyo</h4>
+
+                                </div>
+                                <span class="badge bg-success me-2 mb-4">4.9 ★</span>
+                                <small class="text-muted">100 Ratings</small>
+                                <span class="badge bg-light text-dark border ms-2">⚡ Responsive</span>
+
+                                <p class="mb-1 text-muted mt-2"> <i class="fa-solid fa-location-dot"></i> Vartak
+                                    Nagar Thane West, Thane</p>
+                                <p class="mb-1 text-muted">
+                                    <strong>Open until:</strong> 11:00 PM &nbsp; | &nbsp; ₹550 for two &nbsp; |
+                                    &nbsp;
+                                    <i class="bi bi-car-front"></i> Parking Available
+                                </p>
+
+                                <div class="d-flex flex-wrap gap-2 mt-2">
+                                    <a href="tel:09972269380" class="btn btn-outline-success px-3">📞 0997154980</a>
+                                    <a href="#" class="btn btn-primary px-4">Order Online</a>
+                                    <a href="#" class="btn btn-outline-secondary px-4">Menu</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center my-5">
+                <button class="btn btn-primary d-inline-flex align-items-center px-5 py-2 ">
+                    <span class="me-2 ">Load More</span>
+                </button>
+            </div>
+
+            <div class="container my-5 ms-4">
+                <h4 class="fw-bold mb-4">Latest Customer Reviews</h4>
+
+                <!-- Review Card 1 -->
+                <div class="mb-4 border-bottom pb-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <img src="../img/W1.jpg" class="rounded-circle" width="40" height="40" alt="User">
+                        <strong>Hotel Nityanand</strong>
+                    </div>
+
+                    <div class="d-flex align-items-center gap-2 mt-2">
+                        <span class="badge bg-success fs-6">5.0 ★</span>
+                    </div>
+
+                    <p class="mt-2 mb-1" style="line-height: 1.6;">
+                        “I recently had the pleasure of staying at Hotel Nityanand and I must say, it exceeded all my
+                        expectations.
+                        The food was incredibly tasty and fresh, offering a wide variety to suit every palate...”
+                    </p>
+                    <div class="d-flex justify-content-between">
+                        <small class="text-muted"><strong>ronak</strong></small>
+                        <small class="text-muted">28 Jan 2025</small>
+                    </div>
+                </div>
+
+                <!-- Review Card 2 -->
+                <div class="mb-4 border-bottom pb-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <img src="../img/W2d.jpg" class="rounded-circle" width="40" height="40" alt="User">
+                        <strong>Tandoor Corner</strong>
+                    </div>
+
+                    <div class="d-flex align-items-center gap-2 mt-2">
+                        <span class="badge bg-success fs-6">4.0 ★</span>
+                    </div>
+
+                    <p class="mt-2 mb-1" style="line-height: 1.6;">
+                        “An old and well known restaurant in Bandra, which is known for its Mughlai style dishes and
+                        biryanis.
+                        The ambience is well maintained and takes you back in the retro mood with wooden touches.”
+                    </p>
+                    <div class="d-flex justify-content-between">
+                        <small class="text-muted"><strong>abhishek</strong></small>
+                        <small class="text-muted">28 Feb 2023</small>
+                    </div>
+                </div>
+                <div class="mb-4 border-bottom pb-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <img src="../img/W3.jpg" class="rounded-circle" width="40" height="40" alt="User">
+                        <strong>hotel moon</strong>
+                    </div>
+
+                    <div class="d-flex align-items-center gap-2 mt-2">
+                        <span class="badge bg-success fs-6">4.0 ★</span>
+                    </div>
+
+                    <p class="mt-2 mb-1" style="line-height: 1.6;">
+                        “An old and well known restaurant in Bandra, which is known for its Mughlai style dishes and
+                        biryanis.
+                        The ambience is well maintained and takes you back in the retro mood with wooden touches.”
+                    </p>
+                    <div class="d-flex justify-content-between">
+                        <small class="text-muted"><strong>Kavish</strong></small>
+                        <small class="text-muted">28 Feb 2023</small>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer class="bg-light text-dark text-center p-4">
+            <!-- SOCIAL MEDIA LINKS -->
+            <div class="d-flex justify-content-between align-items-center flex-wrap mt-2">
+                <div class="d-flex align-items-center flex-wrap">
+                    <span class="me-2">Follow us on</span>
+                    <img src="./img/11facebook-circle-256.webp" alt="Facebook" width="25" height="25" class="me-2">
+                    <img src="./img/instagram_icon-instagram_buttoninstegram-512.webp" alt="Instagram" width="25"
+                        height="25" class="me-2">
+                    <img src="./img/youtube-256.webp" alt="YouTube" width="25" height="25" class="me-2">
+                    <img src="./img/twitter_circle-256.webp" alt="Twitter" width="25" height="25" class="me-2">
+                    <img src="./img/circle-linkedin-256.webp" alt="LinkedIn" width="25" height="25">
+                </div>
+                <div class="d-flex gap-2 mt-2 mt-md-0">
+                    <a href="https://play.google.com/store" target="_blank">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
+                            alt="Get it on Google Play" style="height: 40px;">
+                    </a>
+                    <a href="https://www.apple.com/app-store/" target="_blank">
+                        <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                            alt="Download on the App Store" style="height: 40px;">
+                    </a>
+                </div>
+            </div>
+
+            <!-- WELCOME MESSAGE -->
+            <h5 class="mt-4 mb-4 text-start">One-Stop for All Local Businesses, Services, & Stores Nearby Across India
+            </h5>
+
+            <p class="text-start">
+                Welcome to Justdial, your 'one stop shop' where you are assisted with day-to-day and exclusive planning
+                and purchasing activities. We take pride in our iconic customer support number, 8888888888 and the fact
+                that we own a strong hold on local business information pan India.
+
+                Our service extends from providing address and contact details of business establishments around the
+                country, to making orders and reservations for leisure, medical, financial, travel and domestic
+                purposes. We enlist business information across varied sectors like Hotels, Restaurants, Auto Care, Home
+                Decor, Personal and Pet Care, Fitness, Insurance, Real Estate, Sports, Schools, etc. from all over the
+                country. Holding information right from major cities like Mumbai, Delhi, Bangalore, Hyderabad, Chennai,
+                Ahmedabad and Pune our reach stretches out to other smaller cities across the country too.
+
+                Our 'Free Listing' feature gives a platform to showcase varied specialities. We then furnish you with
+                the information via phone, SMS, web, App and WAP as well as, create a space for you to share your
+                experiences through our 'Rate & Review' feature. Through the 'Best Deals', 'Last Minute Deals' and 'Live
+                Quotes', we make sure that you are offered the best bargains in the market.
+            </p>
+
+            <!-- SERVICES HEADING -->
+            <h4 class="mt-5 mb-4 text-start">Some of our services that will prove useful to you on a day-to-day basis
+                are:</h4>
+            <!-- Services Grid -->
+            <div class="container text-start">
+                <div class="row g-4"> <!-- g-4 ensures equal gaps -->
+                    <div class="col-md-3">
+                        <div class="service-box ">
+                            <i class="fas fa-briefcase text-secondary service-icon"></i>
+                            <strong>B2B</strong>
+                            <p>Explore diverse B2B categories, top vendors, and a wholesale experience. Instant
+                                assistance via chat available.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="service-box ">
+                            <i class="fas fa-globe-asia text-success service-icon"></i>
+                            <strong>All India</strong>
+                            <p>Justdial connects businesses across India—from suppliers to wholesalers—offering full
+                                digital B2B convenience.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="service-box">
+                            <i class="fas fa-truck-moving text-warning service-icon"></i>
+                            <strong>Packers and Movers</strong>
+                            <p>Get the best packers and movers with ratings, quotes, and a smooth relocation experience.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="service-box">
+                            <i class="fas fa-utensils text-danger service-icon"></i>
+                            <strong>Order Food Online</strong>
+                            <p>Browse restaurants, apply discounts, and order your favorite meals in just a few clicks.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="service-box">
+                            <i class="fas fa-user-tie text-primary service-icon"></i>
+                            <strong>Jobs</strong>
+                            <p>Find relevant jobs or hire candidates across industries and locations with ease.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="service-box">
+                            <i class="fas fa-film text-dark service-icon"></i>
+                            <strong>Movies</strong>
+                            <p>Book tickets, view trailers and cast, and stay updated with the latest releases.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="service-box">
+                            <i class="fas fa-spa text-pink service-icon"></i>
+                            <strong>Spa & Salon</strong>
+                            <p>Book appointments online for salons or spas near you for a hassle-free experience.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="service-box">
+                            <i class="fas fa-tools text-secondary service-icon"></i>
+                            <strong>Repair & Services</strong>
+                            <p>Get your AC, car, purifier, or appliances serviced quickly with verified professionals.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="service-box">
+                            <i class="fas fa-user-md text-info service-icon"></i>
+                            <strong>Doctor Appointment</strong>
+                            <p>Book doctor appointments online by specialty, city, and clinic. Avoid waiting and delays.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="service-box">
+                            <i class="fas fa-building text-success service-icon"></i>
+                            <strong>Real Estate Agents</strong>
+                            <p>Connect with property agents for buying, selling, or renting homes with verified
+                                listings.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="service-box">
+                            <i class="fas fa-bolt text-warning service-icon"></i>
+                            <strong>Recharge/Bill Payment</strong>
+                            <p>Pay bills and recharge mobiles, DTH, and utilities online instantly with Justdial.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="service-box">
+                            <i class="fas fa-wallet text-danger service-icon"></i>
+                            <strong>Digital Wallets</strong>
+                            <p>Manage your online payments and transactions through trusted digital wallets.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="text-start small mt-5 ">Some of the other services that can be of assistance to you for leisure,
+                health and home convenience are - Pest Control, Skin Care Clinics, Painters, Laundry Services, Interior
+                Designers, Mobile Phone Repair, Vaccination Centres, Internet Service Providers, etc. With an endless
+                number of things under the sun, you can be sure this will be your 'One Stop Shop' to find everything and
+                more.</p>
+            <div class="container-fluid mt-4 text-start px-0">
+                <h5 class="fw-semibold mb-3">Popular Categories</h5>
+                <div class="scroll-buttons overflow-auto">
+                    <div class="d-flex flex-nowrap gap-2 mb-3" style="min-width: max-content;">
+                        <button class="btn btn-light border px-3 py-1  btn-truncate">Accommodation</button>
+                        <button class="btn btn-light border px-3 py-1">Astrology</button>
+                        <button class="btn btn-light border px-3 py-1">Automobiles & Two Wheelers</button>
+                        <button class="btn btn-light border px-3 py-1">Beauty, Fitness & Sports</button>
+                        <button class="btn btn-light border px-3 py-1">Business & Legal</button>
+                        <button class="btn btn-light border px-3 py-1">Education</button>
+                        <button class="btn btn-light border px-3 py-1">Events & Weddings</button>
+                        <button class="btn btn-light border px-3 py-1">Food & Restaurants</button>
+                        <button class="btn btn-light border px-3 py-1">Health & Medical</button>
+                        <button class="btn btn-light border px-3 py-1">Home Services</button>
+                        <button class="btn btn-light border px-3 py-1">Others</button>
+                        <button class="btn btn-light border px-3 py-1">Trasportation & Shipping</button>
+                        <button class="btn btn-light border px-3 py-1">Travel</button>
+                    </div>
+                </div>
+                <h5 class="fw-semibold mt-3 mb-3">Trending Searches</h5>
+                <div class="category-list" style="line-height: 1.8; font-size: 0.93rem;">
+                    Real Estate Agents | Book Shops | Aadhaar Card Agents | Yoga Classes | Estate Agents For Land |
+                    Pmjay Scheme Hospitals | Tutorials For IIT JEE | Mobile Phone Repair & Services-MI | Wrist Watch
+                    Dealers | Education Consultants | Battery Operated Scooter Dealers-OLA | Entertainment Centres |
+                    DTH
+                    TV Broadcast Service Providers-Sun Direct | AC Repair & Services-Blue Star | Tnpsc Tutorials |
+                    Mobile Phone Simcard Dealers-Jio | MPSC Tutorials | Shoe Dealers-Nike | Tirupati Darshanam
+                    Ticketing
+                    Services | Bitcoin Services | Mobile Phone Repair & Services-Nothing | Cat Tutorials | Lawyers
+                    For
+                    District Court | Ayushman Bharat Yojana Consultants | Lawyers For Supreme Court | Sports Shoe
+                    Dealers | Courier Services For Ahmedabad | Internet Payment Gateway Solution Providers | Taxi
+                    Services For Inter City | BPSC Tutorials | Courier Services For Canada | Demat Account Services
+                    |
+                    Automobile Part Dealers-Ashok Leyland | Prp Hair Transplantation Treatment Doctors | Mutual Fund
+                    Agents-SBI | Courier Services For Dubai | BEST Enquiry | Pickleball Courts | Khatu Shyam Bhajan
+                    Singers | Dairy Product Retailers-Amul | Tutorials For Mppsc | Uber Autorickshaw Attachment
+                    Services
+                    | Football Dealers | Courier Services For Surat | Battery Operated Auto Rickshaw Dealers-Mini
+                    Metro
+                    | Electricity Suppliers-Kseb | Courier Services For Tirupati | Packers And Movers For Hyderabad
+                    |
+                    Newspaper Advertising Agencies-Dainik Bhaskar | Tutorials For MHT CET
+                </div>
+
+                <h5 class="fw-semibold mt-4 mb-3">Trending Searches</h5>
+                <div class="category-list" style="line-height: 1.8; font-size: 0.93rem;">
+                    Deals and Offers | Kotak Mahindra Banks | INOX Cinemas | Canara Banks | Ratnakar Banks | PVR Cinemas
+                    | ICICI Banks | HDFC Banks | AU Small Finance Bank | Bank Of Maharashtra | Bank Of India | Axis
+                    Banks | IDFC First Banks | Maharashtra Gramin Banks | Catholic Syrian Banks | Saraswat Co Operative
+                    Banks | Punjab & Sind Banks | State Bank Of India | Union Bank Of India | Punjab National Banks |
+                    Bank Of Baroda | Lifestyle Stores | Behrouz Biryani | Fastrack | The Good Bowl | Sony | Yes Banks |
+                    Croma | Dell Exclusive Stores | Beverly Hills Polo Club | Joyalukkas Jewellery | Kalyan Jewellers |
+                    Flying Machine | Lenovo Exclusive Store | Reliance Digital | Vijay Sales | Duroflex | Anytime
+                    Fitness | Kromakay Salons | Toni&Guy Salons | Bakingo | Barbeque Nation Restaurants | McDonalds |
+                    Sweet Truth Cake Shops | ALDO Stores | Helios | Inglot Stores | LEE Stores | Max Stores | US Polo
+                    Assn | Wrangler | Levi's | Apple Store | IFB Point | LG | Oppo Exclusive Showroom | Federal Banks |
+                    IDBI Banks | Bandhan Banks | DBS Banks | Karur Vysya Banks | Indusind Banks | Central Bank Of India
+                    | Explore JD Collections | Travel & Tourism | Beauty & Fashion | Health & Fitness | Food & Beverage
+                    | Finance | On demand Services | Home & Living | Education & Career | Recreation | Jd Business Guide
+                    | Popular Cities | Bangalore | Mumbai | Chennai | Delhi | Hyderabad | Pune | Ahmedabad | Lucknow |
+                    Patna | Jaipur | Indore | Kochi | Kolkata | Coimbatore | Nagpur | Ludhiana | Agra | Bhubaneshwar |
+                    Bhopal | Guwahati | Surat | Madurai | Visakhapatnam | Sonepat | Vadodara | Meerut |
+                    Thiruvananthapuram | Gurgaon | Kozhikode | Varanasi | Siliguri | Allahabad | Rajkot | Ghaziabad |
+                    Mysore | Noida | Chandigarh | Navi-Mumbai | Vijayawada | Durgapur | Srinagar | Nashik | Panipat |
+                    Jammu | Jodhpur | Udaipur-Rajasthan | Thane | Raipur-Chhattisgarh | Amritsar | Jabalpur
+                </div>
+                <h5 class="fw-semibold mt-4 mb-2">Explore JD Collections</h5>
+                <div class="category-list" style="line-height: 1.8; font-size: 0.93rem;">
+                    Travel & Tourism | Beauty & Fashion | Health & Fitness | Food & Beverage | Finance | On demand
+                    Services |
+                    Home & Living | Education & Career | Recreation | JD Business Guide
+                </div>
+
+                <h5 class="fw-semibold mt-4 mb-2">Popular Cities</h5>
+                <div class="category-list" style="line-height: 1.8; font-size: 0.93rem;">
+                    Bangalore | Mumbai | Chennai | Delhi | Hyderabad | Pune | Ahmedabad | Lucknow | Patna | Jaipur |
+                    Indore |
+                    Kochi | Kolkata | Coimbatore | Nagpur | Ludhiana | Agra | Bhubaneshwar | Bhopal | Guwahati | Surat |
+                    Madurai | Visakhapatnam | Sonepat | Vadodara | Meerut | Thiruvananthapuram | Gurgaon | Kozhikode |
+                    Varanasi | Siliguri | Allahabad | Rajkot | Ghaziabad | Mysore | Noida | Chandigarh | Navi-Mumbai |
+                    Vijayawada | Durgapur | Srinagar | Nashik | Panipat | Jammu | Jodhpur | Udaipur-Rajasthan | Thane |
+                    Raipur-Chhattisgarh | Amritsar | Jabalpur
+                </div>
+                <div class="row mt-4">
+                    <div class="col-md-3">
+                        <h6 class="fw-bold mb-3">Quick Links</h6>
+                        <ul class="list-unstyled text-start">
+                            <li>About us</li>
+                            <li>Investor Relations</li>
+                            <li>We're hiring</li>
+                            <li>Customer Care</li>
+                            <li>Free Listing</li>
+                            <li>What's New</li>
+                            <li>Report a Bug</li>
+                            <li>B2B Sitemap</li>
+                            <li>Sitemap</li>
+                            <li>Advertise</li>
+                            <li>Media</li>
+                            <li>Testimonials</li>
+                            <li>Feedback</li>
+                            <li>Business Badge</li>
+                            <li>Jd Collection</li>
+                            <li>Client Success Videos</li>
+                            <li>B2B India Sitemap</li>
+                            <li>Return & Exchange Policy</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-9">
+                        <h6 class="fw-bold mb-3">JD Verticals</h6>
+                        <div class="row text-start">
+                            <div class="col-md-3">
+                                <ul class="list-unstyled">
+                                    <li>B2B</li>
+                                    <li>Accommodation</li>
+                                    <li>Automobiles & Two Wheelers</li>
+                                    <li>Education</li>
+                                    <li>Entertainment</li>
+                                    <li>Home & Garden</li>
+                                    <li>Lights & Lighting</li>
+                                    <li>Placements</li>
+                                    <li>Sports & Entertainment</li>
+                                    <li>Watches & Eyewear</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-3">
+                                <ul class="list-unstyled">
+                                    <li>All India</li>
+                                    <li>Advertising & PR</li>
+                                    <li>Beauty & Personal Care</li>
+                                    <li>Electronic Component</li>
+                                    <li>Events & Wedding</li>
+                                    <li>Housekeeping & Facility Management</li>
+                                    <li>Luggage Bags & Cases</li>
+                                    <li>Public</li>
+                                    <li>Textile & Leather</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-3">
+                                <ul class="list-unstyled">
+                                    <li>Doctors</li>
+                                    <li>Agriculture</li>
+                                    <li>Business & Legal</li>
+                                    <li>Electronics</li>
+                                    <li>Food & Beverage</li>
+                                    <li>Industrial Plants & Machinery</li>
+                                    <li>Office & School Supplies</li>
+                                    <li>Restaurant</li>
+                                    <li>Toys & Games</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-3">
+                                <ul class="list-unstyled">
+                                    <li>Bills & Recharge</li>
+                                    <li>Apparel</li>
+                                    <li>Chemicals</li>
+                                    <li>Energy</li>
+                                    <li>Furniture</li>
+                                    <li>IT Components</li>
+                                    <li>Packaging & Printing</li>
+                                    <li>Pet & Pet Supplies</li>
+                                    <li>Security & Protection</li>
+                                    <li>Travel</li>
+                                    <li>Cricket</li>
+                                    <li>Astrology</li>
+                                    <li>Construction & Real Estate</li>
+                                    <li>Engineering</li>
+                                    <li>Health & Medical</li>
+                                    <li>Jewellery</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button id="backToTopBtn" class="btn position-fixed"
+                style="bottom: 20px; right: 20px; display: none; z-index: 999; background-color: white; color: black; border: 1px solid black;">
+                ⮝
+            </button>
+        </footer>
+    </div>
+
+    <script>
+        window.addEventListener("scroll", function () {
+            const scrollTop = window.scrollY || document.documentElement.scrollTop;
+            const windowHeight = window.innerHeight;
+            const docHeight = document.documentElement.scrollHeight;
+            const scrollPercent = (scrollTop / (docHeight - windowHeight)) * 100;
+
+            const hiringElement = document.querySelector(".k_wearehiring");
+            const fixedSearch = document.querySelector(".k_fixedSearch");
+
+            if (scrollPercent >= 1.8) {
+                hiringElement?.classList.replace("d-flex", "d-none");
+                fixedSearch?.classList.add("show");
+            } else {
+                hiringElement?.classList.replace("d-none", "d-flex");
+                fixedSearch?.classList.remove("show");
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            if (typeof Swiper !== "undefined") {
+                new Swiper(".swiper", {
+                    slidesPerView: 4,
+                    spaceBetween: 16,
+                    slidesPerGroup: 1,
+                    loop: false,
+                    navigation: {
+                        nextEl: ".swiper-button-next",
+                        prevEl: ".swiper-button-prev",
+                    },
+                    breakpoints: {
+                        0: { slidesPerView: 1.2 },
+                        576: { slidesPerView: 2 },
+                        768: { slidesPerView: 3 },
+                        992: { slidesPerView: 4 },
+                    },
+                });
+            }
+        });
+
+        window.addEventListener("scroll", function () {
+            const backToTopBtn = document.getElementById("backToTopBtn");
+            if (backToTopBtn) {
+                backToTopBtn.style.display = window.scrollY > 100 ? "block" : "none";
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const backToTopBtn = document.getElementById("backToTopBtn");
+            if (backToTopBtn) {
+                backToTopBtn.addEventListener("click", function () {
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                });
+            }
+        });
+
+        window.addEventListener("scroll", () => {
+            const mainSearch = document.getElementById("mainSearch");
+            const floatingSearch = document.getElementById("floatingSearch");
+            const hiringBar = document.querySelector(".k_wearehiring");
+
+            if (window.scrollY > 100) {
+                if (hiringBar) hiringBar.style.display = "none";
+                floatingSearch?.classList.replace("floating-hidden", "floating-visible");
+
+                if (mainSearch) {
+                    mainSearch.style.opacity = "0";
+                    mainSearch.style.pointerEvents = "none";
+                    mainSearch.style.transform = "scale(0.7) translateY(-20px)";
+                }
+            } else {
+                if (hiringBar) hiringBar.style.display = "flex";
+                floatingSearch?.classList.replace("floating-visible", "floating-hidden");
+
+                if (mainSearch) {
+                    mainSearch.style.opacity = "1";
+                    mainSearch.style.pointerEvents = "auto";
+                    mainSearch.style.transform = "scale(1) translateY(0)";
+                }
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const tooltipTriggerList = [].slice.call(
+                document.querySelectorAll('[data-bs-toggle="tooltip"]')
+            );
+            tooltipTriggerList.map((tooltipTriggerEl) => {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const wrapper = document.querySelector(".text-wrapper");
+            let index = 0;
+
+            if (wrapper) {
+                setInterval(() => {
+                    index = (index + 1) % 2;
+                    wrapper.style.transform = `translateY(-${index * 1.8}em)`;
+                }, 2000);
+            }
+        });
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/js/all.min.js"
+        integrity="sha512-b+nQTCdtTBIRIbraqNEwsjB6UvL3UEMkXnhzd8awtCYh0Kcsjl9uEgwVFVbhoj3uu1DO1ZMacNvLoyJJiNfcvg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+</body>
+
+</html>
